@@ -1,0 +1,47 @@
+const mongoose = require('mongoose');
+
+const ProfileSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+  },
+  location: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
+
+  rol: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      team: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  social: {
+    youtube: {
+      type: String,
+    },
+    twitter: {
+      type: String,
+    },
+    facebook: {
+      type: String,
+    },
+    instagram: {
+      type: String,
+    },
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+module.exports = Profile = mongoose.model('profile', ProfileSchema);
