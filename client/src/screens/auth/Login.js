@@ -13,6 +13,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import Labeltext from '../../components/Labeltext';
 import Button1 from '../../components/Button1';
 
+import { login } from '../actions/auth.js';
+
 var height = Dimensions.get('screen').height;
 var width = Dimensions.get('screen').width;
 
@@ -30,8 +32,7 @@ const Login = ({ navigation }) => {
     setFormData({ ...formData, [name]: e.target.value });
   };
 
-  const onSubmit = async e => {
-    e.preventDefault();
+  const onSubmit = e => {
     console.log(e);
     login(email, password);
     console.log('SUCCES!');
@@ -62,8 +63,6 @@ const Login = ({ navigation }) => {
               onChange={e => onChange(e, 'password')}
             />
           </View>
-
-          <Labeltext type={'Contrasenya'} />
 
           <TouchableOpacity onPress={e => onSubmit(e)}>
             <Button1 value={'INICIAR SESSIÓ'} />
@@ -122,5 +121,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: '#1C4928',
     fontSize: 18,
+    height: 40,
   },
 });

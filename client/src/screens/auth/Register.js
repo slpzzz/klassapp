@@ -15,6 +15,8 @@ import Button1 from '../../components/Button1';
 
 import PropTypes from 'prop-types';
 
+import { register } from '../actions/auth';
+
 var height = Dimensions.get('screen').height;
 var width = Dimensions.get('screen').width;
 
@@ -28,13 +30,14 @@ const Register = ({ navigation }) => {
 
   const { name, email, password, password2 } = formData;
 
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e, name) => {
+    setFormData({ ...formData, [name]: e.target.value });
+    console.log(formData);
+  };
 
-  const onSubmit = async e => {
-    e.preventDefault();
+  const onSubmit = e => {
     if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
+      console.log('Passwords do not match', 'danger');
     } else {
       register({ name, email, password });
       console.log('SUCCES!');
@@ -82,7 +85,7 @@ const Register = ({ navigation }) => {
             onChange={e => onChange(e, 'password2')}
           />
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('signup2')}>
+        <TouchableOpacity onPress={() => onSubmit()}>
           <Button1 value={'REGISTRAR-SE'} />
         </TouchableOpacity>
       </View>
@@ -136,5 +139,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     color: '#1C4928',
     fontSize: 18,
+    height: 40,
   },
 });
