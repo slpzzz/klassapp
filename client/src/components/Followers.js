@@ -1,26 +1,36 @@
-import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { FollowBtn } from './FollowBtn';
 
-export default function Followers() {
+export default function Followers({ datos }) {
+  const [handle, setHandle] = useState(false);
+
   return (
     <View style={styles.container}>
       <View style={styles.avatarParent}>
         <Image
           style={styles.avatarProfile}
-          source={{ uri: 'https://tds.cl/img/perfil-usuario.png' }}
+          source={{
+            uri: datos.avatar
+              ? datos.avatar
+              : 'https://tds.cl/img/perfil-usuario.png',
+          }}
         />
       </View>
       <View style={styles.body}>
         <View style={styles.topBody}>
-          <Text style={styles.TextName}>sergi</Text>
-          <Text style={styles.TextTitleRol}>Aficionaat del CF Voltrega</Text>
+          <Text style={styles.TextName}>{datos.user}</Text>
+
+          {/*  ADD ROL !!!!!!
+           {d.rol && (
+              <Text style={styles.TextTitleRol}>
+                {' '}
+                {d.rol[0].title} del {d.rol[0].team}
+              </Text>
+            )} */}
         </View>
       </View>
-      <View style={styles.seguirbtnP}>
-        <View style={styles.seguirbtn}>
-          <Text style={{ color: 'white' }}>Seguir</Text>
-        </View>
-      </View>
+      <FollowBtn id={datos.iduser} />
     </View>
   );
 }
@@ -59,6 +69,16 @@ const styles = StyleSheet.create({
   seguirbtn: {
     backgroundColor: '#487551',
     borderRadius: 20,
+    height: 30,
+    width: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  siguiendobtn: {
+    backgroundColor: 'white',
+    borderColor: '#487551',
+    borderRadius: 20,
+    borderWidth: 1,
     height: 30,
     width: 70,
     justifyContent: 'center',

@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 var width = Dimensions.get('screen').width;
 
-export default function UserScreen() {
+export default function UserScreen({ datos, datos1 }) {
   return (
     <View style={styles.headerParent} elevation={5}>
       <View style={{ alignItems: 'flex-end', marginRight: 32, marginTop: 32 }}>
@@ -14,11 +14,18 @@ export default function UserScreen() {
       <View style={styles.header}>
         <Image
           style={styles.avatarProfile}
-          source={{ uri: 'https://tds.cl/img/perfil-usuario.png' }}
+          source={{ uri: `${datos.avatar}` }}
         />
-        <Text style={{ fontSize: 25, padding: 8 }}>Name</Text>
-        <Text style={{ fontSize: 13, padding: 4 }}>Aficionat Voltrega</Text>
-        <Text style={{ fontSize: 13, padding: 4 }}>Entrenador Terrassa</Text>
+        <Text style={{ fontSize: 25, padding: 8 }}>{datos.name}</Text>
+        <Text style={{ fontSize: 13, padding: 4 }}>{datos1.bio}</Text>
+        {datos1.rol &&
+          datos1.rol.map((d, i) => {
+            return (
+              <Text key={i} style={{ fontSize: 13, padding: 4 }}>
+                {d.title} {d.team}
+              </Text>
+            );
+          })}
       </View>
     </View>
   );

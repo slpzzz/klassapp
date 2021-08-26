@@ -34,36 +34,32 @@ router.get('/me', auth, async (req, res) => {
 // @route   POST api/profile
 // @desc    Create or update user profile
 // @access  Private
-router.post('/', [auth], async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ erros: errors.array() });
   }
 
-  const { location, bio, birth, youtube, facebook, twitter, instagram } =
-    req.body;
+  const { location, bio, rol } = req.body;
 
   //Build profile object
   const profileFields = {};
   profileFields.user = req.user.id;
   if (location) profileFields.location = location;
   if (bio) profileFields.bio = bio;
-
-  //Build social object
-  profileFields.social = {};
-  if (youtube) profileFields.social.youtube = youtube;
-  if (twitter) profileFields.social.twitter = twitter;
-  if (facebook) profileFields.social.facebook = facebook;
-  if (instagram) profileFields.social.instagram = instagram;
+  if (rol) profileFields.rol = rol;
 
   try {
-    let profile = await Profile.findOne({ user: req.user.id });
+    let profile = await Profile.findOne({ user: req.user.id }).populate(
+      'user',
+      ['name', 'avatar', 'birth']
+    );
     if (profile) {
       profile = await Profile.findOneAndUpdate(
         { user: req.user.id },
         { $set: profileFields },
         { new: true }
-      );
+      ).populate('user', ['name', 'avatar', 'birth']);
       return res.json(profile);
     }
 
@@ -134,40 +130,78 @@ router.delete('/', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/profile/rol
-// @desc    Add profile rol
+// @route   PUT api/profile/follow/:follow_id
+// @desc    Add profile follow
 // @access  Private
 
-router.put(
-  '/rol',
-  [
-    auth,
-    [
-      body('title', 'Title is required').not().isEmpty(),
-      body('team', 'Team is required').not().isEmpty(),
-    ],
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    const { title, team } = req.body;
-
-    const newRol = { title, team };
-
-    try {
-      const profile = await Profile.findOne({ user: req.user.id });
-
-      profile.rol.unshift(newRol);
-      await profile.save();
-      res.json(profile);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
+router.put('/follow/:follow_id', auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty) {
+    return res.status(400).json({ errors: errors.array() });
   }
-);
+
+  try {
+    const user = await Profile.findOne({ user: req.user.id }).populate('user', [
+      'name',
+      'avatar',
+      'birth',
+    ]);
+    const profile = await Profile.findOne({
+      user: req.params.follow_id,
+    }).populate('user', ['name', 'avatar', 'birth']);
+
+    const follower = {
+      user: user.user.name,
+      avatar: user.user.avatar,
+      rol: user.rol,
+      iduser: req.user.id,
+    };
+    const following = {
+      user: profile.user.name,
+      avatar: profile.user.avatar,
+      rol: profile.rol,
+      iduser: req.params.follow_id,
+    };
+
+    user.following.unshift(following);
+    profile.followers.unshift(follower);
+
+    await user.save();
+    await profile.save();
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   DELETE api/profile/follow/:follow_id
+// @desc    Delete follow from profile
+// @access  Private
+router.delete('/follow/:follow_id', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    const user = await Profile.findOne({ user: req.params.follow_id });
+
+    //Get remove index he from following
+    const removeIndex = profile.following
+      .map(item => item.id)
+      .indexOf(req.params._id);
+    profile.following.splice(removeIndex, 1);
+    //Get remove index me from followers
+    const removeIndex1 = user.followers
+      .map(item => item.id)
+      .indexOf(req.user.id);
+    user.followers.splice(removeIndex1, 1);
+
+    await user.save();
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route   DELETE api/profile/rol/:rol_id
 // @desc    Delete rol from profile

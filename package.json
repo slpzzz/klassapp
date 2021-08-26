@@ -7,6 +7,7 @@
     "autoprefixer": "^10.2.6",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
+    "cors": "^2.8.5",
     "css-loader": "^1.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
@@ -26,7 +27,6 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \" npm run server\" \" npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-
   },
   "author": "Sergi López",
   "license": "MIT"

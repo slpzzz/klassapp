@@ -38,6 +38,22 @@ const ProfileSchema = new mongoose.Schema({
       type: String,
     },
   },
+  following: [
+    {
+      user: { type: String },
+      avatar: { type: String },
+      rol: { type: [String] },
+      iduser: { type: String },
+    },
+  ],
+  followers: [
+    {
+      user: { type: String },
+      avatar: { type: String },
+      rol: { type: [String] },
+      iduser: { type: String },
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,

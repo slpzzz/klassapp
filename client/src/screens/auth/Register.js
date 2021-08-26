@@ -26,21 +26,19 @@ const Register = ({ navigation }) => {
     email: '',
     password: '',
     password2: '',
+    birth: '01818',
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, birth, password, password2 } = formData;
 
   const onChange = (e, name) => {
     setFormData({ ...formData, [name]: e.target.value });
-    console.log(formData);
   };
 
   const onSubmit = e => {
     if (password !== password2) {
-      console.log('Passwords do not match', 'danger');
-    } else {
-      register({ name, email, password });
-      console.log('SUCCES!');
+    } else if (name && email && birth && password.length > 5) {
+      register({ name, email, birth, password, navigation });
     }
   };
 
@@ -55,6 +53,7 @@ const Register = ({ navigation }) => {
             value={name}
             placeholder='Nom'
             style={styles.buttonText}
+            autoCompleteType='username'
             onChange={e => onChange(e, 'name')}
           />
         </View>
@@ -64,15 +63,25 @@ const Register = ({ navigation }) => {
             type='email'
             placeholder='Correu electrònic'
             style={styles.buttonText}
+            autoCompleteType='email'
             onChange={e => onChange(e, 'email')}
           />
         </View>
+        {/*         <View style={styles.button}>
+          <input
+            type='date'
+            placeholder='date'
+            style={styles.buttonText}
+            onChange={e => onChange(e, 'email')}
+          />
+        </View> */}
         <View style={styles.button}>
           <TextInput
             value={password}
             type='password'
             placeholder='Constrasenya'
             style={styles.buttonText}
+            secureTextEntry={true}
             onChange={e => onChange(e, 'password')}
           />
         </View>
@@ -82,6 +91,7 @@ const Register = ({ navigation }) => {
             type='password'
             placeholder='Constrasenya'
             style={styles.buttonText}
+            secureTextEntry={true}
             onChange={e => onChange(e, 'password2')}
           />
         </View>

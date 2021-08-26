@@ -1,50 +1,92 @@
-import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Etiqueta from './Etiqueta';
 import { FontAwesome } from '@expo/vector-icons';
+import { likePost, unlikePost, isLike } from '../screens/actions/posts';
+import { getProfileMe } from '../screens/actions/profile';
 
-export default function Post() {
-  return (
+export default function Post({ datos, id }) {
+  const [like, setLike] = useState(false);
+
+  useEffect(() => {
+    isLike(setLike);
+  }, []);
+
+  return datos ? (
     <View style={styles.container}>
       <View style={styles.avatarParent}>
         <View style={styles.avatar}>
           <Image
             style={styles.avatarProfile}
-            source={{ uri: 'https://tds.cl/img/perfil-usuario.png' }}
+            source={{
+              uri: datos.avatar
+                ? `${datos.avatar}`
+                : 'https://tds.cl/img/perfil-usuario.png',
+            }}
           />
         </View>
       </View>
       <View style={styles.body}>
         <View style={styles.topBody}>
           <View style={styles.name}>
-            <Text style={styles.TextName}>sergi</Text>
+            <Text style={styles.TextName}>{datos.username}</Text>
           </View>
           <View style={styles.time}></View>
           <Text style={styles.TextTime}>21:32</Text>
         </View>
-        <Text style={styles.TextTitleRol}>Aficionaat del CF Voltrega</Text>
+        {datos.rol.length > 0 && (
+          <Text style={styles.TextTitleRol}>
+            {datos.rol[0].title} {datos.rol[0].team}
+          </Text>
+        )}
         <View>
           <Text style={styles.textBody}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            lobortis aliquam tincidunt. Vestibulum facilisis ultrices erat.
-            Etiam tincidunt eu mi quis condimentum.{' '}
+            {datos.text} {like ? 'true' : 'false'}
           </Text>
         </View>
-        <View>
-          <Etiqueta />
+        <View style={{ flexDirection: 'row', padding: 3 }}>
+          <ScrollView horizontal={true}>
+            {datos.sticker && datos.sticker.map(d => <Etiqueta datos={d} />)}
+          </ScrollView>
         </View>
         <View style={styles.interactBtnParent}>
           <View style={styles.interactBtn}>
             <FontAwesome name='comment-o' size={13} color='black' />
-            <Text style={{ marginLeft: 8 }}>0</Text>
+            <Text style={{ marginLeft: 8 }}>
+              {datos.comments ? datos.comments.length : 0}
+            </Text>
           </View>
           <View style={styles.interactBtn}>
-            <FontAwesome name='soccer-ball-o' size={13} color='black' />
-            <Text style={{ marginLeft: 8 }}> 2</Text>
+            <TouchableOpacity
+              onPress={() =>
+                like
+                  ? (unlikePost(datos._id, setLike),
+                    datos.likes.length.forceUpdate())
+                  : likePost(datos._id, setLike)
+              }
+            >
+              <FontAwesome
+                name='soccer-ball-o'
+                size={13}
+                color={like ? '#1C4928' : 'black'}
+              />
+            </TouchableOpacity>
+            <Text style={{ marginLeft: 8 }}>
+              {datos.likes ? datos.likes.length : 0}
+            </Text>
           </View>
         </View>
       </View>
     </View>
+  ) : (
+    <Text>No existeixen posts</Text>
   );
 }
 

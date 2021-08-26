@@ -1,4 +1,4 @@
-import React, { useState, setState } from 'react';
+import React, { useState, setState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Text, Dimensions } from 'react-native';
 
 import stylesM from '../../styles';
@@ -10,9 +10,21 @@ import Header from '../components/Header';
 import Post from '../components/Post';
 import Followers from '../components/Followers';
 
+import { getProfileMe, getPostsMe } from './actions/profile';
+
 var width = Dimensions.get('screen').width;
 
 const UserScreen = observer(() => {
+  const [datos, setDatos] = useState({});
+  const [datos1, setDatos1] = useState({});
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getProfileMe(setDatos1, setDatos, posts);
+    //getPostsMe(setPosts, datos._id);
+  }, [getProfileMe]);
+
   const [pressed, setPressed] = useState([true, false, false]);
   const selected = index => {
     setPressed(pressed => {
@@ -25,34 +37,42 @@ const UserScreen = observer(() => {
   };
   return (
     <View style={{ marginBottom: 300 }}>
-      <Header />
+      {datos && <Header datos={datos} datos1={datos1} />}
+      {datos1.rol && datos1.rol.map((d, i) => console.log(d))}
       <View elevation={5} style={styles.sectionParent}>
         <TouchableOpacity onPress={() => selected(0)}>
           <View style={styles.sections}>
             <Text>POSTS</Text>
-            <Text style={styles.sectionsNum}>12</Text>
+            <Text style={styles.sectionsNum}>{posts.length}</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => selected(1)}>
           <View style={styles.sections}>
             <Text>SEGUIDORS</Text>
-            <Text style={styles.sectionsNum}>12</Text>
+            <Text style={styles.sectionsNum}>
+              {datos1.followers ? datos1.followers.length : 0}
+            </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => selected(2)}>
           <View style={styles.sections}>
             <Text>SEGUINT</Text>
-            <Text style={styles.sectionsNum}>12</Text>
+            <Text style={styles.sectionsNum}>
+              {datos1.following ? datos1.following.length : 0}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
       <ScrollView>
         {pressed[0] ? (
-          <Post />
+          posts &&
+          posts.map((p, i) => {
+            return <Post key={'post' + i} datos={p} />;
+          })
         ) : pressed[1] ? (
-          <Followers />
+          datos1.followers.map((d, i) => <Followers key={i} datos={d} />)
         ) : pressed[2] ? (
-          <Followers />
+          datos1.following.map((d, i) => <Followers key={i} datos={d} />)
         ) : (
           <Text>Error</Text>
         )}

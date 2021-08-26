@@ -22,12 +22,15 @@ router.post(
 
     try {
       //const user = await User.findById(req.user.id).select('-password');
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await Profile.findOne({ user: req.user.id }).populate(
+        'user',
+        ['name', 'avatar']
+      );
       const newPost = new Post({
         text: req.body.text,
         sticker: req.body.sticker,
-        name: req.user.name,
-        avatar: req.user.avatar,
+        username: profile.user.name,
+        avatar: profile.user.avatar,
         rol: profile.rol,
         user: req.user.id,
       });
@@ -47,7 +50,9 @@ router.post(
 
 router.get('/', auth, async (req, res) => {
   try {
-    const posts = await Post.find().sort({ date: -1 });
+    //const profile = await Profile.findOne({ user: req.user.id });
+    const posts = await Post.find();
+
     res.json(posts);
   } catch (err) {
     console.error(err.message);

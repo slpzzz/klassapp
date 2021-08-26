@@ -20,7 +20,6 @@ export default function TopBar2({ pressed, setPressed }) {
       const newList = [...pressed];
 
       newList[index] = !newList[index];
-      // console.log(newList);
 
       return newList;
     });

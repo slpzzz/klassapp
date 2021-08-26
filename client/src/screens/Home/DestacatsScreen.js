@@ -1,10 +1,30 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { Fragment, useEffect, useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { FollowBtn } from '../../components/FollowBtn';
+import Followers from '../../components/Followers';
+
+import {
+  getProfiles,
+  follow,
+  unfollow,
+  getProfileMe,
+} from '../actions/profile';
 
 export default function Destacats() {
+  const [datos, setDatos] = useState([]);
+  const [handle, setHandle] = useState(false);
+  useEffect(() => {
+    getProfiles(setDatos);
+  }, []);
+
   return (
-    <View style={styles.demo}>
-      <Text>Destacats</Text>
+    <View>
+      {datos.map((d, i) => (
+        <View key={i} style={{ flexDirection: 'row' }}>
+          <Text>{d.user.name}</Text>
+          <FollowBtn id={d.user._id} />
+        </View>
+      ))}
     </View>
   );
 }

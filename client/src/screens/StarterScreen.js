@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,8 @@ import { observer } from 'mobx-react';
 
 import Loading from './Loading';
 
+import { isLogged } from './actions/auth';
+
 var height = Dimensions.get('screen').height;
 
 const StarterScreen = observer(({ navigation }) => {
@@ -20,6 +22,7 @@ const StarterScreen = observer(({ navigation }) => {
 
   setTimeout(() => {
     setTimePassed(false);
+    isLogged(navigation);
   }, 1000);
 
   return timePassed ? (

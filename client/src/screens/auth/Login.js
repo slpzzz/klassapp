@@ -25,17 +25,13 @@ const Login = ({ navigation }) => {
   });
 
   const { email, password } = formData;
-  console.log(formData);
 
   const onChange = (e, name) => {
-    console.log(name);
     setFormData({ ...formData, [name]: e.target.value });
   };
 
   const onSubmit = e => {
-    console.log(e);
-    login(email, password);
-    console.log('SUCCES!');
+    login({ email, password, navigation });
   };
 
   return (
@@ -43,7 +39,7 @@ const Login = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.Formu}>
           <Text style={{ color: '#1C4928', fontSize: 36, marginBottom: 24 }}>
-            Inicia sessió {password}
+            Inicia sessió
           </Text>
           <View style={styles.button}>
             <TextInput
@@ -60,6 +56,7 @@ const Login = ({ navigation }) => {
               type='password'
               placeholder='Constrasenya'
               style={styles.buttonText}
+              secureTextEntry={true}
               onChange={e => onChange(e, 'password')}
             />
           </View>

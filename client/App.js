@@ -25,8 +25,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name='home' component={StarterScreen} />
-        <Stack.Screen name='register' component={Register} />
         <Stack.Screen name='signup2' component={SignUp2} />
+        <Stack.Screen name='register' component={Register} />
         <Stack.Screen name='login' component={Login} />
         <Stack.Screen
           name='homeScreen'

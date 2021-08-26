@@ -6,7 +6,7 @@ import {
   Dimensions,
   StatusBar,
   TouchableOpacity,
-  Picker,
+  TextInput,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Labeltext from '../../components/Labeltext';
@@ -14,11 +14,47 @@ import LabelDate from '../../components/LabelDate';
 import Button1 from '../../components/Button1';
 import AddRol from '../../components/AddRol';
 
+import { Ionicons } from '@expo/vector-icons';
+
 import { Entypo } from '@expo/vector-icons';
+
+import sty from '../../../styles';
+
+import { createProfile } from '../actions/auth';
 
 var height = Dimensions.get('screen').height;
 
 const SignUp2 = ({ navigation }) => {
+  const [rol, setRol] = useState([
+    {
+      title: {},
+      team: {},
+    },
+  ]);
+  const [bio, setBio] = useState('');
+  const [location, setLocation] = useState('');
+
+  const completed = () => {
+    createProfile(rol, bio, location, navigation);
+    //navigation.navigate('homeScreen');
+  };
+  const add = i => {
+    setRol(oldArray => [
+      ...oldArray,
+      {
+        title: {},
+        team: {},
+      },
+    ]);
+  };
+  const remove = i => {
+    if (rol.length > 1) {
+      let arrayRols = [...rol];
+      arrayRols.splice(2, 1);
+      setRol(arrayRols);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate('homeScreen')}>
@@ -37,13 +73,46 @@ const SignUp2 = ({ navigation }) => {
         >
           Ajuda’ns a completar el teu perfil
         </Text>
+        <View>
+          <Text>Afegeix una descripció</Text>
+
+          <TextInput
+            multiline={true}
+            numberOfLines={4}
+            onChangeText={text => setBio(text)}
+            value={bio}
+            placeholder={'Descripció'}
+            style={sty.buttonText}
+          />
+        </View>
+        <View>
+          <Text>Ubicación</Text>
+          <TextInput
+            onChangeText={text => setLocation(text)}
+            value={location}
+            placeholder={'Ubicació'}
+            style={sty.buttonText}
+          />
+        </View>
         <Text style={{ fontSize: 15, color: 'black', padding: 8 }}>
           Quin és el teu rol?
         </Text>
-
-        <AddRol />
+        {rol.map((rol, index) => (
+          <View>
+            <AddRol
+              key={index}
+              removeFunction={() => remove(index)}
+              rol={rol}
+            />
+          </View>
+        ))}
+        <TouchableOpacity onPress={() => add()}>
+          <View style={{ flex: 0.2, alignItems: 'center' }}>
+            <Ionicons name='add-circle' size={32} color='#1C4928' />
+          </View>
+        </TouchableOpacity>
         <View style={{ justifyContent: 'flex-end' }}>
-          <TouchableOpacity onPress={() => navigation.navigate('homeScreen')}>
+          <TouchableOpacity onPress={() => completed()}>
             <Button1 value={'SEGÜENT'} />
           </TouchableOpacity>
         </View>
