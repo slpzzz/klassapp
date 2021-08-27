@@ -116,16 +116,20 @@ router.delete('/:id', auth, async (req, res) => {
 router.put('/like/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    const profile = await Profile.findOne({ user: req.user.id });
 
     // Check if the post has already been liked
     if (post.likes.some(like => like.user.toString() === req.user.id)) {
       return res.status(400).json({ msg: 'Post already liked' });
     }
 
+    profile.likes.unshift({ user: req.params.id });
     post.likes.unshift({ user: req.user.id });
 
     await post.save();
+    await profile.save();
 
+    console.log(post);
     return res.json(post.likes);
   } catch (err) {
     console.error(err.message);
@@ -139,6 +143,7 @@ router.put('/like/:id', auth, async (req, res) => {
 router.put('/unlike/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    const profile = await Profile.findOne({ user: req.user.id });
 
     // Check if the post has not yet been liked
     if (!post.likes.some(like => like.user.toString() === req.user.id)) {
@@ -149,6 +154,9 @@ router.put('/unlike/:id', auth, async (req, res) => {
     post.likes = post.likes.filter(
       ({ user }) => user.toString() !== req.user.id
     );
+
+    profile.likes = profile.likes.filter(({ user }) => user !== req.params.id);
+    await profile.save();
 
     await post.save();
 

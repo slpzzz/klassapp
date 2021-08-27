@@ -13,38 +13,25 @@ import { Seguint } from './Home/SeguintScreen';
 import Destacats from './Home/DestacatsScreen';
 import Descobreix from './Home/DescobreixScreen';
 
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import { render } from 'react-dom';
+
+import TopBar from '../components/TopBar';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Top = createMaterialTopTabNavigator();
 
-const Home = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-};
-const Home2 = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home2!</Text>
-    </View>
-  );
-};
-const NotificationsScreen = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notis!</Text>
-    </View>
-  );
-};
-
 const TimeLine = () => {
   return (
-    <Top.Navigator>
+    <Top.Navigator
+      tabBarOptions={{
+        activeTintColor: '#491C3D',
+        inactiveTintColor: '#CC97BD',
+        labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
+        style: { borderEndColor: '#491C3D' },
+      }}
+    >
       <Top.Screen name='Seguint' component={Seguint} />
       <Top.Screen name='Descobreix' component={Descobreix} />
       <Top.Screen name='Destacats' component={Destacats} />
@@ -54,11 +41,16 @@ const TimeLine = () => {
 
 const Screens = () => {
   return (
-    <Tab.Navigator initialRouteName='home' tabBarOptions={{ showLabel: false }}>
+    <Tab.Navigator
+      initialRouteName='home'
+      tabBarOptions={{ showLabel: false, activeTintColor: '#1C4928' }}
+    >
       <Tab.Screen
         name='match'
         component={MatchScreen}
-        options={{ tabBarIcon: MatchScreen.Icon }}
+        options={{
+          tabBarIcon: MatchScreen.Icon,
+        }}
       />
       <Tab.Screen
         name='home'
@@ -68,7 +60,7 @@ const Screens = () => {
       <Tab.Screen
         name='user'
         component={UserScreen}
-        options={{ tabBarIcon: UserScreen.Icon }}
+        options={{ tabBarIcon: UserScreen.Icon, header: false }}
       />
     </Tab.Navigator>
   );

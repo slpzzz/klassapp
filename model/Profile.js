@@ -54,6 +54,7 @@ const ProfileSchema = new mongoose.Schema({
       iduser: { type: String },
     },
   ],
+  likes: [{ user: { type: String } }],
   date: {
     type: Date,
     default: Date.now,

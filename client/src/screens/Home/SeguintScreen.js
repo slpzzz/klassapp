@@ -5,14 +5,18 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Post from '../../components/Post';
 
 import { getPostFollows } from '../actions/posts';
+import { getProfileMe } from '../actions/profile';
 
 export const Seguint = () => {
   const [datos, setDatos] = useState([]);
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     getPostFollows(datos, setDatos);
+    getProfileMe(setProfile);
   }, []);
 
+  console.log(profile);
   const renderItem = ({ item }) => {
     return <Post datos={item} />;
   };

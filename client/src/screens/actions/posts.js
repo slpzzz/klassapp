@@ -36,8 +36,6 @@ export const getPostFollows = async (datos, setDatos) => {
         usersFollowing.map(d => {
           if (d === dataUsers.user) {
             datos.push(dataUsers);
-          } else {
-            console.log('false');
           }
         });
       });
@@ -62,18 +60,16 @@ export const unlikePost = async (id_post, setLike) => {
 };
 
 export const isLike = (setLike, id) => {
-  console.log(id);
+  axios
+    .get(`${uri}/api/profile/me`)
+    .then(response =>
+      response.data.likes.map(d => d.user === id && setLike(true))
+    );
   axios
     .get(`${uri}/api/posts`)
     .then(response2 => {
-      response2.data.map(d =>
-        d.likes.length > 0
-          ? d.likes.map(l =>
-              l.user === id
-                ? (setLike(true), console.log('true', l.user, id))
-                : setLike(false)
-            )
-          : setLike(false)
+      response2.data.map(
+        d => d.likes.length > 0 && d.likes.filter(({ user }) => user !== id)
       );
     })
     .catch(err => console.error(err));

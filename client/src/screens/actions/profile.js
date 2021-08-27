@@ -21,9 +21,7 @@ export const ifFollow = (setHandle, id) => {
     axios.get(`${uri}/api/profile/me`).then(function (response) {
       if (response.data) {
         return response.data.following.map(d =>
-          d.iduser === id
-            ? (setHandle(true), console.log('true', d.user, d.iduser, id))
-            : (setHandle(false), console.log('false', d.user, d.iduser, id))
+          d.iduser === id ? setHandle(true) : setHandle(false)
         );
       }
     });

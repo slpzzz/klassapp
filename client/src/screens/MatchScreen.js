@@ -15,7 +15,6 @@ const MatchScreen = () => {
 
   return (
     <View style={stylesM.page}>
-      <TopBar />
       <SubTopBar pressed={pressed} setPressed={setPressed} />
       {pressed[0] && <Favorits />}
       {pressed[1] && <Filter />}

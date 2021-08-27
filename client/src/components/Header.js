@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 var width = Dimensions.get('screen').width;
 
-export default function UserScreen({ datos, datos1 }) {
+export default function Header({ datos, datos1 }) {
   return (
     <View style={styles.headerParent} elevation={5}>
       <View style={{ alignItems: 'flex-end', marginRight: 32, marginTop: 32 }}>

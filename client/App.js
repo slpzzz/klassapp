@@ -16,6 +16,7 @@ import StarterScreen from './src/screens/StarterScreen';
 import Register from './src/screens/auth/Register';
 import SignUp2 from './src/screens/auth/SignUp2';
 import Login from './src/screens/auth/Login';
+import TopBar from './src/components/TopBar';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -32,6 +33,7 @@ const App = () => {
           name='homeScreen'
           component={FirstScreen}
           independent={true}
+          options={{ headerShown: true, header: () => <TopBar /> }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -36,21 +36,18 @@ export default function TopBar() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    // width: '100%',
-    width: width,
+    display: 'flex',
+    justifyContent: 'space-between',
     height: 56,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
     shadowRadius: 1,
     elevation: 1,
     flexDirection: 'row',
     //  flex: 1,
   },
   left: {
-    flex: 0.7,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
     marginLeft: 16,
   },
   img: {
@@ -58,9 +55,9 @@ const styles = StyleSheet.create({
     height: 24,
   },
   right: {
+    display: 'flex',
     flexDirection: 'row',
-    flex: 0.3,
     alignItems: 'center',
-    justifyContent: 'center',
+    marginRight: 15,
   },
 });

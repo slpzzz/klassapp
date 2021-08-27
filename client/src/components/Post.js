@@ -12,11 +12,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { likePost, unlikePost, isLike } from '../screens/actions/posts';
 import { getProfileMe } from '../screens/actions/profile';
 
-export default function Post({ datos, id }) {
+export default function Post({ datos }) {
   const [like, setLike] = useState(false);
+  const [numLikes, setNumLikes] = useState();
 
   useEffect(() => {
-    isLike(setLike);
+    isLike(setLike, datos._id);
+    datos.likes && setNumLikes(datos.likes.length);
   }, []);
 
   return datos ? (
@@ -67,9 +69,8 @@ export default function Post({ datos, id }) {
             <TouchableOpacity
               onPress={() =>
                 like
-                  ? (unlikePost(datos._id, setLike),
-                    datos.likes.length.forceUpdate())
-                  : likePost(datos._id, setLike)
+                  ? (unlikePost(datos._id, setLike), setNumLikes(numLikes - 1))
+                  : (likePost(datos._id, setLike), setNumLikes(numLikes + 1))
               }
             >
               <FontAwesome
@@ -78,9 +79,7 @@ export default function Post({ datos, id }) {
                 color={like ? '#1C4928' : 'black'}
               />
             </TouchableOpacity>
-            <Text style={{ marginLeft: 8 }}>
-              {datos.likes ? datos.likes.length : 0}
-            </Text>
+            <Text style={{ marginLeft: 8 }}>{datos.likes ? numLikes : 0}</Text>
           </View>
         </View>
       </View>
