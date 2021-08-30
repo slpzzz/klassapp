@@ -175,24 +175,23 @@ router.put('/follow/:follow_id', auth, async (req, res) => {
   }
 });
 
-// @route   DELETE api/profile/follow/:follow_id
-// @desc    Delete follow from profile
+// @route   DELETE api/profile/unfollow/:follow_id
+// @desc    un from profile
 // @access  Private
-router.delete('/follow/:follow_id', auth, async (req, res) => {
+router.put('/unfollow/:follow_id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
     const user = await Profile.findOne({ user: req.params.follow_id });
+    console.log(profile.following);
+    console.log(user.followers);
 
     //Get remove index he from following
-    const removeIndex = profile.following
-      .map(item => item.id)
-      .indexOf(req.params._id);
-    profile.following.splice(removeIndex, 1);
-    //Get remove index me from followers
-    const removeIndex1 = user.followers
-      .map(item => item.id)
-      .indexOf(req.user.id);
-    user.followers.splice(removeIndex1, 1);
+    profile.following = profile.following.filter(
+      ({ iduser }) => iduser !== req.params.follow_id
+    );
+    user.followers = user.followers.filter(
+      ({ iduser }) => iduser !== req.user.id
+    );
 
     await user.save();
     await profile.save();

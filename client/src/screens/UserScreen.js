@@ -38,7 +38,6 @@ const UserScreen = observer(() => {
   return (
     <View style={{ marginBottom: 300 }}>
       {datos && <Header datos={datos} datos1={datos1} />}
-      {datos1.rol && datos1.rol.map((d, i) => console.log(d))}
       <View elevation={5} style={styles.sectionParent}>
         <TouchableOpacity onPress={() => selected(0)}>
           <View style={styles.sections}>

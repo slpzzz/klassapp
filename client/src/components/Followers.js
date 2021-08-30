@@ -2,8 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { FollowBtn } from './FollowBtn';
 
-export default function Followers({ datos }) {
+import { ifFollow, unfollow, follow } from '../screens/actions/profile';
+
+export default function Followers({ data, update }) {
   const [handle, setHandle] = useState(false);
+
+  useEffect(() => {
+    ifFollow(setHandle, data.iduser);
+  }, []);
+
+  const setFollow = () => {
+    handle ? unfollow(data.iduser) : follow(data.iduser);
+    setHandle(!handle);
+    update();
+  };
 
   return (
     <View style={styles.container}>
@@ -11,26 +23,31 @@ export default function Followers({ datos }) {
         <Image
           style={styles.avatarProfile}
           source={{
-            uri: datos.avatar
-              ? datos.avatar
+            uri: data.avatar
+              ? data.avatar
               : 'https://tds.cl/img/perfil-usuario.png',
           }}
         />
       </View>
       <View style={styles.body}>
         <View style={styles.topBody}>
-          <Text style={styles.TextName}>{datos.user}</Text>
-
-          {/*  ADD ROL !!!!!!
-           {d.rol && (
-              <Text style={styles.TextTitleRol}>
-                {' '}
-                {d.rol[0].title} del {d.rol[0].team}
-              </Text>
-            )} */}
+          <Text style={styles.TextName}>{data.iduser}</Text>
+          <Text style={styles.TextName}>{handle}</Text>
         </View>
       </View>
-      <FollowBtn id={datos.iduser} />
+      <TouchableOpacity onPress={() => setFollow()}>
+        <View style={styles.seguirbtnP}>
+          {handle ? (
+            <View style={styles.siguiendobtn}>
+              <Text style={{ color: '#487551' }}>Siguiendo</Text>
+            </View>
+          ) : (
+            <View style={styles.seguirbtn}>
+              <Text style={{ color: 'white' }}>Seguir</Text>
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }

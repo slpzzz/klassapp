@@ -3,27 +3,17 @@ import { useState } from 'react';
 
 const uri = 'http://localhost:5000';
 
-export const getProfileMe = (setDatos1, setDatos, posts) => {
-  try {
-    axios.get(`${uri}/api/profile/me`).then(function (response) {
-      if (response.data) {
-        setDatos && setDatos(response.data.user);
-        setDatos1 && setDatos1(response.data);
-        posts && getPostsMe(posts, response.data.user._id);
-      }
-    });
-  } catch (err) {
-    console.error('An error occurred', err);
-  }
+export const getProfileMe = setDatos => {
+  axios
+    .get(`${uri}/api/profile/me`)
+    .then(response => setDatos(response.data))
+    .catch(err => console.error(err));
 };
 export const ifFollow = (setHandle, id) => {
+  setHandle(false);
   try {
-    axios.get(`${uri}/api/profile/me`).then(function (response) {
-      if (response.data) {
-        return response.data.following.map(d =>
-          d.iduser === id ? setHandle(true) : setHandle(false)
-        );
-      }
+    axios.get(`${uri}/api/profile/me`).then(response => {
+      response.data.following.map(d => d.iduser === id && setHandle(true));
     });
   } catch (err) {
     console.error('An error occurred', err);
@@ -66,7 +56,7 @@ export const follow = id_user => {
 
 export const unfollow = id_user => {
   try {
-    axios.delete(`${uri}/api/profile/follow/${id_user}`);
+    axios.put(`${uri}/api/profile/unfollow/${id_user}`);
   } catch (err) {
     console.error('An error ocurred', err);
   }

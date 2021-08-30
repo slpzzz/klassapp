@@ -16,16 +16,17 @@ export default function Destacats() {
   useEffect(() => {
     getProfiles(setDatos);
   }, []);
-
+  console.log(datos);
   return (
-    <View>
-      {datos.map((d, i) => (
-        <View key={i} style={{ flexDirection: 'row' }}>
-          <Text>{d.user.name}</Text>
-          <FollowBtn id={d.user._id} />
-        </View>
-      ))}
-    </View>
+    datos && (
+      <View>
+        {datos.map((d, i) => (
+          <View>
+            <Followers key={i} data={d} />
+          </View>
+        ))}
+      </View>
+    )
   );
 }
 

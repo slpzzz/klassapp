@@ -45,6 +45,13 @@ export const getPostFollows = async (datos, setDatos) => {
     });
 };
 
+export const myPosts = setDatos => {
+  axios
+    .get(`${uri}/api/posts/me`)
+    .then(response => setDatos(response.data))
+    .catch(err => console.err(err));
+};
+
 export const likePost = async (id_post, setLike) => {
   await axios
     .put(`${uri}/api/posts/like/${id_post}`)
@@ -73,4 +80,19 @@ export const isLike = (setLike, id) => {
       );
     })
     .catch(err => console.error(err));
+};
+
+export const addComment = (text, id_post) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({ text });
+  try {
+    axios.post(`${uri}/api/posts/comment/${id_post}`, body, config);
+  } catch (err) {
+    console.error('An error ocurred', err);
+  }
 };

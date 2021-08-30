@@ -8,23 +8,15 @@ import {
 } from '../screens/actions/profile';
 
 export const FollowBtn = ({ id }) => {
-  const [handle, setHandle] = useState(false);
-  const [datos, setDatos] = useState(id);
-
-  useEffect(() => {
-    datos != id && setDatos(datos);
-    ifFollow(setHandle, datos);
-  }, []);
-
   const setFollow = () => {
-    handle ? unfollow(id) : follow(id);
-    setHandle(!handle);
+    /*   handle ? unfollow(id) : follow(id);
+    setHandle(!handle); */
   };
 
   return (
-    <TouchableOpacity onPress={() => setFollow()}>
+    <TouchableOpacity onPress={() => {}}>
       <View style={styles.seguirbtnP}>
-        {handle ? (
+        {/*       {handle ? (
           <View style={styles.siguiendobtn}>
             <Text style={{ color: '#487551' }}>Siguiendo</Text>
           </View>
@@ -32,7 +24,7 @@ export const FollowBtn = ({ id }) => {
           <View style={styles.seguirbtn}>
             <Text style={{ color: 'white' }}>Seguir</Text>
           </View>
-        )}
+        )} */}
       </View>
     </TouchableOpacity>
   );

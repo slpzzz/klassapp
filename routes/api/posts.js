@@ -60,6 +60,22 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @route   GET api/posts/me
+// @desc    Get all posts me
+// @access  Private
+
+router.get('/me', auth, async (req, res) => {
+  try {
+    //const profile = await Profile.findOne({ user: req.user.id });
+    const posts = await Post.find({ user: req.user.id });
+
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route   GET api/posts/:id
 // @desc    Get all posts by ID
 // @access  Private
@@ -194,6 +210,7 @@ router.post(
       post.comments.unshift(newComment);
 
       await post.save();
+      console.log(post);
       res.json(post.comments);
     } catch (err) {
       console.error(err.message);

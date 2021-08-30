@@ -17,11 +17,30 @@ import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import { render } from 'react-dom';
 
 import TopBar from '../components/TopBar';
+import Posts from './UserScreens/Posts';
+import Seguidors from './UserScreens/Seguidors';
+import Seguintt from './UserScreens/Seguint';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Top = createMaterialTopTabNavigator();
 
+const Followers = () => {
+  return (
+    <Top.Navigator
+      tabBarOptions={{
+        activeTintColor: '#491C3D',
+        inactiveTintColor: '#CC97BD',
+        labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
+        style: { borderEndColor: '#491C3D' },
+      }}
+    >
+      <Top.Screen name='Posts' component={Posts} />
+      <Top.Screen name='Seguidors' component={Seguidors} />
+      <Top.Screen name='Seguint' component={Seguintt} />
+    </Top.Navigator>
+  );
+};
 const TimeLine = () => {
   return (
     <Top.Navigator
@@ -59,7 +78,7 @@ const Screens = () => {
       />
       <Tab.Screen
         name='user'
-        component={UserScreen}
+        component={Followers}
         options={{ tabBarIcon: UserScreen.Icon, header: false }}
       />
     </Tab.Navigator>
