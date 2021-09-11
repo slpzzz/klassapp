@@ -5,18 +5,21 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Post from '../../components/Post';
 
 import { getPostFollows } from '../actions/posts';
+import ProgressBar from 'react-native-progress/Bar';
 
-export const Seguint = () => {
+export const Seguint = ({ navigation }) => {
   const [datos, setDatos] = useState([]);
-
+  const mount = useRef(null);
   useEffect(() => {
     getPostFollows(datos, setDatos);
   }, []);
 
+  console.log(datos);
   const renderItem = ({ item }) => {
-    return <Post datos={item} />;
+    return <Post id={item._id} datos={item} navigation={navigation} />;
   };
 
+  console.log(datos);
   return datos ? (
     <FlatList
       data={datos}

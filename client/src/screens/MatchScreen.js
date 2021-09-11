@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Favorits from './Match/FavoritesScreen';
 import Filter from './Match/FilterScreen';
 
 import TopBar from '../components/TopBar';
-import SubTopBar from '../components/SubTopBar2';
 
-import stylesM from '../../styles';
+const Top = createMaterialTopTabNavigator();
 
-const MatchScreen = () => {
-  const [pressed, setPressed] = useState([true, false, false]);
-
+const MatchScreen = navigation => {
   return (
-    <View style={stylesM.page}>
-      <SubTopBar pressed={pressed} setPressed={setPressed} />
-      {pressed[0] && <Favorits />}
-      {pressed[1] && <Filter />}
-    </View>
+    <>
+      <View>
+        <TopBar navigation={navigation.navigation} />
+      </View>
+      <Top.Navigator
+        tabBarOptions={{
+          activeTintColor: '#491C3D',
+          inactiveTintColor: '#CC97BD',
+          labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
+          style: { borderEndColor: '#491C3D' },
+        }}
+      >
+        <Top.Screen name='Favorits' component={Favorits} />
+        <Top.Screen name='Cercar' component={Filter} />
+      </Top.Navigator>
+    </>
   );
 };
 
@@ -27,15 +37,3 @@ export default MatchScreen;
 MatchScreen.Icon = ({ color, size }) => (
   <FontAwesome name='soccer-ball-o' size={size} color={color} />
 );
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#cfc',
-  },
-  text: {
-    fontSize: 32,
-  },
-});

@@ -8,16 +8,21 @@ import {
   Alert,
 } from 'react-native';
 
-export default function Etiqueta({ datos }) {
+export default function Etiqueta({ datos, navigation }) {
   return (
-    <TouchableOpacity style={{ padding: 5 }}>
+    <TouchableOpacity
+      style={{ padding: 5 }}
+      onPress={() => {
+        navigation.push('etiqueta', { name: datos });
+      }}
+    >
       <View
         style={[
           styles.sticker,
           {
             backgroundColor:
               datos === '4a catalana'
-                ? 'red'
+                ? '#eb9494'
                 : datos === '3a catalana'
                 ? '#FF7A2F'
                 : datos === '2a catalana'

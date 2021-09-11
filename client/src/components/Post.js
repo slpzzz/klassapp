@@ -20,8 +20,11 @@ import { getProfileMe } from '../screens/actions/profile';
 import Comments from './Comments';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import sty from '../../styles';
+import Date from './Date';
+import moment from 'moment';
+import { postNoti } from '../screens/actions/notis';
 
-export default function Post({ datos }) {
+export default function Post({ datos, navigation }) {
   const [like, setLike] = useState(false);
   const [numLikes, setNumLikes] = useState();
   const [comment, setComment] = useState();
@@ -32,33 +35,44 @@ export default function Post({ datos }) {
     isLike(setLike, datos._id);
     datos.likes && setNumLikes(datos.likes.length);
   }, []);
+
   const newComment = () => {
     addComment(comment, datos._id);
     setComment('');
+    postNoti(datos._id, datos.user, 'comment');
   };
+
+  moment.locale('ca');
+  const dia = moment(datos.date, 'YYYY-MM-DDThh:mm:ss').fromNow();
 
   return datos ? (
     <View>
       <View style={styles.container}>
         <View style={styles.avatarParent}>
-          <View style={styles.avatar}>
-            <Image
-              style={styles.avatarProfile}
-              source={{
-                uri: datos.avatar
-                  ? `${datos.avatar}`
-                  : 'https://tds.cl/img/perfil-usuario.png',
-              }}
-            />
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation && navigation.push('user', datos.user)}
+          >
+            <View style={styles.avatar}>
+              <Image
+                style={styles.avatarProfile}
+                source={{
+                  uri: datos.avatar
+                    ? `${datos.avatar}`
+                    : 'https://tds.cl/img/perfil-usuario.png',
+                }}
+              />
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.body}>
           <View style={styles.topBody}>
             <View style={styles.name}>
               <Text style={styles.TextName}>{datos.username}</Text>
             </View>
-            <View style={styles.time}></View>
-            <Text style={styles.TextTime}>21:32</Text>
+            <View style={styles.time}>
+              {/* <Date data={datos.date} /> */}
+              <Text style={styles.textTime}>{dia}</Text>
+            </View>
           </View>
           {datos.rol.length > 0 && (
             <Text style={styles.TextTitleRol}>
@@ -66,13 +80,14 @@ export default function Post({ datos }) {
             </Text>
           )}
           <View>
-            <Text style={styles.textBody}>
-              {datos.text} {like ? 'true' : 'false'}
-            </Text>
+            <Text style={styles.textBody}>{datos.text}</Text>
           </View>
           <View style={{ flexDirection: 'row', padding: 3 }}>
             <ScrollView horizontal={true}>
-              {datos.sticker && datos.sticker.map(d => <Etiqueta datos={d} />)}
+              {datos.sticker &&
+                datos.sticker.map((d, i) => {
+                  return <Etiqueta key={i} datos={d} navigation={navigation} />;
+                })}
             </ScrollView>
           </View>
           <View style={styles.interactBtnParent}>
@@ -98,7 +113,9 @@ export default function Post({ datos }) {
                   like
                     ? (unlikePost(datos._id, setLike),
                       setNumLikes(numLikes - 1))
-                    : (likePost(datos._id, setLike), setNumLikes(numLikes + 1))
+                    : (likePost(datos._id, setLike),
+                      setNumLikes(numLikes + 1),
+                      postNoti(datos._id, datos.user, 'like'))
                 }
               >
                 <FontAwesome
@@ -160,7 +177,14 @@ export default function Post({ datos }) {
             styles={{ width: '30%' }}
           />
         </View>
-        <ScrollView style={{ height: 200 }}>
+
+        <ScrollView
+          style={
+            datos.comments && datos.comments.length > 2
+              ? { height: 200 }
+              : { height: 'auto' }
+          }
+        >
           {datos.comments &&
             datos.comments.map((c, i) => <Comments key={i} data={c} />)}
         </ScrollView>
@@ -209,15 +233,16 @@ const styles = StyleSheet.create({
   },
   topBody: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   name: {
-    justifyContent: 'flex-start',
-    flex: 0.6,
+    //justifyContent: 'flex-start',
+    //flex: 0.6,
   },
   time: {
-    flex: 0.4,
-    justifyContent: 'flex-end',
-    marginRight: 32,
+    //flex: 0.4,
+    // justifyContent: 'flex-end',
+    // marginRight: 32,
   },
   TextTime: {
     fontSize: 13,

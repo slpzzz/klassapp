@@ -28,7 +28,7 @@ export default function Logo({ size, color }) {
       </Text>
     </View>
   ) : (
-    <Text>No</Text>
+    <Text>.k</Text>
   );
 }
 

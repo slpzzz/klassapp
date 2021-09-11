@@ -8,18 +8,22 @@ var width = Dimensions.get('screen').width;
 export default function Header({ datos, datos1 }) {
   return (
     <View style={styles.headerParent} elevation={5}>
-      <View style={{ alignItems: 'flex-end', marginRight: 32, marginTop: 32 }}>
+      {/*       <View style={{ alignItems: 'flex-end', marginRight: 32, marginTop: 32 }}>
         <Fontisto name='player-settings' size={24} color='black' />
-      </View>
+      </View> */}
       <View style={styles.header}>
         <Image
           style={styles.avatarProfile}
-          source={{ uri: `${datos.avatar}` }}
+          source={{
+            uri: datos1.avatar
+              ? datos1.avatar
+              : 'https://tds.cl/img/perfil-usuario.png',
+          }}
         />
-        <Text style={{ fontSize: 25, padding: 8 }}>{datos.name}</Text>
-        <Text style={{ fontSize: 13, padding: 4 }}>{datos1.bio}</Text>
-        {datos1.rol &&
-          datos1.rol.map((d, i) => {
+        <Text style={{ fontSize: 25, padding: 8 }}>{datos1.name}</Text>
+        <Text style={{ fontSize: 13, padding: 4 }}>{datos.bio}</Text>
+        {datos.rol &&
+          datos.rol.map((d, i) => {
             return (
               <Text key={i} style={{ fontSize: 13, padding: 4 }}>
                 {d.title} {d.team}
@@ -46,5 +50,6 @@ const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
   },
 });

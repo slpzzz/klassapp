@@ -27,7 +27,6 @@ export default function WriteModal({ handleShow, navigation }) {
   const send = () => {
     addPost(sticker, text);
     handleShow();
-    navigation.navigate('homeScreen');
   };
 
   const change = (e, i) => {
@@ -54,7 +53,11 @@ export default function WriteModal({ handleShow, navigation }) {
           zIndex: 0,
           position: 'absolute',
         }}
-      ></View>
+      >
+        <TouchableOpacity onPress={() => handleShow()}>
+          <View style={{ width: width, height: height }} />
+        </TouchableOpacity>
+      </View>
       <View
         style={{
           backgroundColor: 'white',
@@ -68,7 +71,7 @@ export default function WriteModal({ handleShow, navigation }) {
           },
           shadowOpacity: 0.25,
           shadowRadius: 3.84,
-
+          borderRadius: 20,
           elevation: 5,
           padding: 16,
         }}
@@ -89,19 +92,37 @@ export default function WriteModal({ handleShow, navigation }) {
             }}
             onPress={send}
           >
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ color: 'white', width: 60 }}>Enviar</Text>
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 10,
+              }}
+            >
+              <Text style={{ color: 'white' }}>Enviar</Text>
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ padding: 20 }}>
-            {sticker.length < 5 &&
+        <View
+          style={{ marginTop: 10, display: 'flex', flexDirection: 'column' }}
+        >
+          <View
+            style={{ paddingtop: 20, display: 'flex', flexDirection: 'row' }}
+          >
+            {sticker.length < 3 &&
               sticker.map((p, i) => (
                 <Picker
                   key={i}
                   onValueChange={a => change(a, i)}
-                  style={{ flex: 0.5, padding: 5 }}
+                  style={{
+                    padding: 5,
+                    borderColor: '#1C4928',
+                    borderWidth: 1,
+                    borderRadius: 20,
+                    display: 'flex',
+                    flexDirection: 'row',
+                  }}
                 >
                   {data.map((d, i) => (
                     <Picker.Item
@@ -113,21 +134,51 @@ export default function WriteModal({ handleShow, navigation }) {
                 </Picker>
               ))}
           </View>
-          <TouchableOpacity
-            onPress={() => moreStickers()}
-            style={{ padding: 20 }}
+          <View
+            style={{ paddingtop: 20, display: 'flex', flexDirection: 'row' }}
           >
-            {sticker.length < 4 && (
-              <AntDesign name='pluscircleo' size={24} color='#487551' />
-            )}
-          </TouchableOpacity>
+            {sticker.length > 3 &&
+              sticker.map((p, i) => (
+                <Picker
+                  key={i}
+                  onValueChange={a => change(a, i)}
+                  style={{
+                    padding: 5,
+                    borderColor: '#1C4928',
+                    borderWidth: 1,
+                    borderRadius: 20,
+                    display: 'flex',
+                    flexDirection: 'row',
+                  }}
+                >
+                  {data.map((d, i) => (
+                    <Picker.Item
+                      key={i}
+                      label={d.label}
+                      value={d.value}
+                    ></Picker.Item>
+                  ))}
+                </Picker>
+              ))}
+          </View>
         </View>
+        <TouchableOpacity
+          onPress={() => moreStickers()}
+          style={{ padding: 20 }}
+        >
+          <AntDesign name='pluscircleo' size={24} color='#487551' />
+        </TouchableOpacity>
         <View>
           <View>
             <TextInput
               multiline={true}
               numberOfLines={4}
-              style={{ borderWidth: 1, borderColor: '#487551' }}
+              style={{
+                borderWidth: 1,
+                borderColor: '#487551',
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+              }}
               onChangeText={e => setText(e)}
             />
           </View>

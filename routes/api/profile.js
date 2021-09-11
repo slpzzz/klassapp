@@ -182,8 +182,6 @@ router.put('/unfollow/:follow_id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
     const user = await Profile.findOne({ user: req.params.follow_id });
-    console.log(profile.following);
-    console.log(user.followers);
 
     //Get remove index he from following
     profile.following = profile.following.filter(

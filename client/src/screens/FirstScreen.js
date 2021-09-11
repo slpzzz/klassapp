@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UserScreen from './UserScreen';
 import HomeScreen from './HomeScreen';
 import MatchScreen from './MatchScreen';
@@ -20,41 +20,88 @@ import TopBar from '../components/TopBar';
 import Posts from './UserScreens/Posts';
 import Seguidors from './UserScreens/Seguidors';
 import Seguintt from './UserScreens/Seguint';
+import { getProfileMe } from './actions/profile';
+import Header from '../components/Header';
+
+import { EvilIcons } from '@expo/vector-icons';
+import WriteModal from '../components/WriteModal';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Top = createMaterialTopTabNavigator();
 
-const Followers = () => {
+const myProfile = () => {
   return (
-    <Top.Navigator
-      tabBarOptions={{
-        activeTintColor: '#491C3D',
-        inactiveTintColor: '#CC97BD',
-        labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
-        style: { borderEndColor: '#491C3D' },
-      }}
-    >
-      <Top.Screen name='Posts' component={Posts} />
-      <Top.Screen name='Seguidors' component={Seguidors} />
-      <Top.Screen name='Seguint' component={Seguintt} />
-    </Top.Navigator>
+    <>
+      <GetMyProfile />
+      <Top.Navigator
+        tabBarOptions={{
+          activeTintColor: '#491C3D',
+          inactiveTintColor: '#CC97BD',
+          labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
+          style: { borderEndColor: '#491C3D' },
+        }}
+      >
+        <Top.Screen name='Posts' component={Posts} />
+        <Top.Screen name='Seguidors' component={Seguidors} />
+        <Top.Screen name='Seguint' component={Seguintt} />
+      </Top.Navigator>
+    </>
   );
 };
-const TimeLine = () => {
+
+const GetMyProfile = () => {
+  const [datos, setDatos] = useState({});
+  const [datos1, setDatos1] = useState({});
+  useEffect(() => {
+    getProfileMe(setDatos, setDatos1);
+  }, []);
+  return datos && <Header datos={datos} datos1={datos1} />;
+};
+
+const TimeLine = navigation => {
+  const [show, setShow] = useState(false);
   return (
-    <Top.Navigator
-      tabBarOptions={{
-        activeTintColor: '#491C3D',
-        inactiveTintColor: '#CC97BD',
-        labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
-        style: { borderEndColor: '#491C3D' },
-      }}
-    >
-      <Top.Screen name='Seguint' component={Seguint} />
-      <Top.Screen name='Descobreix' component={Descobreix} />
-      <Top.Screen name='Destacats' component={Destacats} />
-    </Top.Navigator>
+    <>
+      <View>
+        <TopBar navigation={navigation.navigation} />
+      </View>
+      <View
+        style={{
+          position: 'absolute',
+          zIndex: 1,
+          alignSelf: 'flex-end',
+          bottom: 0,
+          padding: 20,
+        }}
+      >
+        <TouchableOpacity onPress={() => setShow(!show)}>
+          <View
+            style={{ backgroundColor: '#1C4928', padding: 5, borderRadius: 50 }}
+          >
+            <EvilIcons name='pencil' size={50} color='white' />
+          </View>
+        </TouchableOpacity>
+      </View>
+      {show && (
+        <View style={{ position: 'absolute', zIndex: 1 }}>
+          <WriteModal handleShow={() => setShow(!show)} />
+        </View>
+      )}
+
+      <Top.Navigator
+        tabBarOptions={{
+          activeTintColor: '#491C3D',
+          inactiveTintColor: '#CC97BD',
+          labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
+          style: { borderEndColor: '#491C3D' },
+        }}
+      >
+        <Top.Screen name='Seguint' component={Seguint} />
+        <Top.Screen name='Descobreix' component={Descobreix} />
+        <Top.Screen name='Destacats' component={Destacats} />
+      </Top.Navigator>
+    </>
   );
 };
 
@@ -78,7 +125,7 @@ const Screens = () => {
       />
       <Tab.Screen
         name='user'
-        component={Followers}
+        component={myProfile}
         options={{ tabBarIcon: UserScreen.Icon, header: false }}
       />
     </Tab.Navigator>

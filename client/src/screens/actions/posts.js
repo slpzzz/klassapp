@@ -45,11 +45,42 @@ export const getPostFollows = async (datos, setDatos) => {
     });
 };
 
+export const getStickerPosts = (setDatos, name_sticker) => {
+  axios
+    .get(`${uri}/api/posts/filter/${name_sticker}`)
+    .then(response => setDatos(response.data))
+    .catch(err => console.error(err));
+};
+
+export const getBestPosts = setDatos => {
+  axios
+    .get(`${uri}/api/posts/filter/bests/all`)
+    .then(response => {
+      setDatos(response.data);
+    })
+    .catch(err => console.error(err));
+};
+
+export const getAllPosts = setDatos => {
+  axios
+    .get(`${uri}/api/posts`)
+    .then(response => setDatos(response.data))
+    .catch(err => console.error(err));
+};
+
 export const myPosts = setDatos => {
   axios
     .get(`${uri}/api/posts/me`)
     .then(response => setDatos(response.data))
     .catch(err => console.err(err));
+};
+
+export const userPost = (params, setData) => {
+  console.log(params);
+  axios
+    .get(`${uri}/api/posts/${params}`)
+    .then(response => setData(response.data))
+    .catch(err => console.error(err));
 };
 
 export const likePost = async (id_post, setLike) => {

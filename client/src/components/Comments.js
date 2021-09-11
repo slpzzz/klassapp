@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
 const Comments = ({ data }) => {
-  console.log(data);
   return (
     <View style={styles.container}>
       <View style={{ padding: 10 }}>
@@ -20,9 +19,18 @@ const Comments = ({ data }) => {
             }}
           ></Image>
         </View>
-        <View style={{ padding: 10, display: 'flex', alignItems: 'center' }}>
+        <View
+          style={{
+            padding: 10,
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+          }}
+        >
           <Text style={{ fontWeight: 'bold' }}>{data.name}</Text>
+
           <Text>{data.text}</Text>
+          <Text>{data.date}</Text>
         </View>
       </View>
     </View>

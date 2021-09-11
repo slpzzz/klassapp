@@ -3,51 +3,60 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { FollowBtn } from './FollowBtn';
 
 import { ifFollow, unfollow, follow } from '../screens/actions/profile';
+import { postNoti } from '../screens/actions/notis';
 
-export default function Followers({ data, update }) {
+export default function Followers({ data, navigation }) {
   const [handle, setHandle] = useState(false);
+  const [me, setMe] = useState(false);
 
   useEffect(() => {
-    ifFollow(setHandle, data.iduser);
+    ifFollow(setHandle, data.iduser, setMe);
   }, []);
 
+  console.log(navigation);
+
   const setFollow = () => {
-    handle ? unfollow(data.iduser) : follow(data.iduser);
+    handle
+      ? unfollow(data.iduser)
+      : (follow(data.iduser), postNoti(null, data.iduser, 'follow'));
     setHandle(!handle);
-    update();
   };
+  console.log(data);
 
   return (
     <View style={styles.container}>
       <View style={styles.avatarParent}>
-        <Image
-          style={styles.avatarProfile}
-          source={{
-            uri: data.avatar
-              ? data.avatar
-              : 'https://tds.cl/img/perfil-usuario.png',
-          }}
-        />
+        <TouchableOpacity onPress={() => navigation.push('user', data.iduser)}>
+          <Image
+            style={styles.avatarProfile}
+            source={{
+              uri: data.avatar
+                ? data.avatar
+                : 'https://tds.cl/img/perfil-usuario.png',
+            }}
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.body}>
-        <View style={styles.topBody}>
-          <Text style={styles.TextName}>{data.iduser}</Text>
-          <Text style={styles.TextName}>{handle}</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.push('user', data.iduser)}>
+          <Text style={styles.TextName}>{data.user}</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => setFollow()}>
-        <View style={styles.seguirbtnP}>
-          {handle ? (
-            <View style={styles.siguiendobtn}>
-              <Text style={{ color: '#487551' }}>Siguiendo</Text>
-            </View>
-          ) : (
-            <View style={styles.seguirbtn}>
-              <Text style={{ color: 'white' }}>Seguir</Text>
-            </View>
-          )}
-        </View>
-      </TouchableOpacity>
+      {!me && (
+        <TouchableOpacity onPress={() => setFollow()}>
+          <View style={styles.seguirbtnP}>
+            {handle ? (
+              <View style={styles.siguiendobtn}>
+                <Text style={{ color: '#487551' }}>Siguiendo</Text>
+              </View>
+            ) : (
+              <View style={styles.seguirbtn}>
+                <Text style={{ color: 'white' }}>Seguir</Text>
+              </View>
+            )}
+          </View>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -58,6 +67,8 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     flexDirection: 'row',
     padding: 16,
+    display: 'flex',
+    alignItems: 'center',
   },
   avatarProfile: {
     width: 50,
@@ -65,23 +76,23 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   avatarParent: {
-    flex: 0.1,
+    flex: 0.3,
     alignItems: 'center',
     justifyContent: 'center',
   },
   body: {
-    flex: 0.7,
+    flex: 0.5,
     paddingRight: 16,
     paddingTop: 8,
     paddingBottom: 8,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
   },
   seguirbtnP: {
     flex: 0.2,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    display: 'flex',
   },
   seguirbtn: {
     backgroundColor: '#487551',

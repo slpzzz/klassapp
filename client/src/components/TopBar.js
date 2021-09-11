@@ -7,14 +7,18 @@ import {
   StatusBar,
   TouchableButton,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import Logo from './logo';
 
 import { MaterialIcons } from '@expo/vector-icons';
+import { postNoti } from '../screens/actions/notis';
+import { NavigationContainer } from '@react-navigation/native';
 
 var width = Dimensions.get('screen').width;
 
-export default function TopBar() {
+const TopBar = ({ navigation }) => {
+  console.log('¡¡¡', navigation);
   return (
     <View>
       <StatusBar barStyle='light-content' hidden={false} translucent={false} />
@@ -23,15 +27,23 @@ export default function TopBar() {
           <Logo size={36} color={'#1C4928'}></Logo>
         </View>
         <View style={styles.right}>
-          <MaterialIcons name='notifications' size={24} color='#487551' />
-          <MaterialIcons name='notifications-on' size={24} color='#1C4928' />
+          <TouchableOpacity onPress={() => postNoti()}>
+            <MaterialIcons name='notifications' size={24} color='#487551' />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Notificacions')}
+          >
+            <MaterialIcons name='notifications-on' size={24} color='#1C4928' />
+          </TouchableOpacity>
           <MaterialIcons name='chat-bubble-outline' size={24} color='#487551' />
           <MaterialIcons name='mark-chat-unread' size={24} color='#1C4928' />
         </View>
       </View>
     </View>
   );
-}
+};
+
+export default TopBar;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,0 +1,604 @@
+[
+  {
+    "competicio": "1aCat",
+    "grup": [
+      {
+        "num": 1,
+        "resultats": [
+          {
+            "jornada": 1,
+            "partits": [
+              {
+                "equip1": "LLORET, C.F. A",
+                "equip2": "MARTINENC, F.C. A",
+                "dia": "02-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "BESCANO, C.D. A",
+                "equip2": "PARETS, C.F. A",
+                "dia": "02-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "LES FRANQUESES, C.F. A",
+                "equip2": "L'ESCALA, F.C. A",
+                "dia": "03-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "UNIFICACION LLEFIA,CF. A",
+                "equip2": "BANYOLES, C.E. A",
+                "dia": "03-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "MONTAÑESA, C.F. A",
+                "equip2": "LA JONQUERA, U.E. A",
+                "dia": "03-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "ESCOLA FUTBOL MATARO C.E A",
+                "equip2": "MOLLET U.E.,CF. A",
+                "dia": "03-10-2021",
+                "hora": "17:00"              },
+              {
+                "equip1": "PALAMOS CLUB DE FUTBOL A",
+                "equip2": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "dia": "03-10-2021",
+                "hora": "17:00"              }
+            ]
+          },
+          {
+            "jornada": 2,
+            "partits": [
+              {
+                "equip1": "MOLLET U.E.,CF. A",
+                "equip2": "LLORET, C.F. A",
+                "dia": "10-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "MARTINENC, F.C. A",
+                "equip2": "MONTAÑESA, C.F. A",
+                "dia": "10-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "PARETS, C.F. A",
+                "equip2": "ESCOLA FUTBOL MATARO C.E A",
+                "dia": "10-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "LA JONQUERA, U.E. A",
+                "equip2": "PALAMOS CLUB DE FUTBOL A",
+                "dia": "10-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "L'ESCALA, F.C. A",
+                "equip2": "BESCANO, C.D. A",
+                "dia": "10-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "BANYOLES, C.E. A",
+                "equip2": "LES FRANQUESES, C.F. A",
+                "dia": "10-10-2021",
+                "hora": "16:30"              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "UNIFICACION LLEFIA,CF. A",
+                "dia": "03-10-2021",
+                "hora": "17:00"              }
+            ]
+          },
+          {
+            "jornada": 3,
+            "partits": [
+              {
+                "equip1": "LLORET, C.F. A",
+                "equip2": "PARETS, C.F. A",
+                "dia": "16-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "LES FRANQUESES, C.F. A",
+                "equip2": "BESCANO, C.D. A",
+                "dia": "16-10-2021",
+                "hora": "17:00"              },
+              {
+                "equip1": "MONTAÑESA, C.F. A",
+                "equip2": "MOLLET U.E.,CF. A",
+                "dia": "17-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "UNIFICACION LLEFIA,CF. A",
+                "equip2": "LA JONQUERA, U.E. A",
+                "dia": "17-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "BANYOLES, C.E. A",
+                "equip2": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "dia": "17-10-2021",
+                "hora": "16:30"              },
+              {
+                "equip1": "PALAMOS CLUB DE FUTBOL A",
+                "equip2": "MARTINENC, F.C. A",
+                "dia": "17-10-2021",
+                "hora": "17:00"              },
+              {
+                "equip1": "ESCOLA FUTBOL MATARO C.E A",
+                "equip2": "L'ESCALA, F.C. A",
+                "dia": "17-10-2021",
+                "hora": "17:00"              }
+            ]
+          },
+          {
+            "jornada": 4,
+            "partits": [
+              {
+                "equip1": "BESCANO, C.D. A",
+                "equip2": "ESCOLA FUTBOL MATARO C.E A",
+                "dia": "23-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "PARETS, C.F. A",
+                "equip2": "MONTAÑESA, C.F. A",
+                "dia": "24-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "MOLLET U.E.,CF. A",
+                "equip2": "PALAMOS CLUB DE FUTBOL A",
+                "dia": "24-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "MARTINENC, F.C. A",
+                "equip2": "UNIFICACION LLEFIA,CF. A",
+                "dia": "24-10-2021",
+                "hora": "12:00"              },
+              {
+                "equip1": "LA JONQUERA, U.E. A",
+                "equip2": "BANYOLES, C.E. A",
+                "dia": "24-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "L'ESCALA, F.C. A",
+                "equip2": "LLORET, C.F. A",
+                "dia": "24-10-2021",
+                "hora": "16:00"              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "LES FRANQUESES, C.F. A",
+                "dia": "24-10-2021",
+                "hora": "17:00"              }
+            ]
+          },
+          {
+            "jornada": 5,
+            "partits": [
+              {
+                "equip1": "LLORET, C.F. A",
+                "equip2": "BESCANO, C.D. A",
+                "dia": "30-10-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "LES FRANQUESES, C.F. A",
+                "equip2": "ESCOLA FUTBOL MATARO C.E A",
+                "dia": "30-10-2021",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "MONTAÑESA, C.F. A",
+                "equip2": "L'ESCALA, F.C. A",
+                "dia": "31-10-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "UNIFICACION LLEFIA,CF. A",
+                "equip2": "MOLLET U.E.,CF. A",
+                "dia": "31-10-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "BANYOLES, C.E. A",
+                "equip2": "MARTINENC, F.C. A",
+                "dia": "31-10-2021",
+                "hora": "16:30"
+              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "LA JONQUERA, U.E. A",
+                "dia": "31-10-2021",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "PALAMOS CLUB DE FUTBOL A",
+                "equip2": "PARETS, C.F. A",
+                "dia": "31-10-2021",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 6,
+            "partits": [
+              {
+                "equip1": "BESCANO, C.D. A",
+                "equip2": "MONTAÑESA, C.F. A",
+                "dia": "06-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "PARETS, C.F. A",
+                "equip2": "UNIFICACION LLEFIA,CF. A",
+                "dia": "07-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MOLLET U.E.,CF. A",
+                "equip2": "BANYOLES, C.E. A",
+                "dia": "07-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MARTINENC, F.C. A",
+                "equip2": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "dia": "07-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "LA JONQUERA, U.E. A",
+                "equip2": "LES FRANQUESES, C.F. A",
+                "dia": "07-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "L'ESCALA, F.C. A",
+                "equip2": "PALAMOS CLUB DE FUTBOL A",
+                "dia": "07-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "LLORET, C.F. A",
+                "dia": "07-11-2021",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 7,
+            "partits": [
+              {
+                "equip1": "LES FRANQUESES, C.F. A",
+                "equip2": "LLORET, C.F. A",
+                "dia": "13-11-2021",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "UNIFICACION LLEFIA,CF. A",
+                "equip2": "L'ESCALA, F.C. A",
+                "dia": "14-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MONTAÑESA, C.F. A",
+                "equip2": "ESCOLA FUTBOL MATARO C.E A",
+                "dia": "14-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "LA JONQUERA, U.E. A",
+                "equip2": "MARTINENC, F.C. A",
+                "dia": "14-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "BANYOLES, C.E. A",
+                "equip2": "PARETS, C.F. A",
+                "dia": "14-11-2021",
+                "hora": "16:30"
+              },
+              {
+                "equip1": "PALAMOS CLUB DE FUTBOL A",
+                "equip2": "BESCANO, C.D. A",
+                "dia": "14-11-2021",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "MOLLET U.E.,CF. A",
+                "dia": "14-11-2021",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 8,
+            "partits": [
+              {
+                "equip1": "BESCANO, C.D. A",
+                "equip2": "UNIFICACION LLEFIA,CF. A",
+                "dia": "20-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "LLORET, C.F. A",
+                "equip2": "MONTAÑESA, C.F. A",
+                "dia": "20-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "MARTINENC, F.C. A",
+                "equip2": "LES FRANQUESES, C.F. A",
+                "dia": "21-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "PARETS, C.F. A",
+                "equip2": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "dia": "21-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MOLLET U.E.,CF. A",
+                "equip2": "LA JONQUERA, U.E. A",
+                "dia": "21-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "L'ESCALA, F.C. A",
+                "equip2": "BANYOLES, C.E. A",
+                "dia": "21-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "ESCOLA FUTBOL MATARO C.E A",
+                "equip2": "PALAMOS CLUB DE FUTBOL A",
+                "dia": "21-11-2021",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 9,
+            "partits": [
+              {
+                "equip1": "LES FRANQUESES, C.F. A",
+                "equip2": "MONTAÑESA, C.F. A",
+                "dia": "27-11-2021",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "MARTINENC, F.C. A",
+                "equip2": "MOLLET U.E.,CF. A",
+                "dia": "28-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "UNIFICACION LLEFIA,CF. A",
+                "equip2": "ESCOLA FUTBOL MATARO C.E A",
+                "dia": "28-11-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "LA JONQUERA, U.E. A",
+                "equip2": "PARETS, C.F. A",
+                "dia": "28-11-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "BANYOLES, C.E. A",
+                "equip2": "BESCANO, C.D. A",
+                "dia": "28-11-2021",
+                "hora": "16:30"
+              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "L'ESCALA, F.C. A",
+                "dia": "28-11-2021",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "PALAMOS CLUB DE FUTBOL A",
+                "equip2": "LLORET, C.F. A",
+                "dia": "28-11-2021",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 10,
+            "partits": [
+              {
+                "equip1": "BESCANO, C.D. A",
+                "equip2": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "dia": "11-12-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "LLORET, C.F. A",
+                "equip2": "UNIFICACION LLEFIA,CF. A",
+                "dia": "11-12-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "MOLLET U.E.,CF. A",
+                "equip2": "LES FRANQUESES, C.F. A",
+                "dia": "12-12-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MONTAÑESA, C.F. A",
+                "equip2": "PALAMOS CLUB DE FUTBOL A",
+                "dia": "12-12-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "PARETS, C.F. A",
+                "equip2": "MARTINENC, F.C. A",
+                "dia": "12-12-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "L'ESCALA, F.C. A",
+                "equip2": "LA JONQUERA, U.E. A",
+                "dia": "12-12-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "ESCOLA FUTBOL MATARO C.E A",
+                "equip2": "BANYOLES, C.E. A",
+                "dia": "12-12-2021",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 11,
+            "partits": [
+              {
+                "equip1": "LES FRANQUESES, C.F. A",
+                "equip2": "PALAMOS CLUB DE FUTBOL A",
+                "dia": "18-12-2021",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "MOLLET U.E.,CF. A",
+                "equip2": "PARETS, C.F. A",
+                "dia": "19-12-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MARTINENC, F.C. A",
+                "equip2": "L'ESCALA, F.C. A",
+                "dia": "19-12-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "UNIFICACION LLEFIA,CF. A",
+                "equip2": "MONTAÑESA, C.F. A",
+                "dia": "19-12-2021",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "LA JONQUERA, U.E. A",
+                "equip2": "BESCANO, C.D. A",
+                "dia": "19-12-2021",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "BANYOLES, C.E. A",
+                "equip2": "LLORET, C.F. A",
+                "dia": "19-12-2021",
+                "hora": "16:30"
+              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "ESCOLA FUTBOL MATARO C.E A",
+                "dia": "19-12-2021",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 12,
+            "partits": [
+              {
+                "equip1": "LLORET, C.F. A",
+                "equip2": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "dia": "08-01-2022",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "BESCANO, C.D. A",
+                "equip2": "MARTINENC, F.C. A",
+                "dia": "08-01-2022",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "LES FRANQUESES, C.F. A",
+                "equip2": "PARETS, C.F. A",
+                "dia": "08-01-2022",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "MONTAÑESA, C.F. A",
+                "equip2": "BANYOLES, C.E. A",
+                "dia": "09-01-2022",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "L'ESCALA, F.C. A",
+                "equip2": "MOLLET U.E.,CF. A",
+                "dia": "09-01-2022",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "ESCOLA FUTBOL MATARO C.E A",
+                "equip2": "LA JONQUERA, U.E. A",
+                "dia": "09-01-2022",
+                "hora": "17:00"
+              },
+              {
+                "equip1": "PALAMOS CLUB DE FUTBOL A",
+                "equip2": "UNIFICACION LLEFIA,CF. A",
+                "dia": "09-01-2022",
+                "hora": "17:00"
+              }
+            ]
+          },
+          {
+            "jornada": 13,
+            "partits": [
+              {
+                "equip1": "PARETS, C.F. A",
+                "equip2": "L'ESCALA, F.C. A",
+                "dia": "16-01-2022",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MARTINENC, F.C. A",
+                "equip2": "ESCOLA FUTBOL MATARO C.E A",
+                "dia": "16-01-2022",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "UNIFICACION LLEFIA,CF. A",
+                "equip2": "LES FRANQUESES, C.F. A",
+                "dia": "16-01-2022",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "MOLLET U.E.,CF. A",
+                "equip2": "BESCANO, C.D. A",
+                "dia": "16-01-2022",
+                "hora": "12:00"
+              },
+              {
+                "equip1": "LA JONQUERA, U.E. A",
+                "equip2": "LLORET, C.F. A",
+                "dia": "16-01-2022",
+                "hora": "16:00"
+              },
+              {
+                "equip1": "BANYOLES, C.E. A",
+                "equip2": "PALAMOS CLUB DE FUTBOL A",
+                "dia": "16-01-2022",
+                "hora": "16:30"
+              },
+              {
+                "equip1": "LLAGOSTERA-COSTA BRAVA, SAD U.E. B",
+                "equip2": "MONTAÑESA, C.F. A",
+                "dia": "16-01-2022",
+                "hora": "17:00"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "competicio": "2aCat"
+  },
+  {
+    "competicio": "3aCat"
+  },
+  {
+    "competicio": "4aCat"
+  }
+]

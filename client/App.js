@@ -17,6 +17,9 @@ import Register from './src/screens/auth/Register';
 import SignUp2 from './src/screens/auth/SignUp2';
 import Login from './src/screens/auth/Login';
 import TopBar from './src/components/TopBar';
+import GuestUser from './src/screens/GuestUser/GuestUser';
+import Etiquetes from './src/screens/Home/subPages/Etiquetes';
+import Notis from './src/screens/Notis/Notis';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -33,7 +36,31 @@ const App = () => {
           name='homeScreen'
           component={FirstScreen}
           independent={true}
-          options={{ headerShown: true, header: () => <TopBar /> }}
+        />
+        <Stack.Screen
+          name='user'
+          component={GuestUser}
+          options={{
+            headerShown: true,
+            title: 'Perfil',
+            headerTransparent: false,
+          }}
+        />
+        <Stack.Screen
+          name='etiqueta'
+          component={Etiquetes}
+          options={({ route }) => ({
+            title: route.params.name,
+            headerShown: true,
+          })}
+        />
+        <Stack.Screen
+          name='Notificacions'
+          component={Notis}
+          options={({ route }) => ({
+            title: 'Notificacions',
+            headerShown: true,
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
