@@ -16,7 +16,6 @@ export const ifFollow = (setHandle, id, setMe) => {
   setHandle(false);
   try {
     axios.get(`${uri}/api/profile/me`).then(response => {
-      console.log(response.data.user._id, id);
       response.data.user._id === id && setMe(true);
       response.data.following.map(d => d.iduser === id && setHandle(true));
     });
@@ -90,7 +89,41 @@ export const getSuggestUsers = () => {
     .get(`${uri}/api/profile`)
     .then(response => {
       random = response.data[Math.floor(Math.random() * response.data.length)];
-      console.log(random);
     })
+    .catch(err => console.error(err));
+};
+
+export const putFavLeague = async (categoria, grup) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const body = JSON.stringify({ categoria, grup });
+
+  await axios
+    .put(`${uri}/api/profile/favleague`, body, config)
+    .then(response => console.log('pr', response.data))
+    .catch(err => console.error(err));
+};
+
+export const unFavLeague = (categoria, grup) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const body = JSON.stringify({ categoria, grup });
+
+  axios
+    .delete(`${uri}/api/profile/favleague`, body, config)
+    .then(response => console.log('pro', response.data))
+    .catch(err => console.error(err));
+};
+
+export const getFavLeagues = setdata => {
+  axios
+    .get(`${uri}/api/profile/me`)
+    .then(response => setdata(response.data.favLeagues))
     .catch(err => console.error(err));
 };

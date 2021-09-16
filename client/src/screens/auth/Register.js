@@ -52,7 +52,7 @@ const Register = ({ navigation }) => {
           <TextInput
             value={name}
             placeholder='Nom'
-            style={styles.buttonText}
+            style={name ? styles.buttonTextW : styles.buttonText}
             autoCompleteType='username'
             onChange={e => onChange(e, 'name')}
           />
@@ -62,25 +62,18 @@ const Register = ({ navigation }) => {
             value={email}
             type='email'
             placeholder='Correu electrònic'
-            style={styles.buttonText}
+            style={email ? styles.buttonTextW : styles.buttonText}
             autoCompleteType='email'
             onChange={e => onChange(e, 'email')}
           />
         </View>
-        {/*         <View style={styles.button}>
-          <input
-            type='date'
-            placeholder='date'
-            style={styles.buttonText}
-            onChange={e => onChange(e, 'email')}
-          />
-        </View> */}
+
         <View style={styles.button}>
           <TextInput
             value={password}
             type='password'
             placeholder='Constrasenya'
-            style={styles.buttonText}
+            style={password ? styles.buttonTextW : styles.buttonText}
             secureTextEntry={true}
             onChange={e => onChange(e, 'password')}
           />
@@ -90,7 +83,7 @@ const Register = ({ navigation }) => {
             value={password2}
             type='password'
             placeholder='Constrasenya'
-            style={styles.buttonText}
+            style={password2 ? styles.buttonTextW : styles.buttonText}
             secureTextEntry={true}
             onChange={e => onChange(e, 'password2')}
           />
@@ -141,6 +134,18 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     borderWidth: 1,
+    borderColor: '#1C4928',
+    borderRadius: 5,
+    padding: 8,
+    width: width - 60,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    color: '#1C4928',
+    fontSize: 18,
+    height: 40,
+  },
+  buttonTextW: {
+    borderWidth: 2,
     borderColor: '#1C4928',
     borderRadius: 5,
     padding: 8,

@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
+import moment from 'moment';
 
 const Comments = ({ data }) => {
+  moment.locale('ca');
+  const dia = moment(data.date, 'YYYY-MM-DDThh:mm:ss').fromNow();
   return (
     <View style={styles.container}>
       <View style={{ padding: 10 }}>
@@ -21,7 +24,7 @@ const Comments = ({ data }) => {
         </View>
         <View
           style={{
-            padding: 10,
+            paddingLeft: 10,
             display: 'flex',
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
@@ -30,7 +33,7 @@ const Comments = ({ data }) => {
           <Text style={{ fontWeight: 'bold' }}>{data.name}</Text>
 
           <Text>{data.text}</Text>
-          <Text>{data.date}</Text>
+          <Text style={{ color: '#565656', fontSize: 10 }}>{dia}</Text>
         </View>
       </View>
     </View>

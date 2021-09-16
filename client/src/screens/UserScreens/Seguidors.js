@@ -13,9 +13,17 @@ const Seguidors = navigation => {
         <Followers data={d} navigation={navigation.navigation} />
       ))
     ) : (
-      <View>
+      <View
+        style={{
+          padding: 40,
+          flex: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
         <Text>
-          Interacciona amb els altres usuaris per aconseguir nous seguidors!
+          Interacciona amb els altres usuaris per aconseguir nous seguidors
         </Text>
       </View>
     )

@@ -37,6 +37,9 @@ const UserScreen = observer(() => {
   };
   return (
     <View style={{ marginBottom: 300 }}>
+      <TouchableOpacity>
+        <Text>Tancar sessió</Text>
+      </TouchableOpacity>
       {datos && <Header datos={datos} datos1={datos1} />}
       <View elevation={5} style={styles.sectionParent}>
         <TouchableOpacity onPress={() => selected(0)}>

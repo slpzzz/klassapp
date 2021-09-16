@@ -56,7 +56,6 @@ const GuestComponent = ({ navigation }) => {
   }, []);
 
   const setFollow = () => {
-    console.log(navigation.route.params, datos);
     handle
       ? unfollow(navigation.route.params)
       : (follow(navigation.route.params),
@@ -122,7 +121,6 @@ const GuestComponent = ({ navigation }) => {
 
 const GuestPost = navigation => {
   const [data, setData] = useState([]);
-  console.log('inn');
 
   useEffect(() => userPost(navigation.route.params.id, setData), []);
 
@@ -136,7 +134,6 @@ const GuestSeguidors = navigation => {
     getProfile(null, null, navigation.route.params.id, setDatos);
     //ifFollow(setHandle, navigation.route.params);
   }, []);
-  console.log('seguidors', datos.length);
 
   return datos ? (
     datos.length > 0 ? (
@@ -160,7 +157,6 @@ const GuestSeguint = navigation => {
     getProfile(null, null, navigation.route.params.id, null, setDatos);
     //ifFollow(setHandle, navigation.route.params);
   }, []);
-  console.log('seguidors', datos.length);
 
   return datos ? (
     datos.length > 0 ? (

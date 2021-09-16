@@ -19,20 +19,23 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     try {
       //const user = await User.findById(req.user.id).select('-password');
       const profile = await Profile.findOne({ user: req.user.id }).populate(
         'user',
         ['name', 'avatar']
       );
+      console.log(req.body.partido ? 'in' : 'out');
       const newPost = new Post({
         text: req.body.text,
-        sticker: req.body.sticker,
+        sticker: req.body.partido
+          ? req.body.partido.categoria
+          : req.body.sticker,
         username: profile.user.name,
         avatar: profile.user.avatar,
         rol: profile.rol,
         user: req.user.id,
+        partido: req.body.partido ? req.body.partido.resultados : null,
       });
 
       const post = await newPost.save();
@@ -109,6 +112,27 @@ router.get('/:id', auth, async (req, res) => {
       return res.status(404).json({ msg: 'Post not found' });
     }
     res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+// @route   GET api/posts/single/:id
+// @desc    Get post by ID
+// @access  Private
+
+router.get('/single/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findOne({ _id: req.params.id });
+
+    if (!post) {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+
+    res.json(post);
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {

@@ -7,6 +7,7 @@ import {
   StatusBar,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Labeltext from '../../components/Labeltext';
@@ -16,29 +17,26 @@ import AddRol from '../../components/AddRol';
 
 import { Ionicons } from '@expo/vector-icons';
 
-import { Entypo } from '@expo/vector-icons';
-
+import { EvilIcons } from '@expo/vector-icons';
 import sty from '../../../styles';
 
 import { createProfile } from '../actions/auth';
 
 var height = Dimensions.get('screen').height;
+var width = Dimensions.get('screen').width;
 
 const SignUp2 = ({ navigation }) => {
-  const [rol, setRol] = useState([
-    {
-      title: {},
-      team: {},
-    },
-  ]);
+  const [rol, setRol] = useState([{ title: '', team: '' }]);
   const [bio, setBio] = useState('');
   const [location, setLocation] = useState('');
 
   const completed = () => {
     createProfile(rol, bio, location, navigation);
     //navigation.navigate('homeScreen');
+    //console.log(rol);
   };
   const add = i => {
+    console.log(rol);
     setRol(oldArray => [
       ...oldArray,
       {
@@ -47,34 +45,37 @@ const SignUp2 = ({ navigation }) => {
       },
     ]);
   };
-  const remove = i => {
-    if (rol.length > 1) {
+  const remove = (i, rol_) => {
+    console.log('remove', i, rol, parseInt(i + 1), rol_);
+    if (rol.length > 0) {
       let arrayRols = [...rol];
-      arrayRols.splice(2, 1);
+      arrayRols.splice(1, 1);
       setRol(arrayRols);
+      console.log('remove', i, arrayRols, parseInt(i + 1), rol_);
     }
+    console.log('remove', i, rol, parseInt(i + 1), rol_);
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate('homeScreen')}>
-        <View style={{ alignItems: 'flex-end', padding: 20 }}>
-          <Entypo name='cross' size={24} color='#1C4928' />
-        </View>
+        {/*     <View style={{ alignItems: 'flex-end', padding: 20 }}>
+          <EvilIcons name='close' size={40} color='black' />
+        </View> */}
       </TouchableOpacity>
+      <Text
+        style={{
+          color: '#1C4928',
+          fontSize: 36,
+          padding: 16,
+          textAlign: 'center',
+        }}
+      >
+        Ajuda’ns a completar el teu perfil
+      </Text>
       <View style={styles.Formu}>
-        <Text
-          style={{
-            color: '#1C4928',
-            fontSize: 36,
-            padding: 16,
-            textAlign: 'center',
-          }}
-        >
-          Ajuda’ns a completar el teu perfil
-        </Text>
-        <View>
-          <Text>Afegeix una descripció</Text>
+        {/*  <View style={styles.pad}>
+          <Text style={styles.text}>Afegeix una descripció</Text>
 
           <TextInput
             multiline={true}
@@ -84,9 +85,9 @@ const SignUp2 = ({ navigation }) => {
             placeholder={'Descripció'}
             style={sty.buttonText}
           />
-        </View>
-        <View>
-          <Text>Ubicación</Text>
+        </View> */}
+        <View style={styles.pad}>
+          <Text style={styles.text}>Ubicación</Text>
           <TextInput
             onChangeText={text => setLocation(text)}
             value={location}
@@ -94,24 +95,47 @@ const SignUp2 = ({ navigation }) => {
             style={sty.buttonText}
           />
         </View>
-        <Text style={{ fontSize: 15, color: 'black', padding: 8 }}>
-          Quin és el teu rol?
-        </Text>
-        {rol.map((rol, index) => (
-          <View>
-            <AddRol
-              key={index}
-              removeFunction={() => remove(index)}
-              rol={rol}
-            />
+        <View style={styles.pad}>
+          <Text style={styles.text}>Quin és el teu rol?</Text>
+          <ScrollView>
+            {rol.map((r, index) =>
+              index === 0 ? (
+                <View style={{ backgroundColor: '#E2F1EA', borderRadius: 10 }}>
+                  <AddRol removeFunction={'principal'} rol={r} />
+                </View>
+              ) : (
+                <View>
+                  <AddRol
+                    key={index}
+                    removeFunction={() => remove(index, r)}
+                    rol={r}
+                  />
+                </View>
+              )
+            )}
+          </ScrollView>
+
+          <View
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'flex-end',
+            }}
+          >
+            <TouchableOpacity onPress={() => add()}>
+              <Ionicons name='add-circle' size={32} color='#1C4928' />
+            </TouchableOpacity>
           </View>
-        ))}
-        <TouchableOpacity onPress={() => add()}>
-          <View style={{ flex: 0.2, alignItems: 'center' }}>
-            <Ionicons name='add-circle' size={32} color='#1C4928' />
-          </View>
-        </TouchableOpacity>
-        <View style={{ justifyContent: 'flex-end' }}>
+        </View>
+      </View>
+      <View
+        style={{
+          width: width,
+          paddingLeft: 20,
+          paddingRight: 20,
+        }}
+      >
+        <View style={{ justifyContent: 'flex-end', alignItems: 'center' }}>
           <TouchableOpacity onPress={() => completed()}>
             <Button1 value={'SEGÜENT'} />
           </TouchableOpacity>
@@ -129,6 +153,14 @@ const styles = StyleSheet.create({
     height: height,
   },
   Formu: {
-    alignItems: 'center',
+    padding: 20,
+  },
+  pad: {
+    paddingTop: 10,
+  },
+  text: {
+    fontSize: 15,
+    color: 'black',
+    padding: 8,
   },
 });

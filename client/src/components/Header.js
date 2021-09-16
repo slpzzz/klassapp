@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 var width = Dimensions.get('screen').width;
 
 export default function Header({ datos, datos1 }) {
+  console.log(datos, datos1);
   return (
     <View style={styles.headerParent} elevation={5}>
       {/*       <View style={{ alignItems: 'flex-end', marginRight: 32, marginTop: 32 }}>
@@ -21,12 +22,30 @@ export default function Header({ datos, datos1 }) {
           }}
         />
         <Text style={{ fontSize: 25, padding: 8 }}>{datos1.name}</Text>
-        <Text style={{ fontSize: 13, padding: 4 }}>{datos.bio}</Text>
+        <View style={{ display: 'flex', flexDirection: 'row', padding: 10 }}>
+          <Image
+            style={{ width: 20, height: 20, padding: 10 }}
+            source={{
+              uri: 'https://img.icons8.com/external-prettycons-lineal-color-prettycons/49/000000/external-location-pin-essentials-prettycons-lineal-color-prettycons-4.png',
+            }}
+          />
+          <Text style={{ fontSize: 13, color: '#4E4E4E', padding: 4 }}>
+            {datos.location}
+          </Text>
+        </View>
+        {/* <Text style={{ fontSize: 13, padding: 4 }}>{datos.bio}</Text> */}
         {datos.rol &&
           datos.rol.map((d, i) => {
             return (
-              <Text key={i} style={{ fontSize: 13, padding: 4 }}>
-                {d.title} {d.team}
+              <Text
+                key={i}
+                style={{
+                  fontSize: 16,
+                  padding: 4,
+                  fontWeight: i === 0 ? 'bold' : 'normal',
+                }}
+              >
+                {d.title} del {d.team}
               </Text>
             );
           })}

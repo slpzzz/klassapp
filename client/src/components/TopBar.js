@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -12,13 +12,14 @@ import {
 import Logo from './logo';
 
 import { MaterialIcons } from '@expo/vector-icons';
-import { postNoti } from '../screens/actions/notis';
+import { isNoti, postNoti } from '../screens/actions/notis';
 import { NavigationContainer } from '@react-navigation/native';
 
 var width = Dimensions.get('screen').width;
 
 const TopBar = ({ navigation }) => {
-  console.log('¡¡¡', navigation);
+  const [on, setOn] = useState(false);
+  useEffect(() => isNoti(setOn), []);
   return (
     <View>
       <StatusBar barStyle='light-content' hidden={false} translucent={false} />
@@ -27,16 +28,17 @@ const TopBar = ({ navigation }) => {
           <Logo size={36} color={'#1C4928'}></Logo>
         </View>
         <View style={styles.right}>
-          <TouchableOpacity onPress={() => postNoti()}>
-            <MaterialIcons name='notifications' size={24} color='#487551' />
-          </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Notificacions')}
+            onPress={() => (navigation.navigate('Notificacions'), setOn(false))}
           >
-            <MaterialIcons name='notifications-on' size={24} color='#1C4928' />
+            <MaterialIcons
+              name={on ? 'notifications-on' : 'notifications'}
+              size={24}
+              color={on ? '#1C4928' : '#487551'}
+            />
           </TouchableOpacity>
-          <MaterialIcons name='chat-bubble-outline' size={24} color='#487551' />
-          <MaterialIcons name='mark-chat-unread' size={24} color='#1C4928' />
+          {/*    <MaterialIcons name='chat-bubble-outline' size={24} color='#487551' />
+          <MaterialIcons name='mark-chat-unread' size={24} color='#1C4928' /> */}
         </View>
       </View>
     </View>

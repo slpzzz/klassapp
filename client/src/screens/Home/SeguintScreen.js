@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Post from '../../components/Post';
 
 import { getPostFollows } from '../actions/posts';
@@ -9,25 +9,40 @@ import ProgressBar from 'react-native-progress/Bar';
 
 export const Seguint = ({ navigation }) => {
   const [datos, setDatos] = useState([]);
-  const mount = useRef(null);
   useEffect(() => {
     getPostFollows(datos, setDatos);
-  }, []);
+  }, [getPostFollows]);
 
-  console.log(datos);
   const renderItem = ({ item }) => {
     return <Post id={item._id} datos={item} navigation={navigation} />;
   };
 
-  console.log(datos);
   return datos ? (
-    <FlatList
-      data={datos}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
+    datos.length > 0 ? (
+      <FlatList
+        data={datos}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    ) : (
+      <TouchableOpacity
+        style={{ height: 150 }}
+        onPress={() => navigation.push('write')}
+      >
+        <View
+          style={{
+            padding: 40,
+            flex: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text>Escriu per primera vegada</Text>
+        </View>
+      </TouchableOpacity>
+    )
   ) : (
-    <Text>Escriu per primera vegada !</Text>
+    <Text>Error</Text>
   );
 };
 

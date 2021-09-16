@@ -13,7 +13,18 @@ export default function Etiqueta({ datos, navigation }) {
     <TouchableOpacity
       style={{ padding: 5 }}
       onPress={() => {
-        navigation.push('etiqueta', { name: datos });
+        navigation.push('etiqueta', {
+          name:
+            datos === '4aCat'
+              ? '4a catalana'
+              : datos === '3aCat'
+              ? '3a catalana'
+              : datos === '2aCat'
+              ? '2a catalana'
+              : datos === '1aCat'
+              ? '1a catalana'
+              : datos,
+        });
       }}
     >
       <View
@@ -29,11 +40,29 @@ export default function Etiqueta({ datos, navigation }) {
                 ? '#FFD953'
                 : datos === '1a catalana'
                 ? '#E1E1E1'
-                : datos === '3aDiv' && '#FF7BE2',
+                : datos === '4aCat'
+                ? '#eb9494'
+                : datos === '3aCat'
+                ? '#FF7A2F'
+                : datos === '2aCat'
+                ? '#FFD953'
+                : datos === '1aCat'
+                ? '#E1E1E1'
+                : console.log('no existe'),
           },
         ]}
       >
-        <Text style={styles.textS}>{datos}</Text>
+        <Text style={styles.textS}>
+          {datos === '4aCat'
+            ? '4a catalana'
+            : datos === '3aCat'
+            ? '3a catalana'
+            : datos === '2aCat'
+            ? '2a catalana'
+            : datos === '1aCat'
+            ? '1a catalana'
+            : datos}
+        </Text>
       </View>
     </TouchableOpacity>
   );

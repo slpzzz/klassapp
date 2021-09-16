@@ -21,7 +21,6 @@ export default function Descobreix(navigation) {
     getAllPosts(setDatos);
     getSuggestUsers();
   }, []);
-  console.log('data', navigation);
 
   const renderItem = ({ item }) => {
     return (
@@ -53,9 +52,7 @@ export default function Descobreix(navigation) {
             placeholder={'Buscar'}
           />
         </View>
-        <View style={{ padding: 10 }}>
-          <Text style={{ fontSize: 16 }}>Persones que potser coneixes</Text>
-        </View>
+
         <View style={{ display: 'flex', justifyContent: 'center' }}>
           <ScrollView
             horizontal={true}
@@ -80,54 +77,29 @@ export default function Descobreix(navigation) {
       renderItem={renderItem}
       keyExtractor={item => item.id}
       ListHeaderComponent={() => (
-        <View>
-          <View
+        <View
+          style={{
+            padding: 5,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 5,
+          }}
+        >
+          <TextInput
             style={{
-              padding: 5,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 5,
+              width: 250,
+              height: 25,
+              padding: 10,
+              borderWidth: 1,
+              borderRadius: 10,
+              borderColor: '#764668',
             }}
-          >
-            <TextInput
-              style={{
-                width: 250,
-                height: 25,
-                padding: 10,
-                borderWidth: 1,
-                borderRadius: 10,
-                borderColor: '#764668',
-              }}
-              placeholder={'Buscar'}
-            />
-          </View>
-          <View style={{ padding: 10 }}>
-            <Text style={{ fontSize: 16 }}>Persones que potser coneixes</Text>
-          </View>
-          <FlatList
-            data={datos}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
+            placeholder={'Cerca un usuari'}
           />
-
-          {/*   <View style={{ display: 'flex', justifyContent: 'center' }}>
-            <ScrollView
-              horizontal={true}
-              style={{
-                flexGrow: 0,
-                height: 800,
-              }}
-            >
-              <SuggestUser />
-              <SuggestUser />
-              <SuggestUser />
-              <SuggestUser />
-            </ScrollView>
-          </View> */}
         </View>
       )}
-      //      stickyHeaderIndices={[0]}
+      //stickyHeaderIndices={[0]}
     />
   );
 }

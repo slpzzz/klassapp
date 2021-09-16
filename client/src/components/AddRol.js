@@ -16,7 +16,7 @@ import styles from '../../styles';
 
 export default function AddRol({ removeFunction, rol }) {
   const [text, setText] = useState('');
-  const [rol_, setrol] = useState('jugador');
+  const [rol_, setrol] = useState('Jugador');
 
   rol.title = rol_;
   rol.team = text;
@@ -31,7 +31,7 @@ export default function AddRol({ removeFunction, rol }) {
     >
       <Picker
         style={{
-          flex: 0.3,
+          flex: 0.5,
           borderWidth: 1,
           borderRadius: 20,
           borderColor: '#1C4928',
@@ -43,23 +43,39 @@ export default function AddRol({ removeFunction, rol }) {
         selectedValue={rol_}
         onValueChange={(itemValue, itemIndex) => setrol(itemValue)}
       >
-        <Picker.Item label='Jugador' value='jugador' />
-        <Picker.Item label='Entrenador' value='entrenador' />
-        <Picker.Item label='Aficionat' value='aficionat' />
+        <Picker.Item label='Jugador' value='Jugador' />
+        <Picker.Item label='Entrenador' value='Entrenador' />
+        <Picker.Item label='Aficionat' value='Aficionat' />
       </Picker>
-      <View style={{ flex: 0.4 }}>
+      <View
+        style={removeFunction !== 'principal' ? { flex: 0.3 } : { flex: 0.5 }}
+      >
         <TextInput
           placeholder={'Equip'}
-          style={styles.buttonText}
+          style={styles1.textIn}
           onChangeText={text => setText(text)}
         />
       </View>
-
-      <TouchableOpacity onPress={removeFunction}>
+      {removeFunction !== 'principal' && (
         <View style={{ flex: 0.2, alignItems: 'center' }}>
-          <Ionicons name='remove-circle' size={32} color='#1C4928' />
+          <TouchableOpacity onPress={removeFunction}>
+            <Ionicons name='remove-circle' size={32} color='#1C4928' />
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      )}
     </View>
   );
 }
+
+const styles1 = StyleSheet.create({
+  textIn: {
+    justifyContent: 'center',
+    fontSize: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: '#1C4928',
+    padding: 8,
+
+    borderRadius: 5,
+    color: '#1C4928',
+  },
+});

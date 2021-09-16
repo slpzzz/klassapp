@@ -13,15 +13,12 @@ export default function Followers({ data, navigation }) {
     ifFollow(setHandle, data.iduser, setMe);
   }, []);
 
-  console.log(navigation);
-
   const setFollow = () => {
     handle
       ? unfollow(data.iduser)
       : (follow(data.iduser), postNoti(null, data.iduser, 'follow'));
     setHandle(!handle);
   };
-  console.log(data);
 
   return (
     <View style={styles.container}>

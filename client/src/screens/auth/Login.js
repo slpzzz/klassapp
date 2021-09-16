@@ -46,7 +46,7 @@ const Login = ({ navigation }) => {
               value={email}
               type='email'
               placeholder='email'
-              style={styles.buttonText}
+              style={email ? styles.buttonTextW : styles.buttonText}
               onChange={e => onChange(e, 'email')}
             />
           </View>
@@ -55,7 +55,7 @@ const Login = ({ navigation }) => {
               value={password}
               type='password'
               placeholder='Constrasenya'
-              style={styles.buttonText}
+              style={password ? styles.buttonTextW : styles.buttonText}
               secureTextEntry={true}
               onChange={e => onChange(e, 'password')}
             />
@@ -110,6 +110,18 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     borderWidth: 1,
+    borderColor: '#1C4928',
+    borderRadius: 5,
+    padding: 8,
+    width: width - 60,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    color: '#1C4928',
+    fontSize: 18,
+    height: 40,
+  },
+  buttonTextW: {
+    borderWidth: 2,
     borderColor: '#1C4928',
     borderRadius: 5,
     padding: 8,

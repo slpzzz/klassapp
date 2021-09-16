@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import PartitMin from './PartitMin';
+import dataJSON from '../competicio.json';
+import { putFavLeague, unFavLeague } from '../screens/actions/profile';
 
-export default function FavLeague() {
+export default function FavLeague({ data, navigation }) {
   const [pressed, setPressed] = useState(false);
   const [heart, setheart] = useState(true);
+
+  const cat = dataJSON.find(d => d.competicio === data.categoria);
+  const gr = cat.grups.find(d => d.grup === data.grup);
+
+  const toFav = () => {
+    heart ? unFavLeague('2aCat', 3) : putFavLeague(cat.categoria, gr.grup);
+    setheart(!heart);
+  };
 
   return !pressed ? (
     <TouchableOpacity onPress={e => setPressed(!pressed)}>
       <View style={styles.container}>
-        <TouchableOpacity style={{ flex: 0.1 }} onPress={e => setheart(!heart)}>
+        <TouchableOpacity style={{ flex: 0.1 }} onPress={() => toFav()}>
           <AntDesign
             style={{ textAlign: 'center' }}
             name={heart ? 'heart' : 'hearto'}
@@ -18,14 +28,18 @@ export default function FavLeague() {
             color='#487551'
           />
         </TouchableOpacity>
-        <Text style={{ flex: 0.8 }}>1a catalana - subGrup 1.A</Text>
+        <Text style={{ flex: 0.8 }}>
+          {data.categoria}alana - Grup {data.grup}
+        </Text>
         <AntDesign
           style={{
             flex: 0.1,
             justifyContent: 'flex-end',
+            alignItems: 'center',
+            display: 'flex',
           }}
           name='down'
-          size={24}
+          size={14}
           color='#1C4928'
         />
       </View>
@@ -34,10 +48,7 @@ export default function FavLeague() {
     <View>
       <TouchableOpacity onPress={e => setPressed(!pressed)}>
         <View style={styles.containerPress}>
-          <TouchableOpacity
-            style={{ flex: 0.1 }}
-            onPress={e => setheart(!heart)}
-          >
+          <TouchableOpacity style={{ flex: 0.1 }} onPress={() => toFav()}>
             <AntDesign
               style={{ textAlign: 'center' }}
               name={heart ? 'heart' : 'hearto'}
@@ -45,14 +56,18 @@ export default function FavLeague() {
               color='#487551'
             />
           </TouchableOpacity>
-          <Text style={{ flex: 0.8 }}>1a catalana - subGrup 1.A</Text>
+          <Text style={{ flex: 0.8 }}>
+            {data.categoria}alana - Grup {data.grup}
+          </Text>
           <AntDesign
             style={{
               flex: 0.1,
               justifyContent: 'flex-end',
+              alignItems: 'center',
+              display: 'flex',
             }}
             name='up'
-            size={24}
+            size={14}
             color='#1C4928'
           />
         </View>
@@ -62,11 +77,11 @@ export default function FavLeague() {
       >
         <Text style={{ fontWeight: 'bold', fontSize: 15 }}>JORNADA 1</Text>
       </View>
-      <PartitMin />
-      <PartitMin />
-      <PartitMin />
-      <PartitMin />
-      <PartitMin />
+      {gr.jornades.length > 0 &&
+        gr.jornades[0].partits.map((d, i) => {
+          return <PartitMin key={i} resultados={d} navigation={navigation} />;
+        })}
+
       <View
         style={{
           padding: 16,

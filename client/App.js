@@ -20,6 +20,9 @@ import TopBar from './src/components/TopBar';
 import GuestUser from './src/screens/GuestUser/GuestUser';
 import Etiquetes from './src/screens/Home/subPages/Etiquetes';
 import Notis from './src/screens/Notis/Notis';
+import PostSingle from './src/screens/Post/PostSingle';
+import Texto from './src/screens/Write/Texto';
+import Comment from './src/screens/Write/Comment';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -29,8 +32,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name='home' component={StarterScreen} />
-        <Stack.Screen name='signup2' component={SignUp2} />
         <Stack.Screen name='register' component={Register} />
+        <Stack.Screen name='signup2' component={SignUp2} />
         <Stack.Screen name='login' component={Login} />
         <Stack.Screen
           name='homeScreen'
@@ -40,6 +43,7 @@ const App = () => {
         <Stack.Screen
           name='user'
           component={GuestUser}
+          independent={true}
           options={{
             headerShown: true,
             title: 'Perfil',
@@ -49,6 +53,7 @@ const App = () => {
         <Stack.Screen
           name='etiqueta'
           component={Etiquetes}
+          independent={true}
           options={({ route }) => ({
             title: route.params.name,
             headerShown: true,
@@ -57,11 +62,23 @@ const App = () => {
         <Stack.Screen
           name='Notificacions'
           component={Notis}
-          options={({ route }) => ({
+          independent={true}
+          options={() => ({
             title: 'Notificacions',
             headerShown: true,
           })}
         />
+        <Stack.Screen
+          name='Post'
+          component={PostSingle}
+          independent={true}
+          options={() => ({
+            title: 'Post',
+            headerShown: true,
+          })}
+        />
+        <Stack.Screen name='Comment' component={Comment} />
+        <Stack.Screen name='write' component={Texto} />
       </Stack.Navigator>
     </NavigationContainer>
   );

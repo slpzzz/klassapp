@@ -23,17 +23,18 @@ import Seguintt from './UserScreens/Seguint';
 import { getProfileMe } from './actions/profile';
 import Header from '../components/Header';
 
-import { EvilIcons } from '@expo/vector-icons';
+import { EvilIcons, AntDesign } from '@expo/vector-icons';
 import WriteModal from '../components/WriteModal';
+import { logout } from './actions/auth';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Top = createMaterialTopTabNavigator();
 
-const myProfile = () => {
+const myProfile = navigation => {
   return (
     <>
-      <GetMyProfile />
+      <GetMyProfile navigation={navigation} />
       <Top.Navigator
         tabBarOptions={{
           activeTintColor: '#491C3D',
@@ -50,13 +51,34 @@ const myProfile = () => {
   );
 };
 
-const GetMyProfile = () => {
+const GetMyProfile = ({ navigation }) => {
   const [datos, setDatos] = useState({});
   const [datos1, setDatos1] = useState({});
   useEffect(() => {
     getProfileMe(setDatos, setDatos1);
   }, []);
-  return datos && <Header datos={datos} datos1={datos1} />;
+  console.log('ss', navigation);
+  return (
+    datos && (
+      <View style={{ backgroundColor: 'white' }}>
+        <TouchableOpacity onPress={() => logout(navigation.navigation)}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              padding: 20,
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <AntDesign name='logout' size={24} color='black' />
+            <Text style={{ padding: 10 }}>Tancar sessió</Text>
+          </View>
+        </TouchableOpacity>
+        <Header datos={datos} datos1={datos1} />;
+      </View>
+    )
+  );
 };
 
 const TimeLine = navigation => {
@@ -75,7 +97,7 @@ const TimeLine = navigation => {
           padding: 20,
         }}
       >
-        <TouchableOpacity onPress={() => setShow(!show)}>
+        <TouchableOpacity onPress={() => navigation.navigation.push('write')}>
           <View
             style={{ backgroundColor: '#1C4928', padding: 5, borderRadius: 50 }}
           >

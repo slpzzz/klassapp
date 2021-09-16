@@ -23,6 +23,7 @@ import sty from '../../styles';
 import Date from './Date';
 import moment from 'moment';
 import { postNoti } from '../screens/actions/notis';
+import MatchPost from './MatchPost';
 
 export default function Post({ datos, navigation }) {
   const [like, setLike] = useState(false);
@@ -47,90 +48,99 @@ export default function Post({ datos, navigation }) {
 
   return datos ? (
     <View>
-      <View style={styles.container}>
-        <View style={styles.avatarParent}>
-          <TouchableOpacity
-            onPress={() => navigation && navigation.push('user', datos.user)}
-          >
-            <View style={styles.avatar}>
-              <Image
-                style={styles.avatarProfile}
-                source={{
-                  uri: datos.avatar
-                    ? `${datos.avatar}`
-                    : 'https://tds.cl/img/perfil-usuario.png',
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.body}>
-          <View style={styles.topBody}>
-            <View style={styles.name}>
-              <Text style={styles.TextName}>{datos.username}</Text>
-            </View>
-            <View style={styles.time}>
-              {/* <Date data={datos.date} /> */}
-              <Text style={styles.textTime}>{dia}</Text>
-            </View>
-          </View>
-          {datos.rol.length > 0 && (
-            <Text style={styles.TextTitleRol}>
-              {datos.rol[0].title} {datos.rol[0].team}
-            </Text>
-          )}
-          <View>
-            <Text style={styles.textBody}>{datos.text}</Text>
-          </View>
-          <View style={{ flexDirection: 'row', padding: 3 }}>
-            <ScrollView horizontal={true}>
-              {datos.sticker &&
-                datos.sticker.map((d, i) => {
-                  return <Etiqueta key={i} datos={d} navigation={navigation} />;
-                })}
-            </ScrollView>
-          </View>
-          <View style={styles.interactBtnParent}>
-            <View style={styles.interactBtn}>
-              <TouchableOpacity
-                onPress={() => {
-                  setOpen(!open), setOpenWritter(true);
-                }}
-              >
-                <FontAwesome name='comment-o' size={13} color='black' />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => (setOpen(!open), setOpenWritter(false))}
-              >
-                <Text style={{ marginLeft: 8 }}>
-                  {datos.comments ? datos.comments.length : 0}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.interactBtn}>
-              <TouchableOpacity
-                onPress={() =>
-                  like
-                    ? (unlikePost(datos._id, setLike),
-                      setNumLikes(numLikes - 1))
-                    : (likePost(datos._id, setLike),
-                      setNumLikes(numLikes + 1),
-                      postNoti(datos._id, datos.user, 'like'))
-                }
-              >
-                <FontAwesome
-                  name='soccer-ball-o'
-                  size={13}
-                  color={like ? '#1C4928' : 'black'}
+      <TouchableOpacity
+        onPress={() => navigation && navigation.push('Post', datos._id)}
+      >
+        <View style={styles.container}>
+          <View style={styles.avatarParent}>
+            <TouchableOpacity
+              onPress={() => navigation && navigation.push('user', datos.user)}
+            >
+              <View style={styles.avatar}>
+                <Image
+                  style={styles.avatarProfile}
+                  source={{
+                    uri: datos.avatar
+                      ? `${datos.avatar}`
+                      : 'https://tds.cl/img/perfil-usuario.png',
+                  }}
                 />
-              </TouchableOpacity>
-              <Text style={{ marginLeft: 8 }}>
-                {datos.likes ? numLikes : 0}
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.body}>
+            <View style={styles.topBody}>
+              <View style={styles.name}>
+                <Text style={styles.TextName}>{datos.username}</Text>
+              </View>
+              <View style={styles.time}>
+                {/* <Date data={datos.date} /> */}
+                <Text style={styles.textTime}>{dia}</Text>
+              </View>
+            </View>
+            {datos.rol.length > 0 && (
+              <Text style={styles.TextTitleRol}>
+                {datos.rol[0].title} {datos.rol[0].team}
               </Text>
+            )}
+            <View>
+              <Text style={styles.textBody}>{datos.text}</Text>
+            </View>
+            <View>
+              {datos.partido && <MatchPost resultados={datos.partido} />}
+            </View>
+            <View style={{ flexDirection: 'row', padding: 3 }}>
+              <ScrollView horizontal={true}>
+                {datos.sticker &&
+                  datos.sticker.map((d, i) => {
+                    return (
+                      <Etiqueta key={i} datos={d} navigation={navigation} />
+                    );
+                  })}
+              </ScrollView>
+            </View>
+            <View style={styles.interactBtnParent}>
+              <View style={styles.interactBtn}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setOpen(!open), setOpenWritter(true);
+                  }}
+                >
+                  <FontAwesome name='comment-o' size={13} color='black' />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => (setOpen(!open), setOpenWritter(false))}
+                >
+                  <Text style={{ marginLeft: 8 }}>
+                    {datos.comments ? datos.comments.length : 0}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.interactBtn}>
+                <TouchableOpacity
+                  onPress={() =>
+                    like
+                      ? (unlikePost(datos._id, setLike),
+                        setNumLikes(numLikes - 1))
+                      : (likePost(datos._id, setLike),
+                        setNumLikes(numLikes + 1),
+                        postNoti(datos._id, datos.user, 'like'))
+                  }
+                >
+                  <FontAwesome
+                    name='soccer-ball-o'
+                    size={13}
+                    color={like ? '#1C4928' : 'black'}
+                  />
+                </TouchableOpacity>
+                <Text style={{ marginLeft: 8 }}>
+                  {datos.likes ? numLikes : 0}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
       <View
         style={{
           display: open ? 'block' : 'none',
@@ -138,7 +148,7 @@ export default function Post({ datos, navigation }) {
           padding: 20,
         }}
       >
-        <TouchableOpacity onPress={() => setOpenWritter(!openWritter)}>
+        <TouchableOpacity onPress={() => navigation.push('Comment', datos)}>
           <View
             style={{
               display: openWritter ? 'none' : 'flex',

@@ -19,6 +19,26 @@ const PostSchema = new Schema({
   sticker: {
     type: [String],
   },
+  partido: {
+    equip1: {
+      type: String,
+    },
+    equip2: {
+      type: String,
+    },
+    dia: {
+      type: String,
+    },
+    hora: {
+      type: String,
+    },
+    competicio: {
+      type: String,
+    },
+    resultat: {
+      type: String,
+    },
+  },
   rol: [
     {
       title: {

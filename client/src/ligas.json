@@ -14,5 +14,9 @@
     {
         "valor":"4aCat", 
         "label":"4a catalana"
+    },
+    {
+        "valor": "Totes",
+        "label": "A tothom"
     }
 ]

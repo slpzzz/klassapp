@@ -55,6 +55,13 @@ const ProfileSchema = new mongoose.Schema({
     },
   ],
   likes: [{ user: { type: String } }],
+
+  favLeagues: [
+    {
+      categoria: { type: String },
+      grup: { type: Number },
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,

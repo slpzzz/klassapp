@@ -1,10 +1,10 @@
 [
   {
     "competicio": "1aCat",
-    "grup": [
+    "grups": [
       {
-        "num": 1,
-        "resultats": [
+        "grup": 1,
+        "jornades": [
           {
             "jornada": 1,
             "partits": [
@@ -12,7 +12,9 @@
                 "equip1": "LLORET, C.F. A",
                 "equip2": "MARTINENC, F.C. A",
                 "dia": "02-10-2021",
-                "hora": "16:00"              },
+                "hora": "16:00",
+              "resultat": "1 - 0"
+            },
               {
                 "equip1": "BESCANO, C.D. A",
                 "equip2": "PARETS, C.F. A",
@@ -589,16 +591,97 @@
             ]
           }
         ]
+      },
+      {
+        "grup": 2,
+        "jornades": [{
+          "jornada": 1, 
+          "partits":
+          [{
+              "equip1": "LLORET, C.F. A",
+              "equip2": "MARTINENC, F.C. A",
+              "dia": "02-10-2021",
+              "hora": "16:00",
+            "resultat": "1 - 0"
+         },
+        {
+          "equip1": "BESCANO, C.D. A",
+          "equip2": "PARETS, C.F. A",
+          "dia": "02-10-2021",
+          "hora": "16:00"              }]}]
       }
     ]
   },
   {
-    "competicio": "2aCat"
+    "competicio": "2aCat",
+    "grups": [
+      {
+        "grup": 1,
+        "jornades": [{
+          "jornada": 1, 
+          "partits":
+          [{
+              "equip1": "LLORET, C.F. A",
+              "equip2": "MARTINENC, F.C. A",
+              "dia": "02-10-2021",
+              "hora": "16:00",
+            "resultat": "1 - 0"
+         },
+        {
+          "equip1": "BESCANO, C.D. A",
+          "equip2": "PARETS, C.F. A",
+          "dia": "02-10-2021",
+          "hora": "16:00"              }]}]
+
+      }
+    ]
   },
   {
-    "competicio": "3aCat"
+    "competicio": "3aCat", 
+    "grups": [
+      {
+        "grup": 1,
+        "jornades": [{
+          "jornada": 1, 
+          "partits":
+          [{
+              "equip1": "LLORET, C.F. A",
+              "equip2": "MARTINENC, F.C. A",
+              "dia": "02-10-2021",
+              "hora": "16:00",
+            "resultat": "1 - 0"
+         },
+        {
+          "equip1": "BESCANO, C.D. A",
+          "equip2": "PARETS, C.F. A",
+          "dia": "02-10-2021",
+          "hora": "16:00"              }]}]
+
+      }
+    ]
   },
   {
-    "competicio": "4aCat"
+    "competicio": "4aCat",
+    "grups": [
+      {
+        "grup": 1,
+        "jornades": [{
+          "jornada": 1, 
+          "partits":
+          [{
+              "equip1": "LLORET, C.F. A",
+              "equip2": "MARTINENC, F.C. A",
+              "dia": "02-10-2021",
+              "hora": "16:00",
+            "resultat": "1 - 0"
+         },
+        {
+          "equip1": "BESCANO, C.D. A",
+          "equip2": "PARETS, C.F. A",
+          "dia": "02-10-2021",
+          "hora": "16:00"              }]}]
+
+      }
+    ]
   }
 ]

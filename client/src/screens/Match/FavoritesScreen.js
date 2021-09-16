@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import FavLeague from '../../components/FavLeague';
 
-export default function Favorits() {
+import { getFavLeagues } from '../actions/profile';
+
+export default function Favorits(navigation) {
+  const [data, setdata] = useState([]);
+  useEffect(() => getFavLeagues(setdata), []);
+
   return (
     <View>
-      <ScrollView>
-        <FavLeague />
-        <FavLeague />
-        <FavLeague />
-        <FavLeague />
-      </ScrollView>
+      {data.length > 0 ? (
+        <ScrollView>
+          {data.map((d, i) => (
+            <FavLeague key={i} data={d} navigation={navigation.navigation} />
+          ))}
+        </ScrollView>
+      ) : (
+        <View
+          style={{
+            padding: 40,
+            flex: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text>Agrega les teves primeres lligues</Text>
+        </View>
+      )}
     </View>
   );
 }

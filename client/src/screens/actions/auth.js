@@ -37,6 +37,12 @@ export const login = async ({ email, password, navigation }) => {
   }
 };
 
+// Logout
+export const logout = navigation => {
+  localStorage.removeItem('token');
+  navigation.push('home');
+};
+
 // Register
 
 export const register = async ({
@@ -70,7 +76,7 @@ export const register = async ({
 
 // Create Profile
 
-export const createProfile = (rol, location, bio, navigation) => {
+export const createProfile = (rol, bio, location, navigation) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -80,7 +86,7 @@ export const createProfile = (rol, location, bio, navigation) => {
 
   try {
     axios.post(`${uri}/api/profile`, body, config).then(function (response) {
-      navigation.navigate('homeScreen');
+      navigation.push('homeScreen');
     });
   } catch (err) {
     console.error('An error occurred', err);

@@ -40,7 +40,7 @@ router.post('/', auth, async (req, res) => {
     return res.status(400).json({ erros: errors.array() });
   }
 
-  const { location, bio, rol } = req.body;
+  const { bio, location, rol } = req.body;
 
   //Build profile object
   const profileFields = {};
@@ -212,6 +212,59 @@ router.delete('/rol/:rol_id', auth, async (req, res) => {
       .map(item => item.id)
       .indexOf(req.params.rol_id);
     profile.rol.splice(removeIndex, 1);
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   PUT api/profile/follow/:follow_id
+// @desc    Add profile follow
+// @access  Private
+
+router.put('/favleague', auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id,
+    });
+
+    const favLeague = {
+      categoria: req.body.categoria,
+      grup: req.body.grup,
+    };
+
+    profile.favLeagues.unshift(favLeague);
+
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+router.delete('/favleague', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    console.log(profile);
+    const cat = profile.favLeagues.filter(
+      d => d.categoria == req.body.categoria
+    );
+    const grup = cat.filter(d => d.grup == req.body.grup);
+
+    //Get remove index
+    const removeIndex = profile.favLeagues
+      .map(item => item.id)
+      .indexOf(grup._id);
+
+    profile.favLeagues.splice(removeIndex, 1);
     await profile.save();
     res.json(profile);
   } catch (err) {

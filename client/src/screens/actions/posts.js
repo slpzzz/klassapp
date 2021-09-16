@@ -2,16 +2,18 @@ import axios from 'axios';
 
 const uri = 'http://localhost:5000';
 
-export const addPost = (sticker, text) => {
+export const addPost = (sticker, text, partido) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const body = JSON.stringify({ sticker, text });
+  const body = JSON.stringify({ sticker, text, partido });
   try {
-    axios.post(`${uri}/api/posts`, body, config);
+    axios
+      .post(`${uri}/api/posts`, body, config)
+      .then(response => console.log('inn', response.data));
   } catch (err) {
     console.error('An error ocurred', err);
   }
@@ -19,6 +21,7 @@ export const addPost = (sticker, text) => {
 
 export const getPostFollows = async (datos, setDatos) => {
   const usersFollowing = [];
+  const datosA = [];
   //const res = axios.get(`${uri}/api/posts`);
   const config = {
     header: {
@@ -29,20 +32,30 @@ export const getPostFollows = async (datos, setDatos) => {
     usersFollowing.push(response.data.user._id);
     response.data.following.map(d => usersFollowing.push(d.iduser));
   });
-  const res = await axios
-    .get(`${uri}/api/posts`)
-    .then(response => {
-      response.data.map((dataUsers, i2) => {
-        usersFollowing.map(d => {
-          if (d === dataUsers.user) {
-            datos.push(dataUsers);
-          }
+  console.log('uF', usersFollowing);
+  usersFollowing.length === 1
+    ? await axios
+        .get(`${uri}/api/posts/me`)
+        .then(response => setDatos(response.data))
+        .catch(err => console.err(err))
+    : await axios
+        .get(`${uri}/api/posts`)
+        .then(response => {
+          response.data.map((dataUsers, i2) => {
+            console.log('in');
+            usersFollowing.map(d => {
+              if (d === dataUsers.user) {
+                datosA.push(dataUsers);
+              }
+            });
+          });
+        })
+        .catch(function (error) {
+          console.error(error);
         });
-      });
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+
+  console.log('dat', datosA);
+  setDatos(datosA);
 };
 
 export const getStickerPosts = (setDatos, name_sticker) => {
@@ -68,6 +81,13 @@ export const getAllPosts = setDatos => {
     .catch(err => console.error(err));
 };
 
+export const getOnePost = (id_post, setData) => {
+  axios
+    .get(`${uri}/api/posts/single/${id_post}`)
+    .then(response => setData(response.data))
+    .catch(err => console.error);
+};
+
 export const myPosts = setDatos => {
   axios
     .get(`${uri}/api/posts/me`)
@@ -76,7 +96,6 @@ export const myPosts = setDatos => {
 };
 
 export const userPost = (params, setData) => {
-  console.log(params);
   axios
     .get(`${uri}/api/posts/${params}`)
     .then(response => setData(response.data))
