@@ -137,7 +137,7 @@ export default function Filter(navigation) {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 20,
-                padding: 4,
+                padding: 8,
               }}
             >
               <Text style={{ color: 'white' }}>Cercar</Text>

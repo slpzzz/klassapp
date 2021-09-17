@@ -1,13 +1,29 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
 import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 
+import escut from '../equips.json';
+
 export default function PartitMin({ resultados, categoria, navigation }) {
+  console.log(escut);
+
+  const escut1 = escut.filter(d => d.nom === resultados.equip1);
+  const escut2 = escut.filter(d => d.nom === resultados.equip2);
+
   return (
     resultados && (
       <View style={styles.container}>
         <View style={styles.escudo}>
-          <SimpleLineIcons name='shield' size={24} color='black' />
+          {escut1[0].escut ? (
+            <Image
+              style={{ width: 24, height: 24 }}
+              source={{
+                uri: escut1[0].escut,
+              }}
+            />
+          ) : (
+            <SimpleLineIcons name='shield' size={24} color='black' />
+          )}
         </View>
         <View
           style={{
@@ -17,7 +33,11 @@ export default function PartitMin({ resultados, categoria, navigation }) {
             textAlign: 'right',
           }}
         >
-          <Text style={styles.text}>{resultados.equip1}</Text>
+          <Text style={styles.text}>
+            {resultados.equip1.length < 17
+              ? resultados.equip1
+              : resultados.equip1.substring(0, 17) + ' ...'}
+          </Text>
         </View>
         <View style={styles.result}>
           <View
@@ -44,10 +64,23 @@ export default function PartitMin({ resultados, categoria, navigation }) {
             justifyContent: 'center',
           }}
         >
-          <Text style={styles.text}>{resultados.equip2}</Text>
+          <Text style={styles.text}>
+            {resultados.equip2.length < 17
+              ? resultados.equip2
+              : resultados.equip2.substring(0, 17) + ' ...'}
+          </Text>
         </View>
         <View style={styles.escudo}>
-          <SimpleLineIcons name='shield' size={24} color='black' />
+          {escut2[0].escut ? (
+            <Image
+              style={{ width: 24, height: 24 }}
+              source={{
+                uri: escut2[0].escut,
+              }}
+            />
+          ) : (
+            <SimpleLineIcons name='shield' size={24} color='black' />
+          )}
         </View>
         <View style={styles.escudo}>
           <TouchableOpacity
@@ -66,16 +99,19 @@ const styles = StyleSheet.create({
     height: 52,
     flexDirection: 'row',
     justifyContent: 'center',
+    padding: 3,
   },
   escudo: {
     flex: 0.1,
+    padding: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    fontSize: 12,
+    fontSize: 14,
   },
   result: {
+    padding: 5,
     flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center',

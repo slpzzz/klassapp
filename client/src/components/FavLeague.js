@@ -81,24 +81,6 @@ export default function FavLeague({ data, navigation }) {
         gr.jornades[0].partits.map((d, i) => {
           return <PartitMin key={i} resultados={d} navigation={navigation} />;
         })}
-
-      <View
-        style={{
-          padding: 16,
-          alignItems: 'flex-end',
-        }}
-      >
-        <TouchableOpacity
-          style={{
-            borderRadius: 60,
-            borderWidth: 1,
-            borderColor: '#1C4928',
-            padding: 12,
-          }}
-        >
-          <Text style={{ color: '#1C4928' }}>VEURE EN DETALL</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }

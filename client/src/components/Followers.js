@@ -8,6 +8,7 @@ import { postNoti } from '../screens/actions/notis';
 export default function Followers({ data, navigation }) {
   const [handle, setHandle] = useState(false);
   const [me, setMe] = useState(false);
+  console.log('d', data);
 
   useEffect(() => {
     ifFollow(setHandle, data.iduser, setMe);

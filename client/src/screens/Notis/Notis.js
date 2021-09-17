@@ -1,12 +1,16 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { getNotis, postNoti } from '../actions/notis';
+import moment from 'moment';
 
 const Notis = ({ navigation }) => {
   const [data, setdata] = useState([]);
   useEffect(() => {
     getNotis(setdata);
   }, []);
+  console.log('data', data);
+  moment.locale('ca');
+  const dia = moment(data.date, 'YYYY-MM-DDThh:mm:ss').fromNow();
   return data.length > 0 ? (
     data.map(d => (
       <View
@@ -36,39 +40,66 @@ const Notis = ({ navigation }) => {
             getNotis(setdata)
           )}
         >
-          <View
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginLeft: 10,
-            }}
-          >
-            {d.type === 'comment' && (
+          {d.type === 'comment' && (
+            <View
+              style={{
+                display: 'flex',
+                textalign: 'left',
+                marginLeft: 10,
+              }}
+            >
               <Text style={{ fontWeight: d.new ? 'bold' : 'normal' }}>
-                {d.userid.name + ' ha comentat el tu post'}
+                {d.userid.name + ' ha comentat el teu post'}
               </Text>
-            )}
-            {d.type === 'like' && (
+              <View>
+                <Text style={styles.textMin}>
+                  {moment(d.date, 'YYYY-MM-DDThh:mm:ss').fromNow()}
+                </Text>
+              </View>
+            </View>
+          )}
+          {d.type === 'like' && (
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                marginLeft: 10,
+              }}
+            >
               <Text style={{ fontWeight: d.new ? 'bold' : 'normal' }}>
                 {d.userid.name + ' ha donat pilota al teu post'}
               </Text>
-            )}
-          </View>
+              <View>
+                <Text style={styles.textMin}>
+                  {moment(d.date, 'YYYY-MM-DDThh:mm:ss').fromNow()}
+                </Text>
+              </View>
+            </View>
+          )}
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.push('user', d.userid._id)}>
-          <View
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginLeft: 10,
-            }}
-          >
-            {d.type === 'follow' && (
-              <Text style={{ fontWeight: d.new ? 'bold' : 'normal' }}>
-                {d.userid.name + " t'ha seguit"}
-              </Text>
-            )}
-          </View>
+          {d.type === 'follow' && (
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginLeft: 10,
+              }}
+            >
+              <View>
+                <Text style={{ fontWeight: d.new ? 'bold' : 'normal' }}>
+                  {d.userid.name + " t'ha seguit"}
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.textMin}>
+                  {moment(d.date, 'YYYY-MM-DDThh:mm:ss').fromNow()}
+                </Text>
+              </View>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
     ))
@@ -80,3 +111,10 @@ const Notis = ({ navigation }) => {
 };
 
 export default Notis;
+
+const styles = StyleSheet.create({
+  textMin: {
+    fontSize: 12,
+    color: 'grey',
+  },
+});

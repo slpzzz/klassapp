@@ -43,6 +43,7 @@ export default function Header({ datos, datos1 }) {
                   fontSize: 16,
                   padding: 4,
                   fontWeight: i === 0 ? 'bold' : 'normal',
+                  color: '#487551',
                 }}
               >
                 {d.title} del {d.team}

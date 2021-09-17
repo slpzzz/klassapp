@@ -32,6 +32,9 @@ const Tab = createBottomTabNavigator();
 const Top = createMaterialTopTabNavigator();
 
 const myProfile = navigation => {
+  const [datos, setDatos] = useState();
+  useEffect(() => getProfileMe(setDatos), []);
+  console.log('dd', datos && datos.following.length);
   return (
     <>
       <GetMyProfile navigation={navigation} />
@@ -43,9 +46,35 @@ const myProfile = navigation => {
           style: { borderEndColor: '#491C3D' },
         }}
       >
-        <Top.Screen name='Posts' component={Posts} />
-        <Top.Screen name='Seguidors' component={Seguidors} />
-        <Top.Screen name='Seguint' component={Seguintt} />
+        <Top.Screen name='POSTS' component={Posts} />
+        <Top.Screen
+          name='SEGUIDORS'
+          component={Seguidors}
+          options={
+            datos
+              ? {
+                  // title: 'Seguidors ' + datos ? datos.following.length : '0',
+                  tabBarLabel: 'SEGUIDORS\n ' + datos.followers.length,
+                }
+              : {
+                  tabBarLabel: 'SEGUIDORS\n0',
+                }
+          }
+        />
+        <Top.Screen
+          name='Seguint'
+          component={Seguintt}
+          options={
+            datos
+              ? {
+                  // title: 'Seguidors ' + datos ? datos.following.length : '0',
+                  tabBarLabel: 'SEGUINT\n' + datos.following.length,
+                }
+              : {
+                  tabBarLabel: 'SEGUINT\n0',
+                }
+          }
+        />
       </Top.Navigator>
     </>
   );
@@ -121,7 +150,7 @@ const TimeLine = navigation => {
       >
         <Top.Screen name='Seguint' component={Seguint} />
         <Top.Screen name='Descobreix' component={Descobreix} />
-        <Top.Screen name='Destacats' component={Destacats} />
+        {/* <Top.Screen name='Destacats' component={Destacats} /> */}
       </Top.Navigator>
     </>
   );

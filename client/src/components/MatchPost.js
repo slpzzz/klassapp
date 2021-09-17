@@ -1,8 +1,13 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 
+import escut from '../equips.json';
+
 const MatchPost = ({ resultados }) => {
+  const escut1 = escut.filter(d => d.nom === resultados.equip1);
+  const escut2 = escut.filter(d => d.nom === resultados.equip2);
+
   return (
     <View style={styles.container}>
       <View
@@ -14,7 +19,16 @@ const MatchPost = ({ resultados }) => {
         }}
       >
         <View style={styles.escudo}>
-          <SimpleLineIcons name='shield' size={32} color='black' />
+          {escut1[0].escut ? (
+            <Image
+              style={{ width: 32, height: 32 }}
+              source={{
+                uri: escut1[0].escut,
+              }}
+            />
+          ) : (
+            <SimpleLineIcons name='shield' size={32} color='black' />
+          )}
         </View>
         <Text style={styles.text}>{resultados.equip1}</Text>
       </View>
@@ -43,7 +57,16 @@ const MatchPost = ({ resultados }) => {
         }}
       >
         <View style={styles.escudo}>
-          <SimpleLineIcons name='shield' size={32} color='black' />
+          {escut2[0].escut ? (
+            <Image
+              style={{ width: 32, height: 32 }}
+              source={{
+                uri: escut2[0].escut,
+              }}
+            />
+          ) : (
+            <SimpleLineIcons name='shield' size={32} color='black' />
+          )}
         </View>
         <Text style={styles.text}>{resultados.equip2}</Text>
       </View>
@@ -69,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    height: 40,
+    height: 30,
   },
   text: {
     fontSize: 12,

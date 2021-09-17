@@ -24,6 +24,7 @@ import Date from './Date';
 import moment from 'moment';
 import { postNoti } from '../screens/actions/notis';
 import MatchPost from './MatchPost';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function PostSingleComponent({ datos, navigation }) {
   const [like, setLike] = useState(false);
@@ -31,9 +32,10 @@ export default function PostSingleComponent({ datos, navigation }) {
   const [comment, setComment] = useState();
   const [open, setOpen] = useState(false);
   const [openWritter, setOpenWritter] = useState(false);
+  const [me, setMe] = useState(false);
 
   useEffect(() => {
-    isLike(setLike, datos._id);
+    isLike(setLike, datos._id, datos.user, setMe);
     datos.likes && setNumLikes(datos.likes.length);
   }, []);
 
@@ -130,6 +132,11 @@ export default function PostSingleComponent({ datos, navigation }) {
                 {datos.likes ? numLikes : 0}
               </Text>
             </View>
+            {me && (
+              <TouchableOpacity onPress={() => {}}>
+                <AntDesign name='delete' size={18} color='red' />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>

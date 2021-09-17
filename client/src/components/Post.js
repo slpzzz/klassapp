@@ -15,6 +15,7 @@ import {
   unlikePost,
   isLike,
   addComment,
+  deleteComment,
 } from '../screens/actions/posts';
 import { getProfileMe } from '../screens/actions/profile';
 import Comments from './Comments';
@@ -24,6 +25,7 @@ import Date from './Date';
 import moment from 'moment';
 import { postNoti } from '../screens/actions/notis';
 import MatchPost from './MatchPost';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Post({ datos, navigation }) {
   const [like, setLike] = useState(false);
@@ -31,9 +33,10 @@ export default function Post({ datos, navigation }) {
   const [comment, setComment] = useState();
   const [open, setOpen] = useState(false);
   const [openWritter, setOpenWritter] = useState(false);
+  const [me, setMe] = useState(false);
 
   useEffect(() => {
-    isLike(setLike, datos._id);
+    isLike(setLike, datos._id, datos.user, setMe);
     datos.likes && setNumLikes(datos.likes.length);
   }, []);
 
@@ -41,6 +44,10 @@ export default function Post({ datos, navigation }) {
     addComment(comment, datos._id);
     setComment('');
     postNoti(datos._id, datos.user, 'comment');
+  };
+
+  const Delete = () => {
+    deleteComment(datos._id);
   };
 
   moment.locale('ca');
@@ -137,6 +144,11 @@ export default function Post({ datos, navigation }) {
                   {datos.likes ? numLikes : 0}
                 </Text>
               </View>
+              {me && (
+                <TouchableOpacity onPress={() => Delete()}>
+                  <AntDesign name='delete' size={18} color='red' />
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </View>
@@ -163,30 +175,6 @@ export default function Post({ datos, navigation }) {
             <Text>Escriu un comentari</Text>
           </View>
         </TouchableOpacity>
-        <View
-          style={{
-            display: openWritter ? 'flex' : 'none',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-          }}
-        >
-          <TextInput
-            multiline={true}
-            numberOfLines={2}
-            onChangeText={text => setComment(text)}
-            value={comment}
-            placeholder={'Escribe un comentario'}
-            style={styles.textInput}
-          />
-          <MaterialCommunityIcons
-            name='send-circle'
-            size={24}
-            color='#002100'
-            onPress={() => newComment()}
-            styles={{ width: '30%' }}
-          />
-        </View>
 
         <ScrollView
           style={

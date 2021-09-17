@@ -21,10 +21,23 @@ import { postNoti } from '../actions/notis';
 const Top = createMaterialTopTabNavigator();
 
 const GuestUser = navigation => {
+  const [datos, setDatos] = useState();
+
+  useEffect(() => {
+    getProfile(setDatos, null, navigation.route.params);
+  }, []);
+  console.log('pp', datos);
   return (
     <>
       <GuestComponent navigation={navigation} />
-      <Top.Navigator>
+      <Top.Navigator
+        tabBarOptions={{
+          activeTintColor: '#491C3D',
+          inactiveTintColor: '#CC97BD',
+          labelStyle: { fontSize: '16px', textTransform: 'capitalize' },
+          style: { borderEndColor: '#491C3D' },
+        }}
+      >
         <Top.Screen
           name='Posts'
           component={GuestPost}
@@ -34,11 +47,31 @@ const GuestUser = navigation => {
           name='Seguidors'
           component={GuestSeguidors}
           initialParams={{ id: navigation.route.params }}
+          options={
+            datos
+              ? {
+                  // title: 'Seguidors ' + datos ? datos.following.length : '0',
+                  tabBarLabel: 'SEGUIDORS\n ' + datos.followers.length,
+                }
+              : {
+                  tabBarLabel: 'SEGUIDORS\n0',
+                }
+          }
         />
         <Top.Screen
           name='Seguits'
           component={GuestSeguint}
           initialParams={{ id: navigation.route.params }}
+          options={
+            datos
+              ? {
+                  // title: 'Seguidors ' + datos ? datos.following.length : '0',
+                  tabBarLabel: 'SEGUINT\n' + datos.following.length,
+                }
+              : {
+                  tabBarLabel: 'SEGUINT\n0',
+                }
+          }
         />
       </Top.Navigator>
     </>
@@ -67,7 +100,7 @@ const GuestComponent = ({ navigation }) => {
     datos && (
       <View style={{ backgroundColor: 'white' }}>
         <Header datos={datos} datos1={datos1} />
-        <TouchableOpacity onPress={() => setFollow()}>
+        <TouchableOpacity onPress={() => setFollow()} style={{ padding: 4 }}>
           <View
             style={{
               flex: 0.2,
@@ -78,11 +111,7 @@ const GuestComponent = ({ navigation }) => {
             }}
           >
             {me ? (
-              <TouchableOpacity>
-                <View>
-                  <Text>Editar perfil</Text>
-                </View>
-              </TouchableOpacity>
+              console.log('me')
             ) : handle ? (
               <View
                 style={{
@@ -139,9 +168,17 @@ const GuestSeguidors = navigation => {
     datos.length > 0 ? (
       datos.map(d => <Followers data={d} navigation={navigation.navigation} />)
     ) : (
-      <View>
+      <View
+        style={{
+          padding: 40,
+          flex: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
         <Text>
-          Interacciona amb els altres usuaris per aconseguir nous seguidors!
+          Interacciona amb els altres usuaris per aconseguir nous seguidors
         </Text>
       </View>
     )
@@ -162,10 +199,16 @@ const GuestSeguint = navigation => {
     datos.length > 0 ? (
       datos.map(d => <Followers data={d} navigation={navigation.navigation} />)
     ) : (
-      <View>
-        <Text>
-          Interacciona amb els altres usuaris per aconseguir nous seguidors!
-        </Text>
+      <View
+        style={{
+          padding: 40,
+          flex: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <Text>Comença a seguir nous usuaris</Text>
       </View>
     )
   ) : (

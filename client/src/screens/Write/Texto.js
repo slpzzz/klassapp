@@ -24,8 +24,13 @@ const Texto = navigation => {
 
   console.log(navigation);
   const send = () => {
-    console.log(sticker, text, navigation.route.params);
-    navigation.route.params.categoria
+    console.log(
+      sticker === 'A tothom'
+        ? ['1a catalana', '2a catalana', '3a catalana', '4a catalana']
+        : 'nu',
+      text
+    );
+    navigation.route.params
       ? addPost(sticker, text, {
           resultados: navigation.route.params.resultados,
           categoria:
@@ -37,9 +42,16 @@ const Texto = navigation => {
               ? '2a catalana'
               : navigation.route.params.categoria === '1aCat'
               ? '1a catalana'
+              : navigation.route.params.categoria === 'A tothom'
+              ? ['1a catalana', '2a catalana', '3a catalana', '4a catalana']
               : navigation.route.params.categoria,
         })
-      : addPost(sticker, text, null);
+      : addPost(
+          sticker === 'A tothom'
+            ? ['1a catalana', '2a catalana', '3a catalana', '4a catalana']
+            : sticker,
+          text
+        );
     navigation.navigation.push('homeScreen');
     //handleShow();
   };

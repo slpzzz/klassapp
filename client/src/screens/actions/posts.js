@@ -10,6 +10,7 @@ export const addPost = (sticker, text, partido) => {
   };
 
   const body = JSON.stringify({ sticker, text, partido });
+  console.log(body);
   try {
     axios
       .post(`${uri}/api/posts`, body, config)
@@ -116,12 +117,11 @@ export const unlikePost = async (id_post, setLike) => {
     .catch(err => console.error(err));
 };
 
-export const isLike = (setLike, id) => {
-  axios
-    .get(`${uri}/api/profile/me`)
-    .then(response =>
-      response.data.likes.map(d => d.user === id && setLike(true))
-    );
+export const isLike = (setLike, id, id_user, setMe) => {
+  axios.get(`${uri}/api/profile/me`).then(response => {
+    response.data.user._id === id_user && setMe(true);
+    response.data.likes.map(d => d.user === id && setLike(true));
+  });
   axios
     .get(`${uri}/api/posts`)
     .then(response2 => {
@@ -145,4 +145,11 @@ export const addComment = (text, id_post) => {
   } catch (err) {
     console.error('An error ocurred', err);
   }
+};
+
+export const deleteComment = id_post => {
+  axios
+    .delete(`${uri}/api/posts/comment/${id_post}`)
+    .then(response => console.log(response.data))
+    .catch(err => console.error(err));
 };

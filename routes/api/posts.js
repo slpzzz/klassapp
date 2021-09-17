@@ -264,14 +264,11 @@ router.post(
 // @route    DELETE api/posts/comment/:id/:comment_id
 // @desc     Delete comment
 // @access   Private
-router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
+router.delete('/comment/:comment_id', auth, async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-
+    const post = await Post.find({ user: req.user.id });
     // Pull out comment
-    const comment = post.comments.find(
-      comment => comment.id === req.params.comment_id
-    );
+    const comment = post.find(d => d.id === req.params.comment_id);
     // Make sure comment exists
     if (!comment) {
       return res.status(404).json({ msg: 'Comment does not exist' });
@@ -281,10 +278,8 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
       return res.status(401).json({ msg: 'User not authorized' });
     }
 
-    post.comments = post.comments.filter(
-      ({ id }) => id !== req.params.comment_id
-    );
-
+    post = post.filter(d => d.id !== req.params.comment_id);
+    console.log(comment, post);
     await post.save();
 
     return res.json(post.comments);
@@ -315,7 +310,7 @@ router.get('/filter/bests/all', auth, async (req, res) => {
   try {
     //const profile = await Profile.findOne({ user: req.user.id });
 
-    const posts = await Post.find({}).sort({ likes: -1 });
+    const posts = await Post.find().sort({ likes: -1 });
     res.json(posts);
   } catch (err) {
     console.error(err.message);

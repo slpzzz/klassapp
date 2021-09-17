@@ -11,16 +11,22 @@ import {
 import { getAllPosts } from '../actions/posts';
 import Post from '../../components/Post';
 import SuggestUser from '../../components/SuggestUser';
-import { getSuggestUsers } from '../actions/profile';
+import { getProfiles, getSuggestUsers } from '../actions/profile';
 
 export default function Descobreix(navigation) {
   const [datos, setDatos] = useState([]);
   const [data, setData] = useState([]);
+  const [text, setText] = useState('');
 
   useEffect(() => {
     getAllPosts(setDatos);
-    getSuggestUsers();
+    getProfiles(setData);
   }, []);
+  console.log('data', data);
+
+  const handleText = e => {
+    setText(e);
+  };
 
   const renderItem = ({ item }) => {
     return (
@@ -72,35 +78,53 @@ export default function Descobreix(navigation) {
   };
 
   return (
-    <FlatList
-      data={datos}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-      ListHeaderComponent={() => (
-        <View
+    <>
+      {' '}
+      <View
+        style={{
+          padding: 5,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: 5,
+        }}
+      >
+        <TextInput
           style={{
-            padding: 5,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 5,
+            width: 250,
+            height: 25,
+            padding: 10,
+            borderWidth: 1,
+            borderRadius: 10,
+            borderColor: '#764668',
           }}
-        >
-          <TextInput
-            style={{
-              width: 250,
-              height: 25,
-              padding: 10,
-              borderWidth: 1,
-              borderRadius: 10,
-              borderColor: '#764668',
-            }}
-            placeholder={'Cerca un usuari'}
-          />
-        </View>
+          placeholder={'Cerca un usuari'}
+          onChangeText={t => handleText(t)}
+          value={text}
+        />
+        {console.log(datos)}
+      </View>
+      {text ? (
+        <ScrollView>
+          {data
+            .filter(f => f.user.name.includes(text))
+            .map((d, i) => (
+              <SuggestUser
+                key={i}
+                data={d}
+                navigation={navigation.navigation}
+              />
+            ))}
+        </ScrollView>
+      ) : (
+        <FlatList
+          data={datos}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          //stickyHeaderIndices={[0]}
+        />
       )}
-      //stickyHeaderIndices={[0]}
-    />
+    </>
   );
 }
 

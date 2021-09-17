@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 
 import PartitMin from '../../components/PartitMin';
@@ -44,17 +44,26 @@ const FilterMatches = ({
         }}
       >
         <View style={{ flex: 0.2 }}>
-          {jornada > 1 && (
+          {/*     {jornada > 1 && (
             <TouchableOpacity onPress={enrrere}>
               <AntDesign name='left' size={24} color='black' />
             </TouchableOpacity>
-          )}
+          )} */}
         </View>
         <View style={{ flex: 0.6, textAlign: 'center' }}>
-          <Text>JORNADA {jornada}</Text>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#1C4928',
+              fontSize: 18,
+              padding: 7,
+            }}
+          >
+            JORNADA {jornada}
+          </Text>
         </View>
         <View style={{ flex: 0.2 }}>
-          {jornada < jornadaLength && (
+          {/*   {jornada < jornadaLength && (
             <TouchableOpacity onPress={endavant}>
               <AntDesign
                 style={{ justifyContent: 'flex-end', display: 'flex' }}
@@ -63,19 +72,23 @@ const FilterMatches = ({
                 color='black'
               />
             </TouchableOpacity>
-          )}
+          )} */}
         </View>
       </View>
-      <View>
-        {resultados.map((d, i) => (
-          <PartitMin
-            key={i}
-            resultados={d}
-            categoria={categoria}
-            navigation={navigation}
-          />
-        ))}
-      </View>
+      <ScrollView>
+        <View>
+          {resultados.map((d, i) => (
+            <View style={{ padding: 10 }}>
+              <PartitMin
+                key={i}
+                resultados={d}
+                categoria={categoria}
+                navigation={navigation}
+              />
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
