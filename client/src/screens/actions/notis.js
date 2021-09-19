@@ -11,7 +11,6 @@ export const postNoti = async (id_post, id_user, type, _id) => {
 
   await axios
     .post(`${uri}/api/noti`, body, config)
-    .then(response => console.log(response.data))
     .catch(err => console.error(err));
 };
 
@@ -26,7 +25,7 @@ export const isNoti = setOn => {
   axios
     .get(`${uri}/api/noti`)
     .then(response =>
-      response.data.map(d => (console.log('new', d.new), d.new && setOn(true)))
+      response.data.map(d =>  d.new && setOn(true))
     )
     .catch(err => console.error(err));
 };

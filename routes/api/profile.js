@@ -229,18 +229,24 @@ router.put('/favleague', auth, async (req, res) => {
   if (!errors.isEmpty) {
     return res.status(400).json({ errors: errors.array() });
   }
-
+  var bool = false;
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
     });
+    profile.favLeagues.map(
+      d =>
+        d.categoria === req.body.categoria &&
+        d.grup === req.body.grup &&
+        (bool = true)
+    );
 
     const favLeague = {
       categoria: req.body.categoria,
       grup: req.body.grup,
     };
 
-    profile.favLeagues.unshift(favLeague);
+    !bool && profile.favLeagues.unshift(favLeague);
 
     await profile.save();
     res.json(profile);
@@ -250,21 +256,13 @@ router.put('/favleague', auth, async (req, res) => {
   }
 });
 
-router.delete('/favleague', auth, async (req, res) => {
+router.delete('/favleague/:id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
-    console.log(profile);
-    const cat = profile.favLeagues.filter(
-      d => d.categoria == req.body.categoria
-    );
-    const grup = cat.filter(d => d.grup == req.body.grup);
 
-    //Get remove index
-    const removeIndex = profile.favLeagues
-      .map(item => item.id)
-      .indexOf(grup._id);
+    profile.favLeagues = profile.favLeagues.filter(d => d.id !== req.params.id);
 
-    profile.favLeagues.splice(removeIndex, 1);
+
     await profile.save();
     res.json(profile);
   } catch (err) {

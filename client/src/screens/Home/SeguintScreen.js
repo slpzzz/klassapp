@@ -12,7 +12,6 @@ export const Seguint = ({ navigation }) => {
   useEffect(() => {
     getPostFollows(datos, setDatos);
   }, []);
-  console.log('existe?', datos);
 
   const renderItem = ({ item }) => {
     return <Post id={item._id} datos={item} navigation={navigation} />;

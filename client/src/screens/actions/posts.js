@@ -10,11 +10,8 @@ export const addPost = (sticker, text, partido) => {
   };
 
   const body = JSON.stringify({ sticker, text, partido });
-  console.log(body);
   try {
-    axios
-      .post(`${uri}/api/posts`, body, config)
-      .then(response => console.log('inn', response.data));
+    axios.post(`${uri}/api/posts`, body, config);
   } catch (err) {
     console.error('An error ocurred', err);
   }
@@ -33,7 +30,6 @@ export const getPostFollows = async (datos, setDatos) => {
     usersFollowing.push(response.data.user._id);
     response.data.following.map(d => usersFollowing.push(d.iduser));
   });
-  console.log('uF', usersFollowing);
   usersFollowing.length === 1
     ? await axios
         .get(`${uri}/api/posts/me`)
@@ -43,7 +39,6 @@ export const getPostFollows = async (datos, setDatos) => {
         .get(`${uri}/api/posts`)
         .then(response => {
           response.data.map((dataUsers, i2) => {
-            console.log('in');
             usersFollowing.map(d => {
               if (d === dataUsers.user) {
                 datosA.push(dataUsers);
@@ -55,7 +50,6 @@ export const getPostFollows = async (datos, setDatos) => {
           console.error(error);
         });
 
-  console.log('dat', datosA);
   setDatos(datosA);
 };
 
@@ -149,7 +143,7 @@ export const addComment = (text, id_post) => {
 
 export const deleteComment = id_post => {
   axios
-    .delete(`${uri}/api/posts/comment/${id_post}`)
+    .delete(`${uri}/api/posts/comment/delete/${id_post}`)
     .then(response => console.log(response.data))
     .catch(err => console.error(err));
 };

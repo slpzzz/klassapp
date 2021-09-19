@@ -86,7 +86,7 @@ export const createProfile = (rol, bio, location, navigation) => {
 
   try {
     axios.post(`${uri}/api/profile`, body, config).then(function (response) {
-      navigation.push('homeScreen');
+      navigation.push('followFirst');
     });
   } catch (err) {
     console.error('An error occurred', err);

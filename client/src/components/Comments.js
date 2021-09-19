@@ -8,8 +8,20 @@ const Comments = ({ data }) => {
   return (
     <View style={styles.container}>
       <View style={{ padding: 10 }}>
-        <View style={{ width: 2, height: 10, backgroundColor: 'black' }} />
-        <View style={{ width: 50, height: 2, backgroundColor: 'black' }} />
+        <View
+          style={{
+            width: 2,
+            height: 10,
+            backgroundColor: 'rgb(135, 135, 135)',
+          }}
+        />
+        <View
+          style={{
+            width: 50,
+            height: 2,
+            backgroundColor: 'rgb(135, 135, 135)',
+          }}
+        />
       </View>
       <View style={styles.container}>
         <View>

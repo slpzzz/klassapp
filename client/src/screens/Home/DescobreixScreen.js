@@ -22,7 +22,6 @@ export default function Descobreix(navigation) {
     getAllPosts(setDatos);
     getProfiles(setData);
   }, []);
-  console.log('data', data);
 
   const handleText = e => {
     setText(e);
@@ -102,7 +101,6 @@ export default function Descobreix(navigation) {
           onChangeText={t => handleText(t)}
           value={text}
         />
-        {console.log(datos)}
       </View>
       {text ? (
         <ScrollView>

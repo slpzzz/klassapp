@@ -7,7 +7,6 @@ const Posts = navigation => {
   const [datos, setDatos] = useState([]);
 
   useEffect(() => myPosts(setDatos), []);
-  console.log('9n');
   const renderItem = ({ item }) => {
     return (
       <Post id={item._id} datos={item} navigation={navigation.navigation} />

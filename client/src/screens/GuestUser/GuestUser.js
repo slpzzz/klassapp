@@ -26,7 +26,6 @@ const GuestUser = navigation => {
   useEffect(() => {
     getProfile(setDatos, null, navigation.route.params);
   }, []);
-  console.log('pp', datos);
   return (
     <>
       <GuestComponent navigation={navigation} />
@@ -96,55 +95,55 @@ const GuestComponent = ({ navigation }) => {
     setHandle(!handle);
   };
 
-  return (
-    datos && (
-      <View style={{ backgroundColor: 'white' }}>
-        <Header datos={datos} datos1={datos1} />
-        <TouchableOpacity onPress={() => setFollow()} style={{ padding: 4 }}>
-          <View
-            style={{
-              flex: 0.2,
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              display: 'flex',
-              padding: 10,
-            }}
-          >
-            {me ? (
-              console.log('me')
-            ) : handle ? (
-              <View
-                style={{
-                  backgroundColor: 'white',
-                  borderColor: '#487551',
-                  borderRadius: 20,
-                  borderWidth: 1,
-                  height: 30,
-                  width: 70,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Text style={{ color: '#487551' }}>Siguiendo</Text>
-              </View>
-            ) : (
-              <View
-                style={{
-                  backgroundColor: '#487551',
-                  borderRadius: 20,
-                  height: 30,
-                  width: 70,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Text style={{ color: 'white' }}>Seguir</Text>
-              </View>
-            )}
-          </View>
-        </TouchableOpacity>
-      </View>
-    )
+  return datos ? (
+    <View style={{ backgroundColor: 'white' }}>
+      <Header datos={datos} datos1={datos1} />
+      <TouchableOpacity onPress={() => setFollow()} style={{ padding: 4 }}>
+        <View
+          style={{
+            flex: 0.2,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            display: 'flex',
+            padding: 10,
+          }}
+        >
+          {me ? (
+            console.log('me')
+          ) : handle ? (
+            <View
+              style={{
+                backgroundColor: 'white',
+                borderColor: '#487551',
+                borderRadius: 20,
+                borderWidth: 1,
+                height: 30,
+                width: 70,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Text style={{ color: '#487551' }}>Siguiendo</Text>
+            </View>
+          ) : (
+            <View
+              style={{
+                backgroundColor: '#487551',
+                borderRadius: 20,
+                height: 30,
+                width: 70,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Text style={{ color: 'white' }}>Seguir</Text>
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
+    </View>
+  ) : (
+    <Loading />
   );
 };
 

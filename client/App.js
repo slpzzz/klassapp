@@ -23,6 +23,7 @@ import Notis from './src/screens/Notis/Notis';
 import PostSingle from './src/screens/Post/PostSingle';
 import Texto from './src/screens/Write/Texto';
 import Comment from './src/screens/Write/Comment';
+import FirstFollow from './src/screens/FirstFollow';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -34,6 +35,7 @@ const App = () => {
         <Stack.Screen name='home' component={StarterScreen} />
         <Stack.Screen name='register' component={Register} />
         <Stack.Screen name='signup2' component={SignUp2} />
+        <Stack.Screen name='followFirst ' component={FirstFollow} />
         <Stack.Screen name='login' component={Login} />
         <Stack.Screen
           name='homeScreen'

@@ -8,7 +8,6 @@ const Notis = ({ navigation }) => {
   useEffect(() => {
     getNotis(setdata);
   }, []);
-  console.log('data', data);
   moment.locale('ca');
   const dia = moment(data.date, 'YYYY-MM-DDThh:mm:ss').fromNow();
   return data.length > 0 ? (

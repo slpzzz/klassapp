@@ -25,6 +25,7 @@ import moment from 'moment';
 import { postNoti } from '../screens/actions/notis';
 import MatchPost from './MatchPost';
 import { AntDesign } from '@expo/vector-icons';
+import Loading from './Loading';
 
 export default function PostSingleComponent({ datos, navigation }) {
   const [like, setLike] = useState(false);
@@ -154,7 +155,7 @@ export default function PostSingleComponent({ datos, navigation }) {
       </View>
     </View>
   ) : (
-    <Text>No existeix</Text>
+    <Loading />
   );
 }
 

@@ -19,6 +19,10 @@ const PostSchema = new Schema({
   sticker: {
     type: [String],
   },
+  delete: {
+    type: Boolean,
+    default: false,
+  },
   partido: {
     equip1: {
       type: String,

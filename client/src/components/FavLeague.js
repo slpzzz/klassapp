@@ -13,7 +13,7 @@ export default function FavLeague({ data, navigation }) {
   const gr = cat.grups.find(d => d.grup === data.grup);
 
   const toFav = () => {
-    heart ? unFavLeague('2aCat', 3) : putFavLeague(cat.categoria, gr.grup);
+    heart ? unFavLeague(data._id) : putFavLeague(cat.categoria, gr.grup);
     setheart(!heart);
   };
 

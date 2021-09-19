@@ -5,12 +5,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 import FavLeague from '../../components/FavLeague';
 
 import { getFavLeagues } from '../actions/profile';
+import Loading from '../Loading';
 
 export default function Favorits(navigation) {
   const [data, setdata] = useState([]);
-  useEffect(() => getFavLeagues(setdata), []);
+  useEffect(() => getFavLeagues(setdata));
 
-  return (
+  return data ? (
     <View>
       {data.length > 0 ? (
         <ScrollView>
@@ -31,6 +32,8 @@ export default function Favorits(navigation) {
         </View>
       )}
     </View>
+  ) : (
+    <Loading />
   );
 }
 

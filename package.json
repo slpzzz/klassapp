@@ -4,11 +4,13 @@
   "description": "Amateur football social net",
   "main": "server.js",
   "dependencies": {
+    "@expo-google-fonts/lato": "^0.2.0",
     "autoprefixer": "^10.2.6",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "css-loader": "^1.0.0",
+    "expo-font": "^9.2.1",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
     "gravatar": "^1.8.1",

@@ -26,12 +26,14 @@ const Etiquetes = navigation => {
   const renderItem = ({ item }) => {
     return <Post datos={item} navigation={navigation.navigation} />;
   };
-  return (
+  return datos ? (
     <FlatList
       data={datos}
       renderItem={renderItem}
       keyExtractor={item => item.id}
     />
+  ) : (
+    <Loading />
   );
 };
 

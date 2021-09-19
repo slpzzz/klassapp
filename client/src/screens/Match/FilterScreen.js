@@ -11,7 +11,9 @@ import Button1 from '../../components/Button1';
 
 export default function Filter(navigation) {
   const [categoria, setCategoria] = useState('1aCat');
+  const [categoria1, setCategoria1] = useState('1aCat');
   const [grup, setGrup] = useState(1);
+  const [grup1, setGrup1] = useState(1);
   const [jornada, setJornada] = useState(1);
   const [jornada1, setJornada1] = useState(1);
   const [jornadaLength, setJornadaLenth] = useState();
@@ -26,6 +28,8 @@ export default function Filter(navigation) {
     setResultados(jr.partits);
     setJornada1(jornada);
     setCercar(true);
+    setCategoria1(categoria);
+    setGrup1(grup);
   };
 
   const canviarJornada = type => {
@@ -146,8 +150,8 @@ export default function Filter(navigation) {
         </View>
       </View>
       <FilterMatches
-        categoria={categoria}
-        grup={grup}
+        categoria={categoria1}
+        grup={grup1}
         jornada={jornada1}
         jornadaLength={jornadaLength}
         resultados={resultados}

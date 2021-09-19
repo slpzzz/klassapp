@@ -5,8 +5,6 @@ import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 import escut from '../equips.json';
 
 export default function PartitMin({ resultados, categoria, navigation }) {
-  console.log(escut);
-
   const escut1 = escut.filter(d => d.nom === resultados.equip1);
   const escut2 = escut.filter(d => d.nom === resultados.equip2);
 

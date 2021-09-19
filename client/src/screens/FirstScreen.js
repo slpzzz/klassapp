@@ -34,7 +34,6 @@ const Top = createMaterialTopTabNavigator();
 const myProfile = navigation => {
   const [datos, setDatos] = useState();
   useEffect(() => getProfileMe(setDatos), []);
-  console.log('dd', datos && datos.following.length);
   return (
     <>
       <GetMyProfile navigation={navigation} />
@@ -86,7 +85,6 @@ const GetMyProfile = ({ navigation }) => {
   useEffect(() => {
     getProfileMe(setDatos, setDatos1);
   }, []);
-  console.log('ss', navigation);
   return (
     datos && (
       <View style={{ backgroundColor: 'white' }}>
@@ -95,13 +93,13 @@ const GetMyProfile = ({ navigation }) => {
             style={{
               display: 'flex',
               flexDirection: 'row',
-              padding: 20,
+              paddingRight: 20,
+              paddingTop: 20,
               alignItems: 'center',
               justifyContent: 'flex-end',
             }}
           >
-            <AntDesign name='logout' size={24} color='black' />
-            <Text style={{ padding: 10 }}>Tancar sessió</Text>
+            <AntDesign name='logout' size={24} color='#487551' />
           </View>
         </TouchableOpacity>
         <Header datos={datos} datos1={datos1} />;

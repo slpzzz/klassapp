@@ -22,14 +22,8 @@ const Texto = navigation => {
   const [text, setText] = useState();
   const [sticker, setSticker] = useState(['1a catalana']);
 
-  console.log(navigation);
   const send = () => {
-    console.log(
-      sticker === 'A tothom'
-        ? ['1a catalana', '2a catalana', '3a catalana', '4a catalana']
-        : 'nu',
-      text
-    );
+    
     navigation.route.params
       ? addPost(sticker, text, {
           resultados: navigation.route.params.resultados,

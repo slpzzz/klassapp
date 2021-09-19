@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -25,7 +25,11 @@ const MatchScreen = navigation => {
           style: { borderEndColor: '#491C3D' },
         }}
       >
-        <Top.Screen name='Favorits' component={Favorits} />
+        <Top.Screen
+          name='Favorits'
+          component={Favorits}
+          initialParams={{ state: false }}
+        />
         <Top.Screen name='Cercar' component={Filter} />
       </Top.Navigator>
     </>

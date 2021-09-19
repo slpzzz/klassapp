@@ -33,10 +33,8 @@ const SignUp2 = ({ navigation }) => {
   const completed = () => {
     createProfile(rol, bio, location, navigation);
     //navigation.navigate('homeScreen');
-    //console.log(rol);
   };
   const add = i => {
-    console.log(rol);
     setRol(oldArray => [
       ...oldArray,
       {
@@ -46,7 +44,6 @@ const SignUp2 = ({ navigation }) => {
     ]);
   };
   const remove = (i, rol_) => {
-    console.log('remove', i, rol, parseInt(i + 1), rol_);
     if (rol.length > 0) {
       let arrayRols = [...rol];
       arrayRols.splice(1, 1);
@@ -58,11 +55,9 @@ const SignUp2 = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('homeScreen')}>
-        {/*     <View style={{ alignItems: 'flex-end', padding: 20 }}>
-          <EvilIcons name='close' size={40} color='black' />
-        </View> */}
-      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('followFirst')}
+      ></TouchableOpacity>
       <Text
         style={{
           color: '#1C4928',
