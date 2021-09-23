@@ -85,6 +85,7 @@ const GetMyProfile = ({ navigation }) => {
   useEffect(() => {
     getProfileMe(setDatos, setDatos1);
   }, []);
+  console.log(datos);
   return (
     datos && (
       <View style={{ backgroundColor: 'white' }}>

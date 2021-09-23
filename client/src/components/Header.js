@@ -39,7 +39,7 @@ export default function Header({ datos, datos1 }) {
         <Text style={{ fontFamily: 'Lato_700Bold', fontSize: 25, padding: 8 }}>
           {datos1.name}
         </Text>
-        {location && (
+        {datos.location && (
           <View style={{ display: 'flex', flexDirection: 'row', padding: 10 }}>
             <Image
               style={{ width: 20, height: 20, padding: 10 }}
