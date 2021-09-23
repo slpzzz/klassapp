@@ -14,6 +14,14 @@ import { addPost } from '../../screens/actions/posts';
 
 import data from '../../ligas.json';
 import MatchPost from '../../components/MatchPost';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -23,7 +31,6 @@ const Texto = navigation => {
   const [sticker, setSticker] = useState(['1a catalana']);
 
   const send = () => {
-    
     navigation.route.params
       ? addPost(sticker, text, {
           resultados: navigation.route.params.resultados,
@@ -70,7 +77,7 @@ const Texto = navigation => {
             <Entypo name='cross' size={32} color='#487551' />
           </TouchableOpacity>
           <View style={{ display: 'flex', alignItems: 'center' }}>
-            <Text>Escriure post</Text>
+            <Text style={{ fontFamily: 'Lato_400Regular' }}>Escriure post</Text>
           </View>
         </View>
         <TouchableOpacity
@@ -88,7 +95,9 @@ const Texto = navigation => {
               padding: 10,
             }}
           >
-            <Text style={{ color: 'white' }}>Enviar</Text>
+            <Text style={{ fontFamily: 'Lato_400Regular', color: 'white' }}>
+              Enviar
+            </Text>
           </View>
         </TouchableOpacity>
       </View>

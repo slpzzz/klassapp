@@ -14,12 +14,15 @@ import Logo from './logo';
 import { MaterialIcons } from '@expo/vector-icons';
 import { isNoti, postNoti } from '../screens/actions/notis';
 import { NavigationContainer } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/core';
 
 var width = Dimensions.get('screen').width;
 
 const TopBar = ({ navigation }) => {
+  const isFocused = useIsFocused();
+
   const [on, setOn] = useState(false);
-  useEffect(() => isNoti(setOn), []);
+  useEffect(() => isNoti(setOn), [isFocused]);
   return (
     <View>
       <StatusBar barStyle='light-content' hidden={false} translucent={false} />
@@ -29,7 +32,7 @@ const TopBar = ({ navigation }) => {
         </View>
         <View style={styles.right}>
           <TouchableOpacity
-            onPress={() => (navigation.navigate('Notificacions'), setOn(false))}
+            onPress={() => navigation.navigate('Notificacions')}
           >
             <MaterialIcons
               name={on ? 'notifications-on' : 'notifications'}

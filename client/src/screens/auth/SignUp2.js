@@ -21,6 +21,14 @@ import { EvilIcons } from '@expo/vector-icons';
 import sty from '../../../styles';
 
 import { createProfile } from '../actions/auth';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 var height = Dimensions.get('screen').height;
 var width = Dimensions.get('screen').width;
@@ -32,7 +40,6 @@ const SignUp2 = ({ navigation }) => {
 
   const completed = () => {
     createProfile(rol, bio, location, navigation);
-    //navigation.navigate('homeScreen');
   };
   const add = i => {
     setRol(oldArray => [
@@ -157,5 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'black',
     padding: 8,
+    fontFamily: 'Lato_400Regular',
   },
 });

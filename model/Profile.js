@@ -24,20 +24,6 @@ const ProfileSchema = new mongoose.Schema({
       },
     },
   ],
-  social: {
-    youtube: {
-      type: String,
-    },
-    twitter: {
-      type: String,
-    },
-    facebook: {
-      type: String,
-    },
-    instagram: {
-      type: String,
-    },
-  },
   following: [
     {
       user: { type: String },

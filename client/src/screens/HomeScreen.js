@@ -58,7 +58,7 @@ const HomeScreen = ({ navigation }) => {
           }}
           onPress={() => setShow(!show)}
         >
-          <Text>GO!</Text>
+          <Text style={{}}>GO!</Text>
         </TouchableOpacity>
       </View>
       {pressed[0] && (

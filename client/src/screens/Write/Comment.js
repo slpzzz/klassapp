@@ -15,6 +15,14 @@ import { addComment, addPost } from '../../screens/actions/posts';
 
 import data from '../../ligas.json';
 import { postNoti } from '../actions/notis';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -30,7 +38,7 @@ const Comment = navigation => {
       navigation.route.params.user,
       'comment'
     );
-    navigation.navigation.goBack('Post', navigation.route.params._id);
+    navigation.navigation.goBack();
   };
 
   return (
@@ -53,7 +61,7 @@ const Comment = navigation => {
             <Entypo name='cross' size={32} color='#487551' />
           </TouchableOpacity>
           <View style={{ display: 'flex', alignItems: 'center' }}>
-            <Text>Resposta</Text>
+            <Text style={{ fontFamily: 'Lato_400Regular' }}>Resposta</Text>
           </View>
         </View>
         <TouchableOpacity
@@ -71,7 +79,9 @@ const Comment = navigation => {
               padding: 10,
             }}
           >
-            <Text style={{ color: 'white' }}>Enviar</Text>
+            <Text style={{ fontFamily: 'Lato_400Regular', color: 'white' }}>
+              Enviar
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -93,11 +103,19 @@ const Comment = navigation => {
                   : 'https://tds.cl/img/perfil-usuario.png',
               }}
             />
-            <Text style={{ fontWeight: 'bold', marginLeft: 5, padding: 10 }}>
+            <Text
+              style={{
+                fontFamily: 'Lato_900Black',
+                marginLeft: 5,
+                padding: 10,
+              }}
+            >
               {navigation.route.params.username}
             </Text>
           </View>
-          <Text style={{ padding: 10 }}>{navigation.route.params.text}</Text>
+          <Text style={{ fontFamily: 'Lato_400Regular', padding: 10 }}>
+            {navigation.route.params.text}
+          </Text>
         </View>
 
         <View>

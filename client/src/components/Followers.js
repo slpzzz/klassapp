@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import { FollowBtn } from './FollowBtn';
 
 import { ifFollow, unfollow, follow } from '../screens/actions/profile';
 import { postNoti } from '../screens/actions/notis';
 
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
+
 export default function Followers({ data, navigation }) {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const [handle, setHandle] = useState(false);
   const [me, setMe] = useState(false);
 
@@ -44,11 +59,17 @@ export default function Followers({ data, navigation }) {
           <View style={styles.seguirbtnP}>
             {handle ? (
               <View style={styles.siguiendobtn}>
-                <Text style={{ color: '#487551' }}>Siguiendo</Text>
+                <Text
+                  style={{ fontFamily: 'Lato_400Regular', color: '#487551' }}
+                >
+                  Siguiendo
+                </Text>
               </View>
             ) : (
               <View style={styles.seguirbtn}>
-                <Text style={{ color: 'white' }}>Seguir</Text>
+                <Text style={{ fontFamily: 'Lato_400Regular', color: 'white' }}>
+                  Seguir
+                </Text>
               </View>
             )}
           </View>
@@ -113,9 +134,9 @@ const styles = StyleSheet.create({
     flex: 0.6,
   },
   TextName: {
-    fontWeight: 'bold',
     fontSize: 15,
     color: 'black',
+    fontFamily: 'Lato_700Bold',
   },
   textBody: {
     fontSize: 14,

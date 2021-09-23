@@ -38,7 +38,9 @@ export const getPostFollows = async (datos, setDatos) => {
     : await axios
         .get(`${uri}/api/posts`)
         .then(response => {
+          console.log(response.data);
           response.data.map((dataUsers, i2) => {
+            console.log(dataUsers);
             usersFollowing.map(d => {
               if (d === dataUsers.user) {
                 datosA.push(dataUsers);
@@ -49,6 +51,7 @@ export const getPostFollows = async (datos, setDatos) => {
         .catch(function (error) {
           console.error(error);
         });
+  console.log('dA', datosA);
 
   setDatos(datosA);
 };
@@ -143,7 +146,7 @@ export const addComment = (text, id_post) => {
 
 export const deleteComment = id_post => {
   axios
-    .delete(`${uri}/api/posts/comment/delete/${id_post}`)
+    .put(`${uri}/api/posts/comment/delete/${id_post}`)
     .then(response => console.log(response.data))
     .catch(err => console.error(err));
 };

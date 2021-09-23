@@ -35,7 +35,7 @@ const App = () => {
         <Stack.Screen name='home' component={StarterScreen} />
         <Stack.Screen name='register' component={Register} />
         <Stack.Screen name='signup2' component={SignUp2} />
-        <Stack.Screen name='followFirst ' component={FirstFollow} />
+        <Stack.Screen name='followFirst' component={FirstFollow} />
         <Stack.Screen name='login' component={Login} />
         <Stack.Screen
           name='homeScreen'
@@ -49,7 +49,7 @@ const App = () => {
           options={{
             headerShown: true,
             title: 'Perfil',
-            headerTransparent: false,
+            headerTintColor: '#1C4928',
           }}
         />
         <Stack.Screen
@@ -59,6 +59,7 @@ const App = () => {
           options={({ route }) => ({
             title: route.params.name,
             headerShown: true,
+            headerTintColor: '#1C4928',
           })}
         />
         <Stack.Screen
@@ -68,6 +69,7 @@ const App = () => {
           options={() => ({
             title: 'Notificacions',
             headerShown: true,
+            headerTintColor: '#1C4928',
           })}
         />
         <Stack.Screen
@@ -77,6 +79,7 @@ const App = () => {
           options={() => ({
             title: 'Post',
             headerShown: true,
+            headerTintColor: '#1C4928',
           })}
         />
         <Stack.Screen name='Comment' component={Comment} />

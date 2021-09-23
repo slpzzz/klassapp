@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import data from '../../ligas.json';
-import { FollowBtn } from '../../components/FollowBtn';
 import Followers from '../../components/Followers';
 import { getBestPosts } from '../actions/posts';
 import { Fontisto } from '@expo/vector-icons';
@@ -107,7 +106,7 @@ export default function Destacats({ navigation }) {
           keyExtractor={item => item.id}
         />
       ) : (
-        <Text>Escriu per primera vegada !</Text>
+        <Text style={{}}>Escriu per primera vegada !</Text>
       )}
     </>
   );

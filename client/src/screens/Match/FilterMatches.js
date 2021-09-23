@@ -7,6 +7,14 @@ import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { isFav, putFavLeague, unFavLeague } from '../actions/profile';
 import { CommonActions } from '@react-navigation/routers';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 const FilterMatches = ({
   categoria,
@@ -45,7 +53,9 @@ const FilterMatches = ({
           ) : (
             <AntDesign name='hearto' size={24} color='#1C4928' />
           )}
-          <Text style={{ marginLeft: 5 }}>Marcar lliga com a favorita</Text>
+          <Text style={{ fontFamily: 'Lato_400Regular', marginLeft: 5 }}>
+            Marcar lliga com a favorita
+          </Text>
         </View>
       </TouchableOpacity>
       <ScrollView style={{ height: (height * 2) / 3 }}>

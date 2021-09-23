@@ -22,10 +22,9 @@ export const getNotis = setdata => {
 };
 
 export const isNoti = setOn => {
+  setOn(false);
   axios
     .get(`${uri}/api/noti`)
-    .then(response =>
-      response.data.map(d =>  d.new && setOn(true))
-    )
+    .then(response => response.data.map(d => d.new && setOn(true)))
     .catch(err => console.error(err));
 };

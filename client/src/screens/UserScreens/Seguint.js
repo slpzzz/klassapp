@@ -1,17 +1,23 @@
+import { useIsFocused } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import Followers from '../../components/Followers';
 import { getProfileMe } from '../actions/profile';
+import Loading from '../../components/Loading';
 
 const Seguint = navigation => {
+  const isFocused = useIsFocused();
+
   const [datos, setDatos] = useState();
-  useEffect(() => getProfileMe(setDatos), []);
+  useEffect(() => getProfileMe(setDatos));
 
   return datos ? (
     datos.following.length > 0 ? (
-      datos.following.map(d => (
-        <Followers data={d} navigation={navigation.navigation} />
-      ))
+      <ScrollView style={{ height: 100 }}>
+        {datos.following.map((d, i) => (
+          <Followers key={i} data={d} navigation={navigation.navigation} />
+        ))}
+      </ScrollView>
     ) : (
       <View
         style={{
@@ -22,11 +28,11 @@ const Seguint = navigation => {
           textAlign: 'center',
         }}
       >
-        <Text>Comença a seguir nous usuaris</Text>
+        <Text style={{}}>Comença a seguir nous usuaris</Text>
       </View>
     )
   ) : (
-    <Text>UPS! </Text>
+    <Loading />
   );
 };
 

@@ -25,9 +25,24 @@ import moment from 'moment';
 import { postNoti } from '../screens/actions/notis';
 import MatchPost from './MatchPost';
 import { AntDesign } from '@expo/vector-icons';
-import Loading from './Loading';
+import Loading from './../components/Loading';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 export default function PostSingleComponent({ datos, navigation }) {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const [like, setLike] = useState(false);
   const [numLikes, setNumLikes] = useState();
   const [comment, setComment] = useState();
@@ -40,12 +55,6 @@ export default function PostSingleComponent({ datos, navigation }) {
     datos.likes && setNumLikes(datos.likes.length);
   }, []);
 
-  const newComment = () => {
-    addComment(comment, datos._id);
-    setComment('');
-    postNoti(datos._id, datos.user, 'comment');
-  };
-
   moment.locale('ca');
   const dia = moment(datos.date, 'YYYY-MM-DDThh:mm:ss').fromNow();
 
@@ -53,9 +62,7 @@ export default function PostSingleComponent({ datos, navigation }) {
     <View>
       <View style={styles.container}>
         <View style={styles.avatarParent}>
-          <TouchableOpacity
-            onPress={() => navigation && navigation.push('user', datos.user)}
-          >
+          <TouchableOpacity onPress={() => navigation.push('user', datos.user)}>
             <View style={styles.avatar}>
               <Image
                 style={styles.avatarProfile}
@@ -133,11 +140,11 @@ export default function PostSingleComponent({ datos, navigation }) {
                 {datos.likes ? numLikes : 0}
               </Text>
             </View>
-            {me && (
+            {/*     {me && (
               <TouchableOpacity onPress={() => {}}>
                 <AntDesign name='delete' size={18} color='red' />
               </TouchableOpacity>
-            )}
+            )} */}
           </View>
         </View>
       </View>
@@ -150,7 +157,9 @@ export default function PostSingleComponent({ datos, navigation }) {
       >
         <ScrollView>
           {datos.comments &&
-            datos.comments.map((c, i) => <Comments key={i} data={c} />)}
+            datos.comments.map((c, i) => (
+              <Comments key={i} data={c} navigation={navigation} />
+            ))}
         </ScrollView>
       </View>
     </View>
@@ -200,17 +209,19 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   TextName: {
-    fontWeight: 'bold',
     fontSize: 15,
+    fontFamily: 'Lato_900Black',
   },
   TextTitleRol: {
     fontSize: 13,
     color: '#808080',
+    fontFamily: 'Lato_400Regular',
   },
   textBody: {
     fontSize: 14,
     paddingTop: 8,
     paddingBottom: 8,
+    fontFamily: 'Lato_400Regular',
   },
   interactBtnParent: {
     padding: 8,

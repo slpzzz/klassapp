@@ -3,8 +3,23 @@ import React from 'react';
 import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 
 import escut from '../equips.json';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 const MatchPost = ({ resultados }) => {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const escut1 = escut.filter(d => d.nom === resultados.equip1);
   const escut2 = escut.filter(d => d.nom === resultados.equip2);
 
@@ -42,8 +57,22 @@ const MatchPost = ({ resultados }) => {
             display: 'flex',
           }}
         >
-          <Text style={{ fontSize: 10, color: 'black' }}>{resultados.dia}</Text>
-          <Text style={{ fontSize: 16, color: 'black' }}>
+          <Text
+            style={{
+              fontFamily: 'Lato_400Regular',
+              fontSize: 10,
+              color: 'black',
+            }}
+          >
+            {resultados.dia}
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'Lato_400Regular',
+              fontSize: 16,
+              color: 'black',
+            }}
+          >
             {resultados.resultat ? resultados.resultat : resultados.hora}
           </Text>
         </View>
@@ -98,6 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingTop: 8,
     height: 20,
+    fontFamily: 'Lato_400Regular',
   },
   result: {
     flex: 0.2,

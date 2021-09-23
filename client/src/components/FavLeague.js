@@ -4,8 +4,23 @@ import { AntDesign } from '@expo/vector-icons';
 import PartitMin from './PartitMin';
 import dataJSON from '../competicio.json';
 import { putFavLeague, unFavLeague } from '../screens/actions/profile';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 export default function FavLeague({ data, navigation }) {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const [pressed, setPressed] = useState(false);
   const [heart, setheart] = useState(true);
 
@@ -14,7 +29,6 @@ export default function FavLeague({ data, navigation }) {
 
   const toFav = () => {
     heart ? unFavLeague(data._id) : putFavLeague(cat.categoria, gr.grup);
-    setheart(!heart);
   };
 
   return !pressed ? (
@@ -28,7 +42,7 @@ export default function FavLeague({ data, navigation }) {
             color='#487551'
           />
         </TouchableOpacity>
-        <Text style={{ flex: 0.8 }}>
+        <Text style={{ fontFamily: 'Lato_400Regular', flex: 0.8 }}>
           {data.categoria}alana - Grup {data.grup}
         </Text>
         <AntDesign
@@ -56,7 +70,7 @@ export default function FavLeague({ data, navigation }) {
               color='#487551'
             />
           </TouchableOpacity>
-          <Text style={{ flex: 0.8 }}>
+          <Text style={{ fontFamily: 'Lato_400Regular', flex: 0.8 }}>
             {data.categoria}alana - Grup {data.grup}
           </Text>
           <AntDesign
@@ -75,7 +89,9 @@ export default function FavLeague({ data, navigation }) {
       <View
         style={{ alignItems: 'center', justifyContent: 'center', height: 50 }}
       >
-        <Text style={{ fontWeight: 'bold', fontSize: 15 }}>JORNADA 1</Text>
+        <Text style={{ fontFamily: 'Lato_700Bold', fontSize: 15 }}>
+          JORNADA 1
+        </Text>
       </View>
       {gr.jornades.length > 0 &&
         gr.jornades[0].partits.map((d, i) => {

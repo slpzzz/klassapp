@@ -1,6 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+  FlatList,
+} from 'react-native';
 import Header from '../../components/Header';
 
 import {
@@ -17,15 +24,32 @@ import { userPost } from '../actions/posts';
 import Post from '../../components/Post';
 import Followers from '../../components/Followers';
 import { postNoti } from '../actions/notis';
-
+import Loading from '../../components/Loading';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 const Top = createMaterialTopTabNavigator();
+var height = Dimensions.get('screen').height;
 
 const GuestUser = navigation => {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
+
   const [datos, setDatos] = useState();
 
   useEffect(() => {
     getProfile(setDatos, null, navigation.route.params);
-  }, []);
+  });
   return (
     <>
       <GuestComponent navigation={navigation} />
@@ -123,7 +147,9 @@ const GuestComponent = ({ navigation }) => {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: '#487551' }}>Siguiendo</Text>
+              <Text style={{ fontFamily: 'Lato_400Regular', color: '#487551' }}>
+                Siguiendo
+              </Text>
             </View>
           ) : (
             <View
@@ -136,7 +162,9 @@ const GuestComponent = ({ navigation }) => {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ color: 'white' }}>Seguir</Text>
+              <Text style={{ fontFamily: 'Lato_400Regular', color: 'white' }}>
+                Seguir
+              </Text>
             </View>
           )}
         </View>
@@ -152,7 +180,37 @@ const GuestPost = navigation => {
 
   useEffect(() => userPost(navigation.route.params.id, setData), []);
 
-  return data && data.map((d, i) => <Post key={i} datos={d} />);
+  const renderItem = ({ item }) => {
+    return (
+      <Post id={item._id} datos={item} navigation={navigation.navigation} />
+    );
+  };
+
+  return (
+    data &&
+    (data.length > 0 ? (
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        style={{ height: 100 }}
+      />
+    ) : (
+      <View
+        style={{
+          padding: 40,
+          flex: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <Text style={{ fontFamily: 'Lato_400Regular' }}>
+          Aquest usuari encara no ha fet cap publicació
+        </Text>
+      </View>
+    ))
+  );
 };
 
 const GuestSeguidors = navigation => {
@@ -165,7 +223,11 @@ const GuestSeguidors = navigation => {
 
   return datos ? (
     datos.length > 0 ? (
-      datos.map(d => <Followers data={d} navigation={navigation.navigation} />)
+      <ScrollView style={{ height: 100 }}>
+        {datos.map((d, i) => (
+          <Followers key={i} data={d} navigation={navigation.navigation} />
+        ))}
+      </ScrollView>
     ) : (
       <View
         style={{
@@ -176,13 +238,13 @@ const GuestSeguidors = navigation => {
           textAlign: 'center',
         }}
       >
-        <Text>
-          Interacciona amb els altres usuaris per aconseguir nous seguidors
+        <Text style={{ fontFamily: 'Lato_400Regular' }}>
+          Aquest usuari encara no té cap seguidor.
         </Text>
       </View>
     )
   ) : (
-    <Text>UPS! </Text>
+    <Loading />
   );
 };
 
@@ -196,7 +258,9 @@ const GuestSeguint = navigation => {
 
   return datos ? (
     datos.length > 0 ? (
-      datos.map(d => <Followers data={d} navigation={navigation.navigation} />)
+      datos.map((d, i) => (
+        <Followers key={i} data={d} navigation={navigation.navigation} />
+      ))
     ) : (
       <View
         style={{
@@ -207,11 +271,13 @@ const GuestSeguint = navigation => {
           textAlign: 'center',
         }}
       >
-        <Text>Comença a seguir nous usuaris</Text>
+        <Text style={{ fontFamily: 'Lato_400Regular' }}>
+          Aquest usuari encara no segueix a ningú.
+        </Text>
       </View>
     )
   ) : (
-    <Text>UPS! </Text>
+    <Loading />
   );
 };
 

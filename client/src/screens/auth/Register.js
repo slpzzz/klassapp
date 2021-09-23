@@ -13,6 +13,15 @@ import Labeltext from '../../components/Labeltext';
 import LabelDate from '../../components/LabelDate';
 import Button1 from '../../components/Button1';
 
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
+
 import PropTypes from 'prop-types';
 
 import { register } from '../actions/auth';
@@ -21,6 +30,14 @@ var height = Dimensions.get('screen').height;
 var width = Dimensions.get('screen').width;
 
 const Register = ({ navigation }) => {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -45,7 +62,14 @@ const Register = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.Formu}>
-        <Text style={{ color: '#1C4928', fontSize: 36, marginBottom: 24 }}>
+        <Text
+          style={{
+            fontFamily: 'Lato_400Regular',
+            color: '#1C4928',
+            fontSize: 36,
+            marginBottom: 24,
+          }}
+        >
           Registra't
         </Text>
         <View style={styles.button}>
@@ -61,7 +85,7 @@ const Register = ({ navigation }) => {
           <TextInput
             value={email}
             type='email'
-            placeholder='Correu electrònic'
+            placeholder='Adreça electrònic'
             style={email ? styles.buttonTextW : styles.buttonText}
             autoCompleteType='email'
             onChange={e => onChange(e, 'email')}
@@ -72,17 +96,20 @@ const Register = ({ navigation }) => {
           <TextInput
             value={password}
             type='password'
-            placeholder='Constrasenya'
+            placeholder='Contrasenya'
             style={password ? styles.buttonTextW : styles.buttonText}
             secureTextEntry={true}
             onChange={e => onChange(e, 'password')}
           />
+          <Text style={{ fontFamily: 'Lato_400Regular', color: 'grey' }}>
+            *La contrasenya ha de ser de 7 caràcters mínim
+          </Text>
         </View>
         <View style={styles.button}>
           <TextInput
             value={password2}
             type='password'
-            placeholder='Constrasenya'
+            placeholder='Confirma la contrasenya'
             style={password2 ? styles.buttonTextW : styles.buttonText}
             secureTextEntry={true}
             onChange={e => onChange(e, 'password2')}
@@ -101,10 +128,22 @@ const Register = ({ navigation }) => {
             padding: 20,
           }}
         >
-          <Text style={{ fontSize: 15, color: '#1C4928' }}>
+          <Text
+            style={{
+              fontFamily: 'Lato_400Regular',
+              fontSize: 15,
+              color: '#1C4928',
+            }}
+          >
             Ja tens compte?{' '}
           </Text>
-          <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1C4928' }}>
+          <Text
+            style={{
+              fontFamily: 'Lato_900Black',
+              fontSize: 15,
+              color: '#1C4928',
+            }}
+          >
             Inicia sessió
           </Text>
         </View>

@@ -237,10 +237,10 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     try {
       const user = await User.findById(req.user.id).select('-password');
       const post = await Post.findById(req.params.id);
+      console.log(user);
 
       const newComment = {
         text: req.body.text,
@@ -263,7 +263,7 @@ router.post(
 // @route    DELETE api/posts/comment/:id/:comment_id
 // @desc     Delete comment
 // @access   Private
-router.delete('/comment/delete/:comment_id', auth, async (req, res) => {
+router.put('/comment/delete/:comment_id', auth, async (req, res) => {
   try {
     const post = await Post.find();
     console.log(post);

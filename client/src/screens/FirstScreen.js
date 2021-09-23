@@ -33,7 +33,7 @@ const Top = createMaterialTopTabNavigator();
 
 const myProfile = navigation => {
   const [datos, setDatos] = useState();
-  useEffect(() => getProfileMe(setDatos), []);
+  useEffect(() => getProfileMe(setDatos));
   return (
     <>
       <GetMyProfile navigation={navigation} />
@@ -102,7 +102,7 @@ const GetMyProfile = ({ navigation }) => {
             <AntDesign name='logout' size={24} color='#487551' />
           </View>
         </TouchableOpacity>
-        <Header datos={datos} datos1={datos1} />;
+        <Header datos={datos} datos1={datos1} />
       </View>
     )
   );

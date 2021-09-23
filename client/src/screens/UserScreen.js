@@ -38,19 +38,19 @@ const UserScreen = observer(() => {
   return (
     <View style={{ marginBottom: 300 }}>
       <TouchableOpacity>
-        <Text>Tancar sessió</Text>
+        <Text style={{}}>Tancar sessió</Text>
       </TouchableOpacity>
       {datos && <Header datos={datos} datos1={datos1} />}
       <View elevation={5} style={styles.sectionParent}>
         <TouchableOpacity onPress={() => selected(0)}>
           <View style={styles.sections}>
-            <Text>POSTS</Text>
+            <Text style={{}}>POSTS</Text>
             <Text style={styles.sectionsNum}>{posts.length}</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => selected(1)}>
           <View style={styles.sections}>
-            <Text>SEGUIDORS</Text>
+            <Text style={{}}>SEGUIDORS</Text>
             <Text style={styles.sectionsNum}>
               {datos1.followers ? datos1.followers.length : 0}
             </Text>
@@ -58,7 +58,7 @@ const UserScreen = observer(() => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => selected(2)}>
           <View style={styles.sections}>
-            <Text>SEGUINT</Text>
+            <Text style={{}}>SEGUINT</Text>
             <Text style={styles.sectionsNum}>
               {datos1.following ? datos1.following.length : 0}
             </Text>
@@ -76,7 +76,7 @@ const UserScreen = observer(() => {
         ) : pressed[2] ? (
           datos1.following.map((d, i) => <Followers key={i} datos={d} />)
         ) : (
-          <Text>Error</Text>
+          <Loading />
         )}
       </ScrollView>
     </View>

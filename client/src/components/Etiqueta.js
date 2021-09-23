@@ -7,8 +7,23 @@ import {
   Button,
   Alert,
 } from 'react-native';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 export default function Etiqueta({ datos, navigation }) {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   return (
     <TouchableOpacity
       style={{ padding: 5 }}
@@ -78,5 +93,6 @@ const styles = StyleSheet.create({
   textS: {
     alignItems: 'center',
     fontSize: 12,
+    fontFamily: 'Lato_400Regular',
   },
 });

@@ -1,17 +1,22 @@
+import { useIsFocused } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 
-import { View, Text, TextInput, Dimensions } from 'react-native';
+import { View, Text, TextInput, Dimensions, ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Post from '../../components/Post';
 import PostSingleComponent from '../../components/PostSingleComponent';
 import { getOnePost } from '../actions/posts';
+import Loading from '../../components/Loading';
 
 var height = Dimensions.get('screen').height;
 var width = Dimensions.get('screen').width;
 
 const PostSingle = navigation => {
+  const isFocused = useIsFocused();
+  console.log('dd', navigation);
+
   const [data, setData] = useState();
-  useEffect(() => getOnePost(navigation.route.params, setData), []);
+  useEffect(() => getOnePost(navigation.route.params, setData));
   return data ? (
     <View style={{ height: '100%' }}>
       <View
@@ -46,13 +51,13 @@ const PostSingle = navigation => {
           />
         </TouchableOpacity>
       </View>
-      <View style={{ zIndex: 0 }}>
+      <ScrollView style={{ zIndex: 0, height: height - 50 }}>
         <PostSingleComponent datos={data} navigation={navigation.navigation} />
-      </View>
-      <View style={{ height: 100 }} />
+        <View style={{ height: 100 }} />
+      </ScrollView>
     </View>
   ) : (
-    <Text>Error</Text>
+    <Loading />
   );
 };
 

@@ -11,17 +11,20 @@ import {
 import { getAllPosts } from '../actions/posts';
 import Post from '../../components/Post';
 import SuggestUser from '../../components/SuggestUser';
+import { FontAwesome } from '@expo/vector-icons';
 import { getProfiles, getSuggestUsers } from '../actions/profile';
+import { useIsFocused } from '@react-navigation/core';
 
 export default function Descobreix(navigation) {
   const [datos, setDatos] = useState([]);
   const [data, setData] = useState([]);
   const [text, setText] = useState('');
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     getAllPosts(setDatos);
     getProfiles(setData);
-  }, []);
+  }, [isFocused]);
 
   const handleText = e => {
     setText(e);
@@ -33,61 +36,19 @@ export default function Descobreix(navigation) {
     );
   };
 
-  const header = () => {
-    return (
-      <View>
-        <View
-          style={{
-            padding: 5,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 5,
-          }}
-        >
-          <TextInput
-            style={{
-              width: 250,
-              height: 25,
-              padding: 10,
-              borderWidth: 1,
-              borderRadius: 10,
-              borderColor: '#764668',
-            }}
-            placeholder={'Buscar'}
-          />
-        </View>
-
-        <View style={{ display: 'flex', justifyContent: 'center' }}>
-          <ScrollView
-            horizontal={true}
-            style={{
-              flexGrow: 0,
-              height: 800,
-            }}
-          >
-            <SuggestUser />
-            <SuggestUser />
-            <SuggestUser />
-            <SuggestUser />
-          </ScrollView>
-        </View>
-      </View>
-    );
-  };
-
   return (
     <>
-      {' '}
       <View
         style={{
           padding: 5,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          flexDirection: 'row',
           marginTop: 5,
         }}
       >
+        <FontAwesome name='search' size={24} color='#764668' />
         <TextInput
           style={{
             width: 250,
@@ -96,6 +57,7 @@ export default function Descobreix(navigation) {
             borderWidth: 1,
             borderRadius: 10,
             borderColor: '#764668',
+            marginLeft: 10,
           }}
           placeholder={'Cerca un usuari'}
           onChangeText={t => handleText(t)}

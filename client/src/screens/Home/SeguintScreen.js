@@ -6,15 +6,38 @@ import Post from '../../components/Post';
 
 import { getPostFollows } from '../actions/posts';
 import ProgressBar from 'react-native-progress/Bar';
+import { useIsFocused } from '@react-navigation/core';
+import Loading from '../../components/Loading';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
+export const Seguint = navigation => {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
 
-export const Seguint = ({ navigation }) => {
   const [datos, setDatos] = useState([]);
+
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     getPostFollows(datos, setDatos);
-  }, []);
+  }, [isFocused]);
+  console.log('d', datos);
 
   const renderItem = ({ item }) => {
-    return <Post id={item._id} datos={item} navigation={navigation} />;
+    return (
+      <Post id={item._id} datos={item} navigation={navigation.navigation} />
+    );
   };
 
   return datos ? (
@@ -37,12 +60,14 @@ export const Seguint = ({ navigation }) => {
             alignItems: 'center',
           }}
         >
-          <Text>Escriu per primera vegada</Text>
+          <Text style={{ fontFamily: 'Lato_400Regular' }}>
+            Escriu per primera vegada
+          </Text>
         </View>
       </TouchableOpacity>
     )
   ) : (
-    <Text>Error</Text>
+    <Loading />
   );
 };
 

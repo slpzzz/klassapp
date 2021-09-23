@@ -4,7 +4,23 @@ import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 
 import escut from '../equips.json';
 
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
+
 export default function PartitMin({ resultados, categoria, navigation }) {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const escut1 = escut.filter(d => d.nom === resultados.equip1);
   const escut2 = escut.filter(d => d.nom === resultados.equip2);
 
@@ -47,10 +63,22 @@ export default function PartitMin({ resultados, categoria, navigation }) {
               justifyContent: 'center',
             }}
           >
-            <Text style={{ fontSize: 10, color: 'white' }}>
+            <Text
+              style={{
+                fontFamily: 'Lato_400Regular',
+                fontSize: 10,
+                color: 'white',
+              }}
+            >
               {resultados.dia}
             </Text>
-            <Text style={{ fontSize: 16, color: 'white' }}>
+            <Text
+              style={{
+                fontFamily: 'Lato_400Regular',
+                fontSize: 16,
+                color: 'white',
+              }}
+            >
               {resultados.resultat ? resultados.resultat : resultados.hora}
             </Text>
           </View>
@@ -107,6 +135,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
+    fontFamily: 'Lato_400Regular',
   },
   result: {
     padding: 5,

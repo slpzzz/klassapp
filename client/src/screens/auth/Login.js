@@ -17,8 +17,23 @@ import { login } from '../actions/auth.js';
 
 var height = Dimensions.get('screen').height;
 var width = Dimensions.get('screen').width;
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 const Login = ({ navigation }) => {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -38,14 +53,21 @@ const Login = ({ navigation }) => {
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.Formu}>
-          <Text style={{ color: '#1C4928', fontSize: 36, marginBottom: 24 }}>
+          <Text
+            style={{
+              fontFamily: 'Lato_400Regular',
+              color: '#1C4928',
+              fontSize: 36,
+              marginBottom: 24,
+            }}
+          >
             Inicia sessió
           </Text>
           <View style={styles.button}>
             <TextInput
               value={email}
               type='email'
-              placeholder='email'
+              placeholder='Adreça electrònica'
               style={email ? styles.buttonTextW : styles.buttonText}
               onChange={e => onChange(e, 'email')}
             />
@@ -54,7 +76,7 @@ const Login = ({ navigation }) => {
             <TextInput
               value={password}
               type='password'
-              placeholder='Constrasenya'
+              placeholder='Contrasenya'
               style={password ? styles.buttonTextW : styles.buttonText}
               secureTextEntry={true}
               onChange={e => onChange(e, 'password')}
@@ -74,11 +96,21 @@ const Login = ({ navigation }) => {
               padding: 20,
             }}
           >
-            <Text style={{ fontSize: 15, color: '#1C4928' }}>
+            <Text
+              style={{
+                fontFamily: 'Lato_400Regular',
+                fontSize: 15,
+                color: '#1C4928',
+              }}
+            >
               No tens compte?{' '}
             </Text>
             <Text
-              style={{ fontSize: 15, fontWeight: 'bold', color: '#1C4928' }}
+              style={{
+                fontFamily: 'Lato_900Black',
+                fontSize: 15,
+                color: '#1C4928',
+              }}
             >
               Registra't
             </Text>

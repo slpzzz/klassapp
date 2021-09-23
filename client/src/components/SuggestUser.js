@@ -11,10 +11,25 @@ import data from '../ligas.json';
 import { postNoti } from '../screens/actions/notis';
 import { follow, ifFollow, unfollow } from '../screens/actions/profile';
 import { FontAwesome } from '@expo/vector-icons';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 const width = Dimensions.get('screen').width;
 
 const SuggestUser = ({ data, navigation }) => {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const [handle, setHandle] = useState(false);
   const [me, setMe] = useState(false);
   const setFollow = () => {
@@ -69,7 +84,7 @@ const SuggestUser = ({ data, navigation }) => {
               />
             </View>
             <View style={{ padding: 5 }}>
-              <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>
+              <Text style={{ fontFamily: 'Lato_700Bold', textAlign: 'center' }}>
                 {data.user.name}
               </Text>
             </View>
@@ -84,12 +99,25 @@ const SuggestUser = ({ data, navigation }) => {
               }}
             >
               <FontAwesome name='users' size={12} color='grey' />
-              <Text style={{ fontSize: 12, color: 'grey', marginLeft: 5 }}>
+              <Text
+                style={{
+                  fontFamily: 'Lato_300Light',
+                  fontSize: 12,
+                  color: 'grey',
+                  marginLeft: 5,
+                }}
+              >
                 {data.followers.length} seguidors
               </Text>
             </View>
             {data.rol.map(r => (
-              <Text style={{ fontSize: 12, textAlign: 'left' }}>
+              <Text
+                style={{
+                  fontFamily: 'Lato_400Regular',
+                  fontSize: 12,
+                  textAlign: 'left',
+                }}
+              >
                 {r.title} del {r.team}
               </Text>
             ))}
@@ -109,11 +137,25 @@ const SuggestUser = ({ data, navigation }) => {
                     <View style={styles.seguirbtnP}>
                       {handle ? (
                         <View style={styles.siguiendobtn}>
-                          <Text style={{ color: '#487551' }}>Siguiendo</Text>
+                          <Text
+                            style={{
+                              fontFamily: 'Lato_400Regular',
+                              color: '#487551',
+                            }}
+                          >
+                            Siguiendo
+                          </Text>
                         </View>
                       ) : (
                         <View style={styles.seguirbtn}>
-                          <Text style={{ color: 'white' }}>Seguir</Text>
+                          <Text
+                            style={{
+                              fontFamily: 'Lato_400Regular',
+                              color: 'white',
+                            }}
+                          >
+                            Seguir
+                          </Text>
                         </View>
                       )}
                     </View>

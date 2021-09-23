@@ -9,6 +9,15 @@ import data from '../../competicio.json';
 import FilterMatches from './FilterMatches';
 import Button1 from '../../components/Button1';
 
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
+
 export default function Filter(navigation) {
   const [categoria, setCategoria] = useState('1aCat');
   const [categoria1, setCategoria1] = useState('1aCat');
@@ -40,6 +49,8 @@ export default function Filter(navigation) {
     setResultados(jr.partits);
   };
 
+  console.log(categoria, grup, jornada);
+
   return cercar ? (
     <View>
       <View
@@ -66,7 +77,9 @@ export default function Filter(navigation) {
               justifyContent: 'center',
               padding: 8,
             }}
-            onValueChange={item => setCategoria(item)}
+            onValueChange={item => (
+              setCategoria(item), setGrup(1), setJornada(1)
+            )}
           >
             {data.map((d, i) => (
               <Picker.Item
@@ -78,9 +91,11 @@ export default function Filter(navigation) {
           </Picker>
           <View>
             {data.map(
-              (d, i) =>
+              (d, i) => (
+                console.log(d.competicio, categoria),
                 d.competicio === categoria && (
                   <Picker
+                    key={i}
                     style={{
                       borderWidth: 0,
                       borderColor: '#1C4928',
@@ -89,17 +104,18 @@ export default function Filter(navigation) {
                       justifyContent: 'center',
                       padding: 8,
                     }}
-                    onValueChange={item => setGrup(item)}
+                    onValueChange={item => setGrup(parseInt(item))}
                   >
                     {d.grups.map((g, i) => (
                       <Picker.Item
-                        key={'grups' + i}
+                        key={i}
                         value={g.grup}
-                        label={g.grup}
+                        label={'Grup ' + g.grup}
                       />
                     ))}
                   </Picker>
                 )
+              )
             )}
           </View>
           <View>
@@ -110,6 +126,7 @@ export default function Filter(navigation) {
                   (g, i) =>
                     g.grup === grup && (
                       <Picker
+                        key={i}
                         style={{
                           borderWidth: 0,
                           borderColor: '#1C4928',
@@ -118,13 +135,16 @@ export default function Filter(navigation) {
                           justifyContent: 'center',
                           padding: 8,
                         }}
-                        onValueChange={item => setJornada(parseInt(item))}
+                        onValueChange={item => (
+                          setJornada(parseInt(item)), jornada
+                        )}
                       >
+                        {console.log('in', g)}
                         {g.jornades.map((j, i) => (
                           <Picker.Item
                             key={'jornada' + i}
                             value={j.jornada}
-                            label={j.jornada}
+                            label={'j' + j.jornada}
                           />
                         ))}
                       </Picker>
@@ -144,7 +164,9 @@ export default function Filter(navigation) {
                 padding: 8,
               }}
             >
-              <Text style={{ color: 'white' }}>Cercar</Text>
+              <Text style={{ fontFamily: 'Lato_400Regular', color: 'white' }}>
+                Cercar
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -163,7 +185,7 @@ export default function Filter(navigation) {
   ) : (
     <View style={styles.demo}>
       <View style={{ padding: 10 }}>
-        <Text>Categoria: </Text>
+        <Text style={{ fontFamily: 'Lato_400Regular' }}>Categoria: </Text>
         <Picker
           style={{
             borderWidth: 0,
@@ -186,11 +208,12 @@ export default function Filter(navigation) {
         </Picker>
       </View>
       <View style={{ padding: 10 }}>
-        <Text>Grup: </Text>
+        <Text style={{ fontFamily: 'Lato_400Regular' }}>Grup: </Text>
         {data.map(
           (d, i) =>
             d.competicio === categoria && (
               <Picker
+                key={i}
                 style={{
                   borderWidth: 0,
 
@@ -200,21 +223,26 @@ export default function Filter(navigation) {
                   justifyContent: 'center',
                   padding: 8,
                 }}
-                onValueChange={item => setGrup(item)}
+                onValueChange={item => setGrup(parseInt(item))}
               >
-                {d.grups.map((g, i) => (
-                  <Picker.Item
-                    key={'grups' + i}
-                    value={g.grup}
-                    label={g.grup}
-                  />
-                ))}
+                {d.grups.map(
+                  (g, i) => (
+                    console.log('g', g),
+                    (
+                      <Picker.Item
+                        key={'grups' + i}
+                        value={g.grup}
+                        label={g.grup}
+                      />
+                    )
+                  )
+                )}
               </Picker>
             )
         )}
       </View>
       <View style={{ padding: 10 }}>
-        <Text>Jornada: </Text>
+        <Text style={{ fontFamily: 'Lato_400Regular' }}>Jornada: </Text>
         {data.map(
           (d, i) =>
             d.competicio === categoria &&
@@ -222,6 +250,7 @@ export default function Filter(navigation) {
               (g, i) =>
                 g.grup === grup && (
                   <Picker
+                    key={i}
                     style={{
                       borderWidth: 0,
                       borderColor: '#1C4928',
@@ -233,6 +262,7 @@ export default function Filter(navigation) {
                     }}
                     onValueChange={item => setJornada(parseInt(item))}
                   >
+                    {console.log('g2', g)}
                     {g.jornades.map((j, i) => (
                       <Picker.Item
                         key={'jornada' + i}

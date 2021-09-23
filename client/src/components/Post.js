@@ -26,8 +26,23 @@ import moment from 'moment';
 import { postNoti } from '../screens/actions/notis';
 import MatchPost from './MatchPost';
 import { AntDesign } from '@expo/vector-icons';
+import {
+  useFonts,
+  Lato_300Light,
+  Lato_400Regular,
+  Lato_700Bold,
+  Lato_700Bold_Italic,
+  Lato_900Black,
+} from '@expo-google-fonts/lato';
 
 export default function Post({ datos, navigation }) {
+  let [fontsLoaded] = useFonts({
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+    Lato_900Black,
+  });
   const [like, setLike] = useState(false);
   const [numLikes, setNumLikes] = useState();
   const [comment, setComment] = useState();
@@ -39,12 +54,6 @@ export default function Post({ datos, navigation }) {
     isLike(setLike, datos._id, datos.user, setMe);
     datos.likes && setNumLikes(datos.likes.length);
   }, []);
-
-  const newComment = () => {
-    addComment(comment, datos._id);
-    setComment('');
-    postNoti(datos._id, datos.user, 'comment');
-  };
 
   const Delete = () => {
     deleteComment(datos._id);
@@ -118,7 +127,9 @@ export default function Post({ datos, navigation }) {
                 <TouchableOpacity
                   onPress={() => (setOpen(!open), setOpenWritter(false))}
                 >
-                  <Text style={{ marginLeft: 8 }}>
+                  <Text
+                    style={{ fontFamily: 'Lato_400Regular', marginLeft: 8 }}
+                  >
                     {datos.comments ? datos.comments.length : 0}
                   </Text>
                 </TouchableOpacity>
@@ -140,15 +151,15 @@ export default function Post({ datos, navigation }) {
                     color={like ? '#1C4928' : 'black'}
                   />
                 </TouchableOpacity>
-                <Text style={{ marginLeft: 8 }}>
+                <Text style={{ fontFamily: 'Lato_400Regular', marginLeft: 8 }}>
                   {datos.likes ? numLikes : 0}
                 </Text>
               </View>
-              {me && (
+              {/*   {me && (
                 <TouchableOpacity onPress={() => Delete()}>
                   <AntDesign name='delete' size={18} color='red' />
                 </TouchableOpacity>
-              )}
+              )} */}
             </View>
           </View>
         </View>
@@ -163,7 +174,7 @@ export default function Post({ datos, navigation }) {
         <TouchableOpacity onPress={() => navigation.push('Comment', datos)}>
           <View
             style={{
-              display: openWritter ? 'none' : 'flex',
+              display: 'flex',
               flexDirection: 'row',
             }}
           >
@@ -172,7 +183,9 @@ export default function Post({ datos, navigation }) {
               size={24}
               color='black'
             />
-            <Text>Escriu un comentari</Text>
+            <Text style={{ fontFamily: 'Lato_400Regular' }}>
+              Escriu un comentari
+            </Text>
           </View>
         </TouchableOpacity>
 
@@ -184,7 +197,9 @@ export default function Post({ datos, navigation }) {
           }
         >
           {datos.comments &&
-            datos.comments.map((c, i) => <Comments key={i} data={c} />)}
+            datos.comments.map((c, i) => (
+              <Comments key={i} navigation={navigation} data={c} />
+            ))}
         </ScrollView>
         <TouchableOpacity onPress={() => setOpen(false)}>
           <View
@@ -194,14 +209,14 @@ export default function Post({ datos, navigation }) {
               flexDirection: 'row',
             }}
           >
-            <Text>Amagar</Text>
+            <Text style={{ fontFamily: 'Lato_400Regular' }}>Amagar</Text>
             <MaterialIcons name='keyboard-arrow-up' size={24} color='black' />
           </View>
         </TouchableOpacity>
       </View>
     </View>
   ) : (
-    <Text>No existeixen posts</Text>
+    <Text style={{ fontFamily: 'Lato_400Regular' }}>No existeixen posts</Text>
   );
 }
 
@@ -244,19 +259,23 @@ const styles = StyleSheet.create({
   },
   TextTime: {
     fontSize: 13,
+    fontFamily: 'Lato_300Light',
   },
   TextName: {
     fontWeight: 'bold',
     fontSize: 15,
+    fontFamily: 'Lato_900Black',
   },
   TextTitleRol: {
     fontSize: 13,
     color: '#808080',
+    fontFamily: 'Lato_400Regular',
   },
   textBody: {
     fontSize: 14,
     paddingTop: 8,
     paddingBottom: 8,
+    fontFamily: 'Lato_400Regular',
   },
   interactBtnParent: {
     padding: 8,

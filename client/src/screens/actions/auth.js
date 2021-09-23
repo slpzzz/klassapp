@@ -82,12 +82,13 @@ export const createProfile = (rol, bio, location, navigation) => {
       'Content-Type': 'application/json',
     },
   };
+  console.log(navigation);
   const body = JSON.stringify({ bio, location, rol });
 
   try {
-    axios.post(`${uri}/api/profile`, body, config).then(function (response) {
-      navigation.push('followFirst');
-    });
+    axios
+      .post(`${uri}/api/profile`, body, config)
+      .then(() => navigation.navigate('followFirst'));
   } catch (err) {
     console.error('An error occurred', err);
   }
