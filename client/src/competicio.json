@@ -669,17 +669,48 @@
           "jornada": 1, 
           "partits":
           [{
-              "equip1": "LLORET, C.F. A",
-              "equip2": "MARTINENC, F.C. A",
-              "dia": "02-10-2021",
-              "hora": "16:00",
-            "resultat": "1 - 0"
+              "equip1": "ALT BERGUEDÀ, C.C.R. B",
+              "equip2": "VILADA, CE A",
+              "dia": "25/09/2021",
+              "hora": "16:00"
          },
         {
-          "equip1": "BESCANO, C.D. A",
-          "equip2": "PARETS, C.F. A",
-          "dia": "02-10-2021",
-          "hora": "16:00"              }]}]
+              "equip1": "MONTMAJOR F.C. A",
+              "equip2": "GIRONELLA, C.F. AT. B",
+              "dia": "25/09/2021",
+              "hora": "16:00"
+         },
+        {
+              "equip1": "PUIGCERDA, C.F. A",
+              "equip2": "CALLUS, C.F. B",
+              "dia": "25/09/2021",
+              "hora": "16:30"
+         },
+        {
+              "equip1": "SANT LLORENÇ MORUNYS, C.E. A",
+              "equip2": "AVIA, U.E. B",
+              "dia": "25/09/2021",
+              "hora": "17:00"
+         },
+        {
+              "equip1": "CARDONA, C.F. B",
+              "equip2": "AVINYO , C.E. A",
+              "dia": "26/09/2021",
+              "hora": "16:00"
+         },
+        {
+              "equip1": "OLVAN, C.E. A",
+              "equip2": "SURIA, C.E. B",
+              "dia": "26/09/2021",
+              "hora": "16:15"
+         },
+        {
+              "equip1": "CALDERS, C.F. A",
+              "equip2": "CASSERRES, C.F. A",
+              "dia": "26/09/2021",
+              "hora": "16:30"
+         }
+      ]}]
 
       }
     ]
