@@ -89,7 +89,7 @@ const SignUp2 = ({ navigation }) => {
           />
         </View> */}
         <View style={styles.pad}>
-          <Text style={styles.text}>Ubicación</Text>
+          <Text style={styles.text}>Ubicació</Text>
           <TextInput
             onChangeText={text => setLocation(text)}
             value={location}
