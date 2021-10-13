@@ -38,7 +38,7 @@ const StarterScreen = observer(({ navigation }) => {
   setTimeout(() => {
     setTimePassed(false);
     isLogged(navigation);
-  }, 1000);
+  }, 3000);
 
   return timePassed ? (
     <View>
@@ -51,7 +51,7 @@ const StarterScreen = observer(({ navigation }) => {
         <View style={{ justifyContent: 'center' }}>
           <Text
             style={{
-              fontFamily: 'Lato_400Regular',
+              fontFamily: 'Lato_300Light',
               color: 'white',
               fontSize: 48,
             }}
